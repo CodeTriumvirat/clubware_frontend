@@ -1,0 +1,21 @@
+ - name: Setup Node.js environment
+    uses: actions/setup-node@v2
+    with:
+      node-version: 'v21.6.2'
+
+  - name: Install SSH key
+    uses: webfactory/ssh-agent@v0.5.4
+    with:
+      ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+  - name: Deploy to Server
+    run: |
+      ssh -t -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} <<'EOF'
+      cd /home/output/sites/clubware_frontend 
+      export PATH=$PATH:/home/output/.nvm/versions/node/v21.6.2/bin 
+      echo $PATH
+      npm install
+      npm run build
+      pm2 reload clubware_frontend
+      exit
+      EOF
