@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
-          node-version: '21.6.2'
+          node-version: "21.6.2"
 
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.5.4
@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -t -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} <<'EOF'
+          ssh -t -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} <<'EOF'
           cd /home/output/sites/clubware_frontend
           export PATH=$PATH:/home/output/.nvm/versions/node/v21.6.2/bin
           echo $PATH
