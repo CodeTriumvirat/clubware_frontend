@@ -4,6 +4,8 @@ import { theme } from "../styles/theme";
 
 export function render(ui: React.ReactNode) {
   return testingLibraryRender(<>{ui}</>, {
-    wrapper: ({ children }: { children: React.ReactNode }) => <MantineProvider theme={theme}>{children}</MantineProvider>
+    wrapper: ({ children }: { children: React.ReactNode }) => (
+      <MantineProvider theme={theme}>{children}</MantineProvider>
+    ),
   });
 }
