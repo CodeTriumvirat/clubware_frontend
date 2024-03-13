@@ -30,7 +30,7 @@ jobs:
           export PATH=$PATH:/home/output/.nvm/versions/node/v21.6.2/bin
           echo $PATH
           npm install
-          npm run build
+          npm run dev
           pm2 reload clubware_frontend
           exit
           EOF
