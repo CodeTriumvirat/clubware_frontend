@@ -29,6 +29,7 @@ jobs:
           cd /home/output/sites/clubware_frontend
           export PATH=$PATH:/home/output/.nvm/versions/node/v21.6.2/bin
           echo $PATH
+          git pull
           npm install
           npm run build
           pm2 reload clubware_frontend
