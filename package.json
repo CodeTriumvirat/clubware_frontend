@@ -12,7 +12,7 @@
     "prettier": "prettier --check .",
     "format": "prettier --write .",
     "prepare": "husky",
-    "pre-commit": "prettier --write . && git add -A ."
+    "pre-commit": "prettier --write . && npm run lint && git add -A ."
   },
   "dependencies": {
     "@mantine/core": "^7.6.2",

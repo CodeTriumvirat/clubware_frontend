@@ -9,6 +9,7 @@ export default function Home() {
       <Button variant="filled" className="bg-slate-500">
         Awesome Mantine Button with custom Tailwind color
       </Button>
+
       <IconPacman stroke={2} />
     </main>
   );
