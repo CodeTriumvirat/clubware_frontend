@@ -1,37 +1,37 @@
 name: Deploy Next.js App
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  build:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    build:
+        name: Build and Deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: "21.6.2"
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '21.6.2'
 
-      - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.4
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            - name: Install SSH key
+              uses: webfactory/ssh-agent@v0.5.4
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Deploy to Server
-        run: |
-          ssh -t -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} <<'EOF'
-          cd /home/output/sites/clubware_frontend
-          export PATH=$PATH:/home/output/.nvm/versions/node/v21.6.2/bin
-          echo $PATH
-          git pull
-          npm install
-          npm run build
-          pm2 reload clubware_frontend
-          exit
-          EOF
+            - name: Deploy to Server
+              run: |
+                  ssh -t -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} <<'EOF'
+                  cd /home/output/sites/clubware_frontend
+                  export PATH=$PATH:/home/output/.nvm/versions/node/v21.6.2/bin
+                  echo $PATH
+                  git pull
+                  npm install
+                  npm run build
+                  pm2 reload clubware_frontend
+                  exit
+                  EOF
