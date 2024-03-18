@@ -10,10 +10,6 @@ import { defineConfig, devices } from '@playwright/test'
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-    use: {
-        baseURL: 'http://localhost:3000',
-    },
-
     testDir: './app/e2e-tests',
     /* Run tests in files in parallel */
     fullyParallel: true,
