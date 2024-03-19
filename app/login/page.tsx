@@ -12,7 +12,7 @@ import {
 export default function LoginPage() {
     return (
         <Container size={420} my={40}>
-            <Title align="center" mb={12}>
+            <Title mb={12}>
                 Log dich ein, Habibi!
             </Title>
             <Paper
@@ -48,7 +48,7 @@ export default function LoginPage() {
                         Sign up
                     </Button>
                 </form>
-                <Text align="center" mt="md">
+                <Text mt="md">
                     Passwort vergessen?
                 </Text>
             </Paper>
