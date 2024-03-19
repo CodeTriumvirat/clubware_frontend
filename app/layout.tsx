@@ -1,5 +1,13 @@
 import type { Metadata } from 'next'
-import { MantineProvider, ColorSchemeScript } from '@mantine/core'
+import {
+    AppShell,
+    MantineProvider,
+    ColorSchemeScript,
+    Footer,
+    Group,
+    Header,
+    Text,
+} from '@mantine/core'
 import './styles/globals.css'
 import { theme } from '@/styles/theme'
 
@@ -24,8 +32,9 @@ export default function RootLayout({
                 />
             </head>
             <body>
-                {' '}
-                <MantineProvider theme={theme}>{children}</MantineProvider>
+                <MantineProvider theme={theme}>
+                    <AppShell>{children}</AppShell>
+                </MantineProvider>
             </body>
         </html>
     )
