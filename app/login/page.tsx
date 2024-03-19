@@ -12,9 +12,7 @@ import {
 export default function LoginPage() {
     return (
         <Container size={420} my={40}>
-            <Title mb={12}>
-                Log dich ein, Habibi!
-            </Title>
+            <Title mb={12}>Log dich ein, Habibi!</Title>
             <Paper
                 withBorder
                 shadow="md"
@@ -41,16 +39,14 @@ export default function LoginPage() {
                         type="password"
                         required
                     />
-                    <Button fullWidth mt="xl" formAction={login}>
+                    <Button type="submit" fullWidth mt="xl" formAction={login}>
                         Log in
                     </Button>
-                    <Button fullWidth mt="xl" formAction={signup}>
+                    <Button type="submit" fullWidth mt="xl" formAction={signup}>
                         Sign up
                     </Button>
                 </form>
-                <Text mt="md">
-                    Passwort vergessen?
-                </Text>
+                <Text mt="md">Passwort vergessen?</Text>
             </Paper>
         </Container>
     )
