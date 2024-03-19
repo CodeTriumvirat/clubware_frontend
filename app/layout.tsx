@@ -3,10 +3,6 @@ import {
     AppShell,
     MantineProvider,
     ColorSchemeScript,
-    Footer,
-    Group,
-    Header,
-    Text,
 } from '@mantine/core'
 import './styles/globals.css'
 import { theme } from '@/styles/theme'
