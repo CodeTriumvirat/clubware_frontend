@@ -11,10 +11,11 @@ export async function Profile() {
     const supabase = createClient()
 
     let { data, error } = await supabase.from('user_profiles').select('*')
+    error ? console.error(error) : console.log(data)
 
-    return (
+    return data ? (
         <Container size={420} my={40}>
-            <div>{JSON.stringify(data)}</div>
+            {/* <div>{JSON.stringify(data)}</div> */}
             <Paper
                 withBorder
                 shadow="md"
@@ -35,7 +36,7 @@ export async function Profile() {
                         fit="contain"
                         mt="md"
                     />
-                    <Flex direction="column" gap="sm" mt="md">
+                    <Flex direction="column" gap="sm" mt="md" w="80%">
                         <Flex
                             gap="md"
                             justify="space-between"
@@ -44,7 +45,7 @@ export async function Profile() {
                             wrap="wrap"
                         >
                             <Text>Firstname</Text>
-                            <Text>d</Text>
+                            <Text>{data[0].first_name}</Text>
                         </Flex>
                         <Flex
                             gap="md"
@@ -54,7 +55,7 @@ export async function Profile() {
                             wrap="wrap"
                         >
                             <Text>Lastname</Text>
-                            <Text>Doe</Text>
+                            <Text>{data[0].last_name}</Text>
                         </Flex>
                         <Flex
                             gap="md"
@@ -63,8 +64,8 @@ export async function Profile() {
                             direction="row"
                             wrap="wrap"
                         >
-                            <Text>Email</Text>
-                            <Text>john@doe.com</Text>
+                            <Text>Birthday</Text>
+                            <Text>{data[0].date_of_birth}</Text>
                         </Flex>
                         <Flex
                             gap="md"
@@ -74,11 +75,13 @@ export async function Profile() {
                             wrap="wrap"
                         >
                             <Text>Phone</Text>
-                            <Text>123-456-7890</Text>
+                            <Text>{data[0].phone_number}</Text>
                         </Flex>
                     </Flex>
                 </Flex>
             </Paper>
         </Container>
+    ) : (
+        ''
     )
 }

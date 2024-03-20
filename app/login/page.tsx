@@ -45,18 +45,20 @@ export default function Page() {
                         Sign up
                     </Button>
                 </form>
-                <Button variant="filled" size="xs" mt="md">
-                    Passwort vergessen?
-                </Button>
-                <Button
-                    type="submit"
-                    formAction={logout}
-                    variant="filled"
-                    size="xs"
-                    mt="md"
-                >
-                    Logout
-                </Button>
+                <form>
+                    <Button variant="filled" size="xs" mt="md">
+                        Passwort vergessen?
+                    </Button>
+                    <Button
+                        type="submit"
+                        formAction={logout}
+                        variant="filled"
+                        size="xs"
+                        mt="md"
+                    >
+                        Logout
+                    </Button>
+                </form>
                 {/* <Text mt="md">Passwort vergessen?</Text> */}
             </Paper>
         </Container>
