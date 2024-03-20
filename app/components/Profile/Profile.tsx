@@ -5,13 +5,10 @@ import { createClient } from '@/utils/supabase/server'
 import { Database } from '@/types/supabase'
 import { UserProfile } from '@/types/types'
 
-export const revalidate = 0
-
 export async function Profile() {
     const supabase = createClient()
 
     let { data, error } = await supabase.from('user_profiles').select('*')
-    error ? console.error(error) : console.log(data)
 
     return data ? (
         <Container size={420} my={40}>

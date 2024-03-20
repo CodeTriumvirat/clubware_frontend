@@ -52,7 +52,6 @@ export async function logout() {
 
     if (error) {
         throw new Error(error.message)
-        console.log(error?.message)
     }
 
     revalidatePath('/', 'layout')
