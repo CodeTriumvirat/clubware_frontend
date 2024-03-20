@@ -1,6 +1,16 @@
 'use client'
-import { AppShell, Skeleton, Burger, Text } from '@mantine/core'
+import { AppShell, Burger, NavLink } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { IconChevronRight, IconSettings } from '@tabler/icons-react'
+import Link from 'next/link'
+import { useState } from 'react'
+
+const navData = [
+    { link: '/', label: 'Home', icon: IconSettings },
+    { link: '/login', label: 'Login', icon: IconSettings },
+    { link: '/profile', label: 'Profile', icon: IconSettings },
+    { link: '/auth/recovery', label: 'Password Recovery', icon: IconSettings },
+]
 
 export default function AppContainer({
     children,
@@ -8,6 +18,21 @@ export default function AppContainer({
     children: React.ReactNode
 }>) {
     const [opened, { toggle }] = useDisclosure()
+    const [active, setActive] = useState(0)
+
+    const navLinks = navData.map((item, index) => (
+        <NavLink
+            key={item.label}
+            component={Link}
+            href={item.link}
+            label={item.label}
+            leftSection={<item.icon stroke={1.5} />}
+            rightSection={<IconChevronRight size="1rem" stroke={1.5} />}
+            variant="subtle"
+            active={index === active}
+            onClick={() => setActive(index)}
+        />
+    ))
 
     return (
         <AppShell
@@ -27,13 +52,7 @@ export default function AppContainer({
                     size="sm"
                 />
             </AppShell.Header>
-            <AppShell.Navbar p="md">
-                {Array(15)
-                    .fill(0)
-                    .map((_, index) => (
-                        <Skeleton key={index} h={28} mt="sm" animate={false} />
-                    ))}
-            </AppShell.Navbar>
+            <AppShell.Navbar p="md">{navLinks}</AppShell.Navbar>
             <AppShell.Main>{children}</AppShell.Main>
         </AppShell>
     )
