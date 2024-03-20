@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { AppShell, MantineProvider, ColorSchemeScript } from '@mantine/core'
+import { MantineProvider, ColorSchemeScript } from '@mantine/core'
 import './styles/globals.css'
 import { theme } from '@/styles/theme'
 import { Notifications } from '@mantine/notifications'
+import AppContainer from '@/components/AppContainer/AppContainer'
 
 export const metadata: Metadata = {
     title: 'ClubWare ERP',
@@ -27,7 +28,7 @@ export default function RootLayout({
             <body>
                 <MantineProvider theme={theme}>
                     <Notifications />
-                    <AppShell>{children}</AppShell>
+                    <AppContainer>{children}</AppContainer>
                 </MantineProvider>
             </body>
         </html>
