@@ -26,7 +26,7 @@ export default function RootLayout({
                 />
             </head>
             <body>
-                <MantineProvider theme={theme}>
+                <MantineProvider theme={theme} defaultColorScheme="dark">
                     <Notifications />
                     <AppContainer>{children}</AppContainer>
                 </MantineProvider>
