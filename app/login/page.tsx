@@ -1,15 +1,14 @@
-import { login, signup } from './actions'
+import { login, logout, signup } from './actions'
 import {
     Button,
     Container,
     Paper,
     PasswordInput,
-    Text,
     TextInput,
     Title,
 } from '@mantine/core'
 
-export default function LoginPage() {
+export default function Page() {
     return (
         <Container size={420} my={40}>
             <Title mb={12}>Log dich ein, Habibi!</Title>
@@ -46,7 +45,21 @@ export default function LoginPage() {
                         Sign up
                     </Button>
                 </form>
-                <Text mt="md">Passwort vergessen?</Text>
+                <form>
+                    <Button variant="filled" size="xs" mt="md">
+                        Passwort vergessen?
+                    </Button>
+                    <Button
+                        type="submit"
+                        formAction={logout}
+                        variant="filled"
+                        size="xs"
+                        mt="md"
+                    >
+                        Logout
+                    </Button>
+                </form>
+                {/* <Text mt="md">Passwort vergessen?</Text> */}
             </Paper>
         </Container>
     )
