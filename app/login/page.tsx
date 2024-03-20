@@ -46,7 +46,10 @@ export default function LoginPage() {
                         Sign up
                     </Button>
                 </form>
-                <Text mt="md">Passwort vergessen?</Text>
+                <Button variant="filled" size="xs" mt="md">
+                    Passwort vergessen?
+                </Button>
+                {/* <Text mt="md">Passwort vergessen?</Text> */}
             </Paper>
         </Container>
     )
