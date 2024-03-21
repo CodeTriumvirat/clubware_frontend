@@ -59,7 +59,7 @@ export type Database = {
     }
     public: {
         Tables: {
-            user_profiles: {
+            user_profile: {
                 Row: {
                     address: string | null
                     date_of_birth: string | null
@@ -95,7 +95,7 @@ export type Database = {
                 }
                 Relationships: [
                     {
-                        foreignKeyName: 'public_user_profiles_user_id_fkey'
+                        foreignKeyName: 'public_user_profile_user_id_fkey'
                         columns: ['user_id']
                         referencedRelation: 'users'
                         referencedColumns: ['id']

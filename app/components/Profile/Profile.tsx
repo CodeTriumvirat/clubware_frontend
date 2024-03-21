@@ -7,7 +7,7 @@ import { NoProfile } from '../NoProfile/NoProfile'
 export async function Profile() {
     const supabase = createClient()
 
-    let { data, error } = await supabase.from('user_profiles').select('*')
+    let { data, error } = await supabase.from('user_profile').select('*')
 
     return (
         <>
