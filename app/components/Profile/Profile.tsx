@@ -20,68 +20,56 @@ export async function Profile() {
                             align="center"
                         >
                             <Title order={2}>User Profile</Title>
-                            <Flex
-                                justify="center"
-                                direction="column"
-                                align="center"
-                            >
-                                <Title order={2}>User Profile</Title>
-                                <Image
-                                    component={NextImage}
-                                    src={myImage}
-                                    radius="md"
-                                    alt="My image"
-                                    w="80%"
-                                    h={150}
-                                    fit="contain"
-                                    mt="md"
-                                />
+                            <Image
+                                component={NextImage}
+                                src={myImage}
+                                radius="md"
+                                alt="My image"
+                                w="80%"
+                                h={150}
+                                fit="contain"
+                                mt="md"
+                            />
+                            <Flex direction="column" gap="sm" mt="md" w="80%">
                                 <Flex
-                                    direction="column"
-                                    gap="sm"
-                                    mt="md"
-                                    w="80%"
+                                    gap="md"
+                                    justify="space-between"
+                                    align="flex-start"
+                                    direction="row"
+                                    wrap="wrap"
                                 >
-                                    <Flex
-                                        gap="md"
-                                        justify="space-between"
-                                        align="flex-start"
-                                        direction="row"
-                                        wrap="wrap"
-                                    >
-                                        <Text>Firstname</Text>
-                                        <Text>{data[0].first_name}</Text>
-                                    </Flex>
-                                    <Flex
-                                        gap="md"
-                                        justify="space-between"
-                                        align="flex-start"
-                                        direction="row"
-                                        wrap="wrap"
-                                    >
-                                        <Text>Lastname</Text>
-                                        <Text>{data[0].last_name}</Text>
-                                    </Flex>
-                                    <Flex
-                                        gap="md"
-                                        justify="space-between"
-                                        align="flex-start"
-                                        direction="row"
-                                        wrap="wrap"
-                                    >
-                                        <Text>Birthday</Text>
-                                        <Text>{data[0].date_of_birth}</Text>
-                                    </Flex>
-                                    <Flex
-                                        gap="md"
-                                        justify="space-between"
-                                        align="flex-start"
-                                        direction="row"
-                                        wrap="wrap"
-                                    >
-                                        <Text>Phone</Text>
-                                        <Text>{data[0].phone_number}</Text>
-                                    </Flex>
+                                    <Text>Firstname</Text>
+                                    <Text>{data[0].first_name}</Text>
+                                </Flex>
+                                <Flex
+                                    gap="md"
+                                    justify="space-between"
+                                    align="flex-start"
+                                    direction="row"
+                                    wrap="wrap"
+                                >
+                                    <Text>Lastname</Text>
+                                    <Text>{data[0].last_name}</Text>
+                                </Flex>
+                                <Flex
+                                    gap="md"
+                                    justify="space-between"
+                                    align="flex-start"
+                                    direction="row"
+                                    wrap="wrap"
+                                >
+                                    <Text>Birthday</Text>
+                                    <Text>{data[0].date_of_birth}</Text>
+                                </Flex>
+                                <Flex
+                                    gap="md"
+                                    justify="space-between"
+                                    align="flex-start"
+                                    direction="row"
+                                    wrap="wrap"
+                                >
+                                    <Text>Phone</Text>
+                                    <Text>{data[0].phone_number}</Text>
                                 </Flex>
                             </Flex>
                         </Flex>
