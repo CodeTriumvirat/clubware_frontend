@@ -9,18 +9,18 @@ export async function Profile() {
 
     let { data, error } = await supabase.from('user_profiles').select('*')
 
+
     return (
         <>
             {data && (
                 <Container size={420} my={40}>
-                    <Paper
+              
+            <Paper
                         withBorder
                         shadow="md"
-                        p={30}
-                        radius="md"
-                        mt="xl"
-                        className="text-black"
-                    >
+                        p={30} radius="md" mt="xl">
+                <Flex justify="center" direction="column" align="center">
+                  <Title order={2}>User Profile</Title>
                         <Flex
                             justify="center"
                             direction="column"

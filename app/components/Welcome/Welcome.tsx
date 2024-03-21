@@ -7,7 +7,7 @@ export function Welcome() {
                 <Text
                     inherit
                     variant="gradient"
-                    gradient={{ from: 'pink', to: 'yellow' }}
+                    gradient={{ from: 'funkyPurple', to: 'white', deg: 1 }}
                 >
                     Welcome to Clubware
                 </Text>
