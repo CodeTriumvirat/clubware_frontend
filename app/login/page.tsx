@@ -12,14 +12,7 @@ export default function Page() {
     return (
         <Container size={420} my={40}>
             <Title mb={12}>Log dich ein, Habibi!</Title>
-            <Paper
-                withBorder
-                shadow="md"
-                p={30}
-                radius="md"
-                mt="xl"
-                className="text-black"
-            >
+            <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
                 <form>
                     <TextInput
                         label="Email"

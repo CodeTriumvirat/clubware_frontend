@@ -13,14 +13,7 @@ export async function Profile() {
     return data ? (
         <Container size={420} my={40}>
             {/* <div>{JSON.stringify(data)}</div> */}
-            <Paper
-                withBorder
-                shadow="md"
-                p={30}
-                radius="md"
-                mt="xl"
-                className="text-black"
-            >
+            <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
                 <Flex justify="center" direction="column" align="center">
                     <Title order={2}>User Profile</Title>
                     <Image
