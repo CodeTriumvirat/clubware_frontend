@@ -83,7 +83,7 @@ export async function Profile() {
                                         <Text>{data[0].phone_number}</Text>
                                     </Flex>
                                 </Flex>
-                            </Flex>{' '}
+                            </Flex>
                         </Flex>
                     </Paper>
                 </Container>
