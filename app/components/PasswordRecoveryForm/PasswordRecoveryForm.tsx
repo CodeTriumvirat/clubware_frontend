@@ -1,5 +1,5 @@
 'use client'
-import { Button, TextInput } from '@mantine/core'
+import { Button, TextInput, Stack } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { setNewPassword } from '@/auth/recovery/actions'
 import { FormEvent } from 'react'
@@ -47,12 +47,17 @@ export default function PasswordRecoveryForm() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <TextInput
-                    label="Password"
-                    id="password"
-                    {...form.getInputProps('password')}
-                />
-                <Button type="submit">Submit</Button>
+                <Stack>
+                    <TextInput
+                        type="password"
+                        label="Password"
+                        id="password"
+                        {...form.getInputProps('password')}
+                    />
+                    <Button w="50%" type="submit">
+                        Submit
+                    </Button>
+                </Stack>
             </form>
         </>
     )
