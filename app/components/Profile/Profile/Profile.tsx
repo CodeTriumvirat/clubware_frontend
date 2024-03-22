@@ -13,21 +13,20 @@ import { createClient } from '@/utils/supabase/server'
 import { NoProfile } from '@/components/Profile/NoProfile/NoProfile'
 import { EditProfile } from '@/components/Profile/EditProfile/EditProfile'
 import { UserProfile } from '@/types/types'
+import { User } from '@supabase/supabase-js'
 
 export async function Profile() {
     const supabase = createClient()
 
-    let userProfile = {} as UserProfile
+    let authUser = (await supabase.auth.getUser()).data.user as User
 
-    let { data: authUser } = await supabase.auth.getUser()
-
-    if (authUser.user) {
-        let { data: userProfileData } = await supabase
+    let userProfile = (
+        await supabase
             .from('user_profile')
             .select('*')
-            .eq('user_id', authUser.user.id)
-        if (userProfileData) userProfile = userProfileData[0]
-    }
+            .eq('user_id', authUser.id)
+            .single()
+    ).data
 
     return (
         <>
