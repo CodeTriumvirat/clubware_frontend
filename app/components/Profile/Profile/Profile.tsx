@@ -4,23 +4,34 @@ import {
     Title,
     Text,
     Image,
-    Flex,
     Stack,
     Group,
 } from '@mantine/core'
 import NextImage from 'next/image'
 import myImage from '/public/images/bg-9.png'
 import { createClient } from '@/utils/supabase/server'
-import { NoProfile } from '../NoProfile/NoProfile'
+import { NoProfile } from '@/components/Profile/NoProfile/NoProfile'
+import { EditProfile } from '@/components/Profile/EditProfile/EditProfile'
+import { UserProfile } from '@/types/types'
 
 export async function Profile() {
     const supabase = createClient()
 
-    let { data, error } = await supabase.from('user_profile').select('*')
+    let userProfile = {} as UserProfile
+
+    let { data: authUser } = await supabase.auth.getUser()
+
+    if (authUser.user) {
+        let { data: userProfileData } = await supabase
+            .from('user_profile')
+            .select('*')
+            .eq('user_id', authUser.user.id)
+        if (userProfileData) userProfile = userProfileData[0]
+    }
 
     return (
         <>
-            {data && (
+            {userProfile && (
                 <Container size={420} my={40}>
                     <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
                         <Stack justify="center" align="center">
@@ -43,7 +54,7 @@ export async function Profile() {
                                     wrap="wrap"
                                 >
                                     <Text>Firstname</Text>
-                                    <Text>{data[0].first_name}</Text>
+                                    <Text>{userProfile.first_name}</Text>
                                 </Group>
                                 <Group
                                     gap="md"
@@ -52,7 +63,7 @@ export async function Profile() {
                                     wrap="wrap"
                                 >
                                     <Text>Lastname</Text>
-                                    <Text>{data[0].last_name}</Text>
+                                    <Text>{userProfile.last_name}</Text>
                                 </Group>
                                 <Group
                                     gap="md"
@@ -61,7 +72,7 @@ export async function Profile() {
                                     wrap="wrap"
                                 >
                                     <Text>Birthday</Text>
-                                    <Text>{data[0].date_of_birth}</Text>
+                                    <Text>{userProfile.date_of_birth}</Text>
                                 </Group>
                                 <Group
                                     gap="md"
@@ -70,14 +81,15 @@ export async function Profile() {
                                     wrap="wrap"
                                 >
                                     <Text>Phone</Text>
-                                    <Text>{data[0].phone_number}</Text>
+                                    <Text>{userProfile.phone_number}</Text>
                                 </Group>
+                                {/* <EditProfile user={userProfile.user_id} /> */}
                             </Stack>
                         </Stack>
                     </Paper>
                 </Container>
             )}
-            {!data && <NoProfile />}
+            {!userProfile && <NoProfile />}
         </>
     )
 }
