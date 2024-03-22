@@ -13,6 +13,38 @@ import { createClient } from '@/utils/supabase/server'
 import { EditProfile } from '@/components/Profile/EditProfile/EditProfile'
 import { User } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
+import { UserProfile } from '@/types/types'
+
+const userFields = [
+    {
+        label: 'Firstname',
+        id: 'first_name',
+    },
+    {
+        label: 'Lastname',
+        id: 'last_name',
+    },
+    {
+        label: 'Birthday',
+        id: 'date_of_birth',
+    },
+    {
+        label: 'Phone',
+        id: 'phone_number',
+    },
+    {
+        label: 'Profile Bio',
+        id: 'profile_bio',
+    },
+    {
+        label: 'Address',
+        id: 'address',
+    },
+    {
+        label: 'Employment Date',
+        id: 'employment_date',
+    },
+]
 
 export async function Profile() {
     const supabase = createClient()
@@ -28,6 +60,26 @@ export async function Profile() {
     ).data
 
     if (!userProfile) notFound()
+
+    type UserProfileWithoutId = Omit<UserProfile, 'id' | 'user_id'> & {
+        [key: string]: string | null
+    }
+
+    const { id, user_id, ...rest } = userProfile
+    const userProfileWithoutId: UserProfileWithoutId = rest
+
+    const profileTextFields = userFields.map((field, index) => (
+        <Group
+            key={index}
+            gap="md"
+            justify="space-between"
+            align="flex-start"
+            wrap="wrap"
+        >
+            <Text>{field.label}</Text>
+            <Text>{userProfileWithoutId[field.id]}</Text>
+        </Group>
+    ))
 
     return (
         <>
@@ -47,42 +99,7 @@ export async function Profile() {
                                 mt="md"
                             />
                             <Stack gap="sm" mt="md" w="80%">
-                                <Group
-                                    gap="md"
-                                    justify="space-between"
-                                    align="flex-start"
-                                    wrap="wrap"
-                                >
-                                    <Text>Firstname</Text>
-                                    <Text>{userProfile.first_name}</Text>
-                                </Group>
-                                <Group
-                                    gap="md"
-                                    justify="space-between"
-                                    align="flex-start"
-                                    wrap="wrap"
-                                >
-                                    <Text>Lastname</Text>
-                                    <Text>{userProfile.last_name}</Text>
-                                </Group>
-                                <Group
-                                    gap="md"
-                                    justify="space-between"
-                                    align="flex-start"
-                                    wrap="wrap"
-                                >
-                                    <Text>Birthday</Text>
-                                    <Text>{userProfile.date_of_birth}</Text>
-                                </Group>
-                                <Group
-                                    gap="md"
-                                    justify="space-between"
-                                    align="flex-start"
-                                    wrap="wrap"
-                                >
-                                    <Text>Phone</Text>
-                                    <Text>{userProfile.phone_number}</Text>
-                                </Group>
+                                {profileTextFields}
                                 <EditProfile userProfile={userProfile} />
                             </Stack>
                         </Stack>
