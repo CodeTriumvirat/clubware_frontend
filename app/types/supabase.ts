@@ -64,34 +64,34 @@ export type Database = {
                     address: string | null
                     date_of_birth: string | null
                     employment_date: string | null
-                    first_name: string
+                    first_name: string | null
                     id: string
-                    last_name: string
+                    last_name: string | null
                     phone_number: string | null
                     profile_bio: string | null
-                    user_id: string | null
+                    user_id: string
                 }
                 Insert: {
                     address?: string | null
                     date_of_birth?: string | null
                     employment_date?: string | null
-                    first_name: string
+                    first_name?: string | null
                     id?: string
-                    last_name: string
+                    last_name?: string | null
                     phone_number?: string | null
                     profile_bio?: string | null
-                    user_id?: string | null
+                    user_id: string
                 }
                 Update: {
                     address?: string | null
                     date_of_birth?: string | null
                     employment_date?: string | null
-                    first_name?: string
+                    first_name?: string | null
                     id?: string
-                    last_name?: string
+                    last_name?: string | null
                     phone_number?: string | null
                     profile_bio?: string | null
-                    user_id?: string | null
+                    user_id?: string
                 }
                 Relationships: [
                     {

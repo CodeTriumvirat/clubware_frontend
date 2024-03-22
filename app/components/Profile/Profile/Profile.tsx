@@ -12,7 +12,6 @@ import myImage from '/public/images/bg-9.png'
 import { createClient } from '@/utils/supabase/server'
 import { NoProfile } from '@/components/Profile/NoProfile/NoProfile'
 import { EditProfile } from '@/components/Profile/EditProfile/EditProfile'
-import { UserProfile } from '@/types/types'
 import { User } from '@supabase/supabase-js'
 
 export async function Profile() {
@@ -82,7 +81,7 @@ export async function Profile() {
                                     <Text>Phone</Text>
                                     <Text>{userProfile.phone_number}</Text>
                                 </Group>
-                                {/* <EditProfile user={userProfile.user_id} /> */}
+                                <EditProfile userProfile={userProfile} />
                             </Stack>
                         </Stack>
                     </Paper>
