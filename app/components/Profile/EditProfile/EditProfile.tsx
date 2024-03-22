@@ -27,6 +27,11 @@ export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
                 /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
                     ? null
                     : 'Invalid Employent Date',
+            phone_number: (value) =>
+                value === null ||
+                /^(?:\+|00)(?:[0-9] ?){6,14}[0-9]$/.test(value)
+                    ? null
+                    : 'Number needs to start with a + or 00',
         },
     })
 
