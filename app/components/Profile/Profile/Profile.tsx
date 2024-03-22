@@ -10,9 +10,9 @@ import {
 import NextImage from 'next/image'
 import myImage from '/public/images/bg-9.png'
 import { createClient } from '@/utils/supabase/server'
-import { NoProfile } from '@/components/Profile/NoProfile/NoProfile'
 import { EditProfile } from '@/components/Profile/EditProfile/EditProfile'
 import { User } from '@supabase/supabase-js'
+import { notFound } from 'next/navigation'
 
 export async function Profile() {
     const supabase = createClient()
@@ -26,6 +26,8 @@ export async function Profile() {
             .eq('user_id', authUser.id)
             .single()
     ).data
+
+    if (!userProfile) notFound()
 
     return (
         <>
@@ -87,7 +89,6 @@ export async function Profile() {
                     </Paper>
                 </Container>
             )}
-            {!userProfile && <NoProfile />}
         </>
     )
 }

@@ -1,19 +1,10 @@
 'use client'
 import { useDisclosure } from '@mantine/hooks'
-import {
-    Modal,
-    Button,
-    Text,
-    Input,
-    Stack,
-    Group,
-    TextInput,
-} from '@mantine/core'
+import { Modal, Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/types/types'
 import { useForm } from '@mantine/form'
 import { FormEvent } from 'react'
 import { setNewProfile } from '@/components/Profile/EditProfile/actions'
-import { userAgent } from 'next/server'
 import { notifications } from '@mantine/notifications'
 
 export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
@@ -22,6 +13,20 @@ export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
     const form = useForm({
         initialValues: {
             ...userProfile,
+        },
+
+        validate: {
+            date_of_birth: (value) =>
+                value === null ||
+                /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
+                    ? null
+                    : 'Invalid Date of Birth',
+
+            employment_date: (value) =>
+                value === null ||
+                /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
+                    ? null
+                    : 'Invalid Employent Date',
         },
     })
 
@@ -53,18 +58,37 @@ export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
         {
             label: 'Firstname',
             id: 'first_name',
+            type: 'text',
         },
         {
             label: 'Lastname',
             id: 'last_name',
+            type: 'text',
         },
         {
             label: 'Birthday',
             id: 'date_of_birth',
+            type: 'date',
         },
         {
             label: 'Phone',
             id: 'phone_number',
+            type: 'text',
+        },
+        {
+            label: 'Profile Bio',
+            id: 'profile_bio',
+            type: 'text',
+        },
+        {
+            label: 'Address',
+            id: 'address',
+            type: 'text',
+        },
+        {
+            label: 'Employent Date',
+            id: 'employment_date',
+            type: 'date',
         },
     ]
 
@@ -73,6 +97,7 @@ export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
             key={index}
             label={field.label}
             id={field.id}
+            type={field.type}
             {...form.getInputProps(field.id)}
         />
     ))
