@@ -61,36 +61,36 @@ export type Database = {
         Tables: {
             user_profile: {
                 Row: {
-                    address: string | null
+                    address: string
                     date_of_birth: string | null
                     employment_date: string | null
-                    first_name: string | null
+                    first_name: string
                     id: string
-                    last_name: string | null
-                    phone_number: string | null
-                    profile_bio: string | null
+                    last_name: string
+                    phone_number: string
+                    profile_bio: string
                     user_id: string
                 }
                 Insert: {
-                    address?: string | null
+                    address?: string
                     date_of_birth?: string | null
                     employment_date?: string | null
-                    first_name?: string | null
+                    first_name?: string
                     id?: string
-                    last_name?: string | null
-                    phone_number?: string | null
-                    profile_bio?: string | null
+                    last_name?: string
+                    phone_number?: string
+                    profile_bio?: string
                     user_id: string
                 }
                 Update: {
-                    address?: string | null
+                    address?: string
                     date_of_birth?: string | null
                     employment_date?: string | null
-                    first_name?: string | null
+                    first_name?: string
                     id?: string
-                    last_name?: string | null
-                    phone_number?: string | null
-                    profile_bio?: string | null
+                    last_name?: string
+                    phone_number?: string
+                    profile_bio?: string
                     user_id?: string
                 }
                 Relationships: [

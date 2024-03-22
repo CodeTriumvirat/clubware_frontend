@@ -9,7 +9,11 @@ const navData = [
     { link: '/', label: 'Home', icon: IconSettings },
     { link: '/login', label: 'Login', icon: IconSettings },
     { link: '/profile', label: 'Profile', icon: IconSettings },
-    { link: '/auth/recovery', label: 'Password Recovery', icon: IconSettings },
+    {
+        link: '/password-recovery',
+        label: 'Password Recovery',
+        icon: IconSettings,
+    },
 ]
 
 export default function AppContainer({

@@ -9,11 +9,11 @@ import {
 } from '@mantine/core'
 import NextImage from 'next/image'
 import myImage from '/public/images/bg-9.png'
-import { createClient } from '@/utils/supabase/server'
-import { EditProfile } from '@/components/Profile/EditProfile/EditProfile'
+import { createClient } from '@/_utils/supabase/server'
+import { EditProfile } from '@/profile/EditProfileModal'
 import { User } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
-import { UserProfile } from '@/types/types'
+import { UserProfile } from '@/_types'
 
 const userFields = [
     {

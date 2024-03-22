@@ -1,5 +1,5 @@
-import PasswordRecoveryForm from '@/components/PasswordRecoveryForm/PasswordRecoveryForm'
-import { createClient } from '@/utils/supabase/server'
+import PasswordRecoveryForm from '@/(auth)/PasswordRecoveryForm'
+import { createClient } from '@/_utils/supabase/server'
 import { redirect } from 'next/navigation'
 
 export default async function Page() {

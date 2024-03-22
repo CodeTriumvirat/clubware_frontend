@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { MantineProvider, ColorSchemeScript } from '@mantine/core'
-import './styles/globals.css'
-import { theme } from '@/styles/theme'
+import '@/_styles/globals.css'
+import { theme } from '@/_styles/theme'
 import { Notifications } from '@mantine/notifications'
-import AppContainer from '@/components/AppContainer/AppContainer'
+import AppContainer from '@/_components/AppContainer'
 
 export const metadata: Metadata = {
     title: 'ClubWare ERP',

@@ -1,10 +1,10 @@
 'use client'
 import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, Stack, TextInput } from '@mantine/core'
-import { UserProfile } from '@/types/types'
+import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
 import { FormEvent } from 'react'
-import { setNewProfile } from '@/components/Profile/EditProfile/actions'
+import { updateUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
 
 export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
@@ -42,7 +42,7 @@ export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
 
         if (!errors.hasErrors) {
             try {
-                await setNewProfile(form.values)
+                await updateUserProfile(form.values)
                 close()
             } catch (error) {
                 if (error instanceof Error)

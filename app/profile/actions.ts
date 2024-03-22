@@ -3,10 +3,10 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@/utils/supabase/server'
-import { UserProfile } from '@/types/types'
+import { createClient } from '@/_utils/supabase/server'
+import { UserProfile } from '@/_types'
 
-export async function setNewProfile(profileData: UserProfile) {
+export async function updateUserProfile(profileData: UserProfile) {
     const supabase = createClient()
 
     const { error } = await supabase
