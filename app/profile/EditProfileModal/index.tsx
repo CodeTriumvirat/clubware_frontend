@@ -7,7 +7,11 @@ import { FormEvent } from 'react'
 import { updateUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
 
-export function EditProfile({ userProfile }: { userProfile: UserProfile }) {
+export function EditProfileModal({
+    userProfile,
+}: {
+    userProfile: UserProfile
+}) {
     const [opened, { open, close }] = useDisclosure(false)
 
     const form = useForm({

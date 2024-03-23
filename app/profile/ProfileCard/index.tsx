@@ -10,7 +10,7 @@ import {
 import NextImage from 'next/image'
 import myImage from '/public/images/bg-9.png'
 import { createClient } from '@/_utils/supabase/server'
-import { EditProfile } from '@/profile/EditProfileModal'
+import { EditProfileModal } from '@/profile/EditProfileModal'
 import { User } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
 import { UserProfile } from '@/_types'
@@ -46,7 +46,7 @@ const userFields = [
     },
 ]
 
-export async function Profile() {
+export async function ProfileCard() {
     const supabase = createClient()
 
     let authUser = (await supabase.auth.getUser()).data.user as User
@@ -100,7 +100,7 @@ export async function Profile() {
                             />
                             <Stack gap="sm" mt="md" w="80%">
                                 {profileTextFields}
-                                <EditProfile userProfile={userProfile} />
+                                <EditProfileModal userProfile={userProfile} />
                             </Stack>
                         </Stack>
                     </Paper>

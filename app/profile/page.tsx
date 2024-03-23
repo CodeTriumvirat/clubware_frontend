@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/_utils/supabase/server'
-import { Profile } from '@/profile/ProfileCard'
+import { ProfileCard } from '@/profile/ProfileCard'
 
 export default async function Page() {
     const supabase = createClient()
@@ -11,5 +11,5 @@ export default async function Page() {
         redirect('/login')
     }
 
-    return <Profile />
+    return <ProfileCard />
 }
