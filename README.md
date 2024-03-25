@@ -13,7 +13,7 @@ To start developing, follow these steps:
 1. Clone the project to your local directory:
 
     ```
-    git clone <Frontend-Repository-URL>
+    git clone git@github.com:CodeTriumvirat/clubware_frontend.git
     ```
 
 2. Install the required dependencies:
