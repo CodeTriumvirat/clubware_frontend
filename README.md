@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Clubware.io
+
+Welcome to Clubware.io, the innovative employee and inventory management software designed specifically for clubs and festivals. Our goal is to simplify the management of events and resources through an intuitive user interface and powerful backend services.
+
+## Technology Stack
+
+Clubware.io leverages modern web technologies to provide a responsive and scalable application. The frontend is developed with [Next.js](https://nextjs.org/docs) and [Mantine UI](https://mantine.dev/docs/), while the backend is built on [Supabase](https://supabase.com/docs).
 
 ## Getting Started
 
-First, run the development server:
+To start developing, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the project to your local directory:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```
+   git clone <Frontend-Repository-URL>
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Install the required dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```
+   npm install
+   ```
 
-## Learn More
+3. Start the development server:
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   npm run dev
+   ```
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The frontend is now accessible at `http://localhost:3010`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Configuration
 
-## Deploy on Vercel
+To properly run the application, you need to set up the `.env.local` file with the necessary API keys. A sample configuration file `.env.local.example` is included in the project. Copy this file, edit it with your specific values, and rename it to `.env.local`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure and Style Guide
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Our Clubware frontend project follows a specific structure and naming conventions guide to ensure consistency and readability in the code:
+
+### Project Structure
+
+- **app/(features)**: Contains all feature-related modules. Each feature is placed in a folder named with parentheses, e.g., `(auth)`.
+- **app/_components**: Global components that can be used across different parts of the application.
+- **app/_styles**: Global styles, themes, and utility classes.
+- **app/_types**: TypeScript types and interfaces for global use.
+- **app/_utils**: Helper functions and utilities for the entire application.
+
+### Naming Conventions
+
+- **Features**: Feature folders are named with parentheses, e.g., `(auth)`.
+- **Non-Route Folders**: Start with an underscore `_` for utility directories like `_components`, `_styles`, `_types`, and `_utils`.
+- **Index Files**: Use `index.tsx` or `index.ts` for component exports to simplify imports.
+
+### Contribution Guidelines
+
+Please follow our contribution guidelines to maintain the consistency and quality of the project. Specific guidelines for components, styles, types, and utilities are included in the Style Guide.
+
+For more information on Mantine UI and Next.js, please visit their official documentation.
