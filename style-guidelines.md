@@ -11,8 +11,7 @@ Our project is organized into several key directories, each serving a specific p
     Within each feature folder, we may have:
 
     -   **Components**: Reusable components specific to this feature.
-    -   **Actions**: Redux actions, if applicable.
-    -   **Reducers**: Redux reducers, if applicable.
+    -   **Actions**: Next Server actions for this feature.
     -   **Tests**: Tests specific to this feature.
 
 -   **app/\_components**: This directory houses global components that can be used across different parts of the application. Components within this directory are further organized into subdirectories named after the components they contain.
