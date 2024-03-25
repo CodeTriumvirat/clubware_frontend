@@ -33,7 +33,7 @@ export function EditProfileModal({
                     : 'Invalid Employent Date',
             phone_number: (value) =>
                 value === null ||
-                /^(?:\+|00)(?:[0-9] ?){6,14}[0-9]$/.test(value)
+                /^(?:(?:\+|00)(?:[0-9] ?){6,14}[0-9])?$/.test(value)
                     ? null
                     : 'Number needs to start with a + or 00',
         },
