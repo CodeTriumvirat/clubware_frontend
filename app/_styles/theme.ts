@@ -66,4 +66,7 @@ export const theme = createTheme({
             '#a95a00',
         ],
     },
+    autoContrast: true,
+    defaultRadius: 'md',
+    cursorType: 'pointer',
 })
