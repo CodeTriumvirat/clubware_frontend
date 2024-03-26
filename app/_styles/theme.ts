@@ -2,7 +2,16 @@
 
 import { createTheme } from '@mantine/core'
 
+import { Nunito, Nunito_Sans } from 'next/font/google'
+
+const NunitoFont = Nunito({ subsets: ['latin'] })
+const NunitoSansFont = Nunito_Sans({ subsets: ['latin'] })
+
 export const theme = createTheme({
+    fontFamily: NunitoSansFont.style.fontFamily,
+    headings: {
+        fontFamily: NunitoFont.style.fontFamily,
+    },
     primaryColor: 'funkyPurple',
     colors: {
         funkyPurple: [
