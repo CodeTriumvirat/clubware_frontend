@@ -1,0 +1,19 @@
+.navContainer {
+    align-items: center;
+    @mixin larger-than $mantine-breakpoint-sm {
+        align-items: flex-start;
+    }
+}
+
+.linkGroupContainer {
+    @mixin larger-than $mantine-breakpoint-sm {
+        margin-left: 1rem;
+    }
+}
+
+.divider {
+    border-color: var(--mantine-color-funkyPurple-9);
+    @mixin dark {
+        border-color: var(--mantine-color-funkyPurple-0);
+    }
+}
