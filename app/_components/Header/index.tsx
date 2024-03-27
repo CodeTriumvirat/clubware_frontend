@@ -1,6 +1,7 @@
 import { Group, Flex, Burger, TextInput } from '@mantine/core'
 import { Logo } from '@/_components/Logo'
 import styles from './styles.module.css'
+import { ColorSchemeToggle } from '../ColorSchemeToggle'
 
 export const Header = ({
     isNavOpened,
@@ -34,6 +35,7 @@ export const Header = ({
                     placeholder="Suche:"
                     className={styles.searchInput}
                 ></TextInput>
+                <ColorSchemeToggle />
             </Flex>
         </Group>
     )

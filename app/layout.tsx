@@ -18,7 +18,7 @@ export default function RootLayout({
     return (
         <html lang="de">
             <head>
-                <ColorSchemeScript defaultColorScheme="auto" />
+                <ColorSchemeScript />
                 <link rel="shortcut icon" href="/favicon.ico" />
                 <meta
                     name="viewport"
@@ -26,7 +26,7 @@ export default function RootLayout({
                 />
             </head>
             <body>
-                <MantineProvider theme={theme} defaultColorScheme="auto">
+                <MantineProvider theme={theme}>
                     <Notifications />
                     <AppContainer>{children}</AppContainer>
                 </MantineProvider>
