@@ -24,23 +24,6 @@
     }
 }
 
-.headerContainer {
-    height: 100%;
-}
-
-.headerLeft {
-    width: 100vw;
-    @mixin larger-than $mantine-breakpoint-sm {
-        width: 250px;
-    }
-    @mixin larger-than $mantine-breakpoint-md {
-        width: 250px;
-    }
-    @mixin larger-than $mantine-breakpoint-lg {
-        width: 300px;
-    }
-}
-
 .mainContainer {
     background-color: var(--mantine-color-body);
     flex-grow: 1;
@@ -49,11 +32,5 @@
     padding: 1rem;
     @mixin smaller-than $mantine-breakpoint-sm {
         border-radius: 0;
-    }
-}
-
-.searchInput {
-    input {
-        background-color: var(--mantine-color-body);
     }
 }
