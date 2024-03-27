@@ -1,0 +1,8 @@
+.Logo {
+    text-decoration: none;
+    color: var(--mantine-color-funkyPurple-1);
+
+    span {
+        color: var(--mantine-color-habibiViolet-5);
+    }
+}

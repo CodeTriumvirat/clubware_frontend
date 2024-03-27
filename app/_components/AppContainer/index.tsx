@@ -1,19 +1,77 @@
 'use client'
-import { AppShell, Burger, NavLink } from '@mantine/core'
+import { AppShell, Burger, Flex, Group, TextInput, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconChevronRight, IconSettings } from '@tabler/icons-react'
-import Link from 'next/link'
+import {
+    IconAdjustments,
+    IconBuildingWarehouse,
+    IconCalendar,
+    IconCalendarStats,
+    IconConfetti,
+    IconFileAnalytics,
+    IconGauge,
+    IconLock,
+    IconNotes,
+    IconPresentationAnalytics,
+    IconUsers,
+    IconJumpRope,
+    IconHelpOctagon,
+    IconBrandHipchat,
+} from '@tabler/icons-react'
+import { LinkGroup } from '@/_components/LinkGroup'
+import styles from './styles.module.css'
 import { useState } from 'react'
+import { Logo } from '@/_components/Logo'
 
-const navData = [
-    { link: '/', label: 'Home', icon: IconSettings },
-    { link: '/login', label: 'Login', icon: IconSettings },
-    { link: '/profile', label: 'Profile', icon: IconSettings },
+const mockdata = [
+    { label: 'Dashboard', link: '/dashboard', icon: IconGauge },
     {
-        link: '/password-recovery',
-        label: 'Password Recovery',
-        icon: IconSettings,
+        label: 'Kalender',
+        link: '/marketnews',
+        icon: IconCalendar,
+        links: [
+            { label: 'Übersicht', link: '/a' },
+            { label: 'Heute', link: '/b' },
+            { label: 'Diese Woche', link: '/c' },
+            { label: 'Diesen Monat', link: '/d' },
+        ],
     },
+    {
+        label: 'Warenwirtschaft',
+        link: '/releases',
+        icon: IconBuildingWarehouse,
+        links: [
+            { label: 'Übersicht', link: '/' },
+            { label: 'Bestand', link: '/' },
+            { label: 'Einkaufsliste', link: '/' },
+            { label: 'Produkte Hinzufügen', link: '/' },
+            { label: 'Inventur', link: '/' },
+        ],
+    },
+    {
+        label: 'Veranstaltungen',
+        link: '/analytics',
+        icon: IconConfetti,
+        links: [
+            { label: 'Übersicht', link: '/' },
+            { label: 'nächste Verantaltungen', link: '/' },
+            { label: 'Veranstaltung hinzufügen', link: '/' },
+        ],
+    },
+    { label: 'Mitarbeter*innen', link: '/analytics', icon: IconUsers },
+
+    {
+        label: 'Schichtplan',
+        link: '/analytics',
+        icon: IconJumpRope,
+        links: [
+            { label: 'Übersicht', link: '/' },
+            { label: 'Schicht hinzufügen', link: '/' },
+        ],
+    },
+    { label: 'F.A.Q.', link: '/settings', icon: IconHelpOctagon },
+    { label: 'TurboChat3000', link: '/settings', icon: IconBrandHipchat },
+
+    { label: 'Settings', link: '/settings', icon: IconAdjustments },
 ]
 
 export default function AppContainer({
@@ -22,42 +80,64 @@ export default function AppContainer({
     children: React.ReactNode
 }>) {
     const [opened, { toggle }] = useDisclosure()
-    const [active, setActive] = useState(0)
 
-    const navLinks = navData.map((item, index) => (
-        <NavLink
-            key={item.label}
-            component={Link}
-            href={item.link}
-            label={item.label}
-            leftSection={<item.icon stroke={1.5} />}
-            rightSection={<IconChevronRight size="1rem" stroke={1.5} />}
-            variant="subtle"
-            active={index === active}
-            onClick={() => setActive(index)}
+    const [openedNav, setOpenedNav] = useState('')
+
+    const links = mockdata.map((item, index) => (
+        <LinkGroup
+            {...item}
+            openedNav={openedNav}
+            setOpenedNav={setOpenedNav}
+            key={index}
         />
     ))
 
     return (
         <AppShell
-            header={{ height: { base: 60, md: 70, lg: 80 } }}
+            className={styles.appShell}
+            withBorder={false}
+            header={{ height: { base: 50, md: 50, lg: 50 } }}
             navbar={{
-                width: { base: 200, md: 300, lg: 400 },
+                width: { base: 250, md: 250, lg: 300 },
                 breakpoint: 'sm',
                 collapsed: { mobile: !opened },
             }}
             padding="md"
         >
             <AppShell.Header>
-                <Burger
-                    opened={opened}
-                    onClick={toggle}
-                    hiddenFrom="sm"
-                    size="sm"
-                />
+                <Group className={styles.headerContainer}>
+                    <Flex
+                        align="center"
+                        ml="md"
+                        justify="space-between"
+                        className={styles.headerLeft}
+                    >
+                        <Burger
+                            hiddenFrom="sm"
+                            opened={opened}
+                            onClick={toggle}
+                            size="sm"
+                        />
+                        <Logo />
+                    </Flex>
+                    <Flex
+                        align="center"
+                        className={styles.headerRight}
+                        visibleFrom="sm"
+                    >
+                        <TextInput
+                            placeholder="Suche:"
+                            className={styles.searchInput}
+                        ></TextInput>
+                    </Flex>
+                </Group>
             </AppShell.Header>
-            <AppShell.Navbar p="md">{navLinks}</AppShell.Navbar>
-            <AppShell.Main>{children}</AppShell.Main>
+            <AppShell.Navbar p="md">
+                <Stack className={styles.navContainer}>{links}</Stack>
+            </AppShell.Navbar>
+            <AppShell.Main>
+                <div className={styles.mainContainer}>{children}</div>
+            </AppShell.Main>
         </AppShell>
     )
 }

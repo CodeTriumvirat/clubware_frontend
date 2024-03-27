@@ -1,26 +1,18 @@
-@layer base, mantine, tailwind;
+@import '@mantine/core/styles.css';
+@import '@mantine/notifications/styles.css';
 
-@layer base {
-    @tailwind base;
-}
-
-@layer tailwind {
-    @tailwind components;
-    @tailwind utilities;
-}
-
-@import '@mantine/core/styles.layer.css';
-@import '@mantine/notifications/styles.layer.css';
-@import '@mantine/dropzone/styles.css';
 
 :root {
-    --funkyPurpleDarkBackground: #151020;
-    --funkyPurpleLightBackground: #faf5fc;
+    --funkyPurpleDarkBody: #201c2c;
+    --funkyPurpleDarkAppshell: #191523;
+    --funkyPurpleLightBody: #fbfbfb;
+    --funkyPurpleLightAppshell: #d7d1d1;
 
-    @mixin light-root {
-        --mantine-color-body: var(--funkyPurpleLightBackground);
-    }
+    --mantine-color-body: var(--funkyPurpleLightBody);
+    --app-color-appshell: var(--funkyPurpleLightAppshell);
+
     @mixin dark-root {
-        --mantine-color-body: var(--funkyPurpleDarkBackground);
+        --mantine-color-body: var(--funkyPurpleDarkBody);
+        --app-color-appshell: var(--funkyPurpleDarkAppshell);
     }
 }
