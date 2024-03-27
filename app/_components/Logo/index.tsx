@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 
 export const Logo = () => {
     return (
-        <Link href="/dashboard" className={styles.Logo}>
+        <Link href="/dashboard" className={styles.logo}>
             <Text ml="xl" size="xl">
                 clubware.
                 <span>io</span>

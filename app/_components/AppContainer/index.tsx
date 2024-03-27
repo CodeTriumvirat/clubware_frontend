@@ -133,7 +133,7 @@ export default function AppContainer({
                 </Group>
             </AppShell.Header>
             <AppShell.Navbar p="md">
-                <Stack className={styles.navContainer}>{links}</Stack>
+                <Stack>{links}</Stack>
             </AppShell.Navbar>
             <AppShell.Main>
                 <div className={styles.mainContainer}>{children}</div>
