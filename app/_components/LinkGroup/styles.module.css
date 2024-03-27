@@ -13,6 +13,9 @@
 
 .linkGroupContainer {
     margin-left: 1.5rem;
+    a {
+        border-radius: var(--mantine-radius-default);
+    }
 }
 
 .divider {
