@@ -1,6 +1,7 @@
 @import '@mantine/core/styles.css';
 @import '@mantine/notifications/styles.css';
 
+
 :root {
     --funkyPurpleDarkBody: #201c2c;
     --funkyPurpleDarkAppshell: #191523;

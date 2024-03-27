@@ -84,7 +84,7 @@ export async function ProfileCard() {
     return (
         <>
             {userProfile && (
-                <Container size={420} my={40}>
+                <Container size={620} my={40}>
                     <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
                         <Stack justify="center" align="center">
                             <Title order={2}>User Profile</Title>
@@ -93,8 +93,7 @@ export async function ProfileCard() {
                                 src={myImage}
                                 radius="md"
                                 alt="My image"
-                                w="80%"
-                                h={150}
+                                w="60%"
                                 fit="contain"
                                 mt="md"
                             />
