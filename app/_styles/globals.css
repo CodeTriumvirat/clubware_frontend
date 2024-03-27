@@ -15,8 +15,8 @@
 :root {
     --funkyPurpleDarkBody: #201c2c;
     --funkyPurpleDarkAppshell: #191523;
-    --funkyPurpleLightBody: #f2ebf5;
-    --funkyPurpleLightAppshell: #dbd4de;
+    --funkyPurpleLightBody: #fbfbfb;
+    --funkyPurpleLightAppshell: #d7d1d1;
 
     --mantine-color-body: var(--funkyPurpleLightBody);
     --app-color-appshell: var(--funkyPurpleLightAppshell);
