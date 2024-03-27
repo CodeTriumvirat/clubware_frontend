@@ -3,9 +3,11 @@ import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
-import { FormEvent } from 'react'
-import { updateUserProfile } from '@/profile/actions'
+import { FormEvent, useState } from 'react'
+import { updateUserProfile, uploadProfilePicture } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
+import { DataDropzone } from '@/_components/DataDropzone'
+import { IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone'
 
 export function EditProfileModal({
     userProfile,
@@ -13,6 +15,7 @@ export function EditProfileModal({
     userProfile: UserProfile
 }) {
     const [opened, { open, close }] = useDisclosure(false)
+    const [file, setFile] = useState<FileWithPath>()
 
     const form = useForm({
         initialValues: {
@@ -43,24 +46,41 @@ export function EditProfileModal({
         event.preventDefault()
 
         let errors = form.validate()
+        console.log('Form errors:', errors)
 
         if (!errors.hasErrors) {
             try {
                 await updateUserProfile(form.values)
-                close()
+                console.log('Profile updated')
             } catch (error) {
-                if (error instanceof Error)
+                if (error instanceof Error) {
                     notifications.show({
                         title: 'Error',
                         message: error.message,
                     })
+                }
             }
+        } else {
+            console.log('Form has errors, cannot submit')
         }
-        if (errors.hasErrors) {
-            notifications.show({
-                title: 'There has been an error',
-                message: 'Profile could not be updated. Please try again.',
-            })
+
+        if (file) {
+            try {
+                await uploadProfilePicture(file, userProfile.id)
+                console.log('Upload successful')
+                setFile(undefined)
+                close()
+            } catch (error) {
+                if (error instanceof Error) {
+                    notifications.show({
+                        title: 'Error',
+                        message: error.message,
+                    })
+                    console.log(error.message)
+                }
+            }
+        } else {
+            console.log('No file selected for upload')
         }
     }
     const userFields = [
@@ -117,6 +137,15 @@ export function EditProfileModal({
                 {/* Modal content */}
                 <form onSubmit={handleSubmit}>
                     <Stack>
+                        <DataDropzone
+                            maxSize={2 * 1024 ** 2}
+                            accept={IMAGE_MIME_TYPE}
+                            newFile={file}
+                            setNewFile={setFile}
+                            topText="Drag and drop your profile picture here or click to browse"
+                            bottomText="Attach one file, it should not exceed 2mb"
+                        />
+
                         {formFields}
                         <Button type="submit" mx="xs">
                             Save Changes

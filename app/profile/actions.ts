@@ -21,3 +21,24 @@ export async function updateUserProfile(profileData: UserProfile) {
 
     if (error) throw new Error('Failed to update profile')
 }
+export async function uploadProfilePicture(file: File | undefined, id: string) {
+    const supabase = createClient()
+    if (file) {
+        console.log('File type:', file.type)
+        console.log('File:', file)
+        try {
+            const { error } = await supabase.storage
+                .from('profile_picture')
+                .upload(`${id}.${file.type}`, file, { upsert: true })
+            if (error) {
+                console.error('Error uploading file:', error.message)
+            } else {
+                console.log('Upload successful')
+            }
+        } catch (error: any) {
+            console.error('Error uploading file:', error.message)
+        }
+    } else {
+        console.log('No file provided for upload')
+    }
+}
