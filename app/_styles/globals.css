@@ -13,13 +13,16 @@
 @import '@mantine/notifications/styles.layer.css';
 
 :root {
-    --funkyPurpleDarkBackground: #151020;
-    --funkyPurpleLightBackground: #faf5fc;
+    --funkyPurpleDarkBody: #201c2c;
+    --funkyPurpleDarkAppshell: #191523;
+    --funkyPurpleLightBody: #fbf8fc;
+    --funkyPurpleLightAppshell: #f8effb;
 
-    @mixin light-root {
-        --mantine-color-body: var(--funkyPurpleLightBackground);
-    }
+    --mantine-color-body: var(--funkyPurpleLightBody);
+    --app-color-appshell: var(--funkyPurpleLightAppshell);
+
     @mixin dark-root {
-        --mantine-color-body: var(--funkyPurpleDarkBackground);
+        --mantine-color-body: var(--funkyPurpleDarkBody);
+        --app-color-appshell: var(--funkyPurpleDarkAppshell);
     }
 }
