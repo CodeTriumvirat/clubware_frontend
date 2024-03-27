@@ -105,7 +105,7 @@ export default function AppContainer({
             padding="md"
         >
             <AppShell.Header>
-                <Group className={styles.headerContainer}>
+                <Group gap={0} className={styles.headerContainer}>
                     <Flex
                         align="center"
                         ml="md"
