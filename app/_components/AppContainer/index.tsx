@@ -3,53 +3,75 @@ import { AppShell, Burger, Flex, Group, TextInput, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import {
     IconAdjustments,
+    IconBuildingWarehouse,
+    IconCalendar,
     IconCalendarStats,
+    IconConfetti,
     IconFileAnalytics,
     IconGauge,
     IconLock,
     IconNotes,
     IconPresentationAnalytics,
+    IconUsers,
+    IconJumpRope,
+    IconHelpOctagon,
+    IconBrandHipchat,
 } from '@tabler/icons-react'
 import { LinkGroup } from '@/_components/LinkGroup'
 import styles from './styles.module.css'
 import { useState } from 'react'
+import { Logo } from '@/_components/Logo'
 
 const mockdata = [
     { label: 'Dashboard', link: '/dashboard', icon: IconGauge },
     {
-        label: 'Market news',
+        label: 'Kalender',
         link: '/marketnews',
-        icon: IconNotes,
+        icon: IconCalendar,
         links: [
-            { label: 'Overview', link: '/a' },
-            { label: 'Forecasts', link: '/b' },
-            { label: 'Outlook', link: '/c' },
-            { label: 'Real time', link: '/d' },
+            { label: 'Übersicht', link: '/a' },
+            { label: 'Heute', link: '/b' },
+            { label: 'Diese Woche', link: '/c' },
+            { label: 'Diesen Monat', link: '/d' },
         ],
     },
     {
-        label: 'Releases',
+        label: 'Warenwirtschaft',
         link: '/releases',
-        icon: IconCalendarStats,
+        icon: IconBuildingWarehouse,
         links: [
-            { label: 'Upcoming releases', link: '/' },
-            { label: 'Previous releases', link: '/' },
-            { label: 'Releases schedule', link: '/' },
+            { label: 'Übersicht', link: '/' },
+            { label: 'Bestand', link: '/' },
+            { label: 'Einkaufsliste', link: '/' },
+            { label: 'Produkte Hinzufügen', link: '/' },
+            { label: 'Inventur', link: '/' },
         ],
     },
-    { label: 'Analytics', link: '/analytics', icon: IconPresentationAnalytics },
-    { label: 'Contracts', link: '/contracts', icon: IconFileAnalytics },
-    { label: 'Settings', link: '/settings', icon: IconAdjustments },
     {
-        label: 'Security',
-        link: '/security',
-        icon: IconLock,
+        label: 'Veranstaltungen',
+        link: '/analytics',
+        icon: IconConfetti,
         links: [
-            { label: 'Enable 2FA', link: '/' },
-            { label: 'Change password', link: '/' },
-            { label: 'Recovery codes', link: '/' },
+            { label: 'Übersicht', link: '/' },
+            { label: 'nächste Verantaltungen', link: '/' },
+            { label: 'Veranstaltung hinzufügen', link: '/' },
         ],
     },
+    { label: 'Mitarbeter*innen', link: '/analytics', icon: IconUsers },
+
+    {
+        label: 'Schichtplan',
+        link: '/analytics',
+        icon: IconJumpRope,
+        links: [
+            { label: 'Übersicht', link: '/' },
+            { label: 'Schicht hinzufügen', link: '/' },
+        ],
+    },
+    { label: 'F.A.Q.', link: '/settings', icon: IconHelpOctagon },
+    { label: 'TurboChat3000', link: '/settings', icon: IconBrandHipchat },
+
+    { label: 'Settings', link: '/settings', icon: IconAdjustments },
 ]
 
 export default function AppContainer({
@@ -85,6 +107,7 @@ export default function AppContainer({
             <AppShell.Header>
                 <Group className={styles.headerContainer}>
                     <Flex align="center" className={styles.headerLeft}>
+                        <Logo />
                         <Burger
                             hiddenFrom="sm"
                             opened={opened}

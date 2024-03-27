@@ -1,7 +1,10 @@
 .navContainer {
     align-items: center;
+
     @mixin larger-than $mantine-breakpoint-sm {
         align-items: flex-start;
+    }
+    @mixin smaller-than $mantine-breakpoint-sm {
     }
 }
 

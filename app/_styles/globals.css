@@ -1,16 +1,5 @@
-@layer base, mantine, tailwind;
-
-@layer base {
-    @tailwind base;
-}
-
-@layer tailwind {
-    @tailwind components;
-    @tailwind utilities;
-}
-
-@import '@mantine/core/styles.layer.css';
-@import '@mantine/notifications/styles.layer.css';
+@import '@mantine/core/styles.css';
+@import '@mantine/notifications/styles.css';
 
 :root {
     --funkyPurpleDarkBody: #201c2c;
