@@ -9,9 +9,7 @@
 }
 
 .linkGroupContainer {
-    @mixin larger-than $mantine-breakpoint-sm {
-        margin-left: 1rem;
-    }
+    margin-left: 1.5rem;
 }
 
 .divider {

@@ -106,14 +106,19 @@ export default function AppContainer({
         >
             <AppShell.Header>
                 <Group className={styles.headerContainer}>
-                    <Flex align="center" className={styles.headerLeft}>
-                        <Logo />
+                    <Flex
+                        align="center"
+                        ml="md"
+                        justify="space-between"
+                        className={styles.headerLeft}
+                    >
                         <Burger
                             hiddenFrom="sm"
                             opened={opened}
                             onClick={toggle}
                             size="sm"
                         />
+                        <Logo />
                     </Flex>
                     <Flex
                         align="center"
