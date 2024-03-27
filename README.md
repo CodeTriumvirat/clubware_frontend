@@ -51,6 +51,7 @@ Our Clubware frontend project follows a specific structure and naming convention
 -   **Features**: Feature folders are named with parentheses, e.g., `(auth)`.
 -   **Non-Route Folders**: Start with an underscore `_` for utility directories like `_components`, `_styles`, `_types`, and `_utils`.
 -   **Index Files**: Use `index.tsx` or `index.ts` for component exports to simplify imports.
+-   **CSS Module Classes**: Using `camelCase` is preferred as kebab-case may cause unexpected behavior when trying to access styles.class-name with dot notation.
 
 ### Contribution Guidelines
 
