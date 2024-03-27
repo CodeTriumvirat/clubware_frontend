@@ -6,6 +6,9 @@
     }
     @mixin smaller-than $mantine-breakpoint-sm {
     }
+    a {
+        border-radius: var(--mantine-radius-default);
+    }
 }
 
 .linkGroupContainer {
