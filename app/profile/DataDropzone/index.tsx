@@ -1,55 +1,70 @@
-import { Group, Text, rem, Image, SimpleGrid, CloseButton } from '@mantine/core'
+import {
+    Group,
+    Text,
+    rem,
+    Image,
+    SimpleGrid,
+    CloseButton,
+    Button,
+} from '@mantine/core'
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react'
 import { Dropzone, DropzoneProps, FileWithPath } from '@mantine/dropzone'
 import { useState } from 'react'
-import { useForm } from '@mantine/form'
+import { notifications } from '@mantine/notifications'
+import { uploadProfilePicture } from '../actions'
 
 export interface DataDropzoneProps extends Partial<DropzoneProps> {
     topText?: string
     bottomText?: string
-}
-
-interface FormValues {
-    files: File[]
+    user_id: string
 }
 
 export function DataDropzone({
     topText,
     bottomText,
+    user_id,
     ...props
 }: DataDropzoneProps) {
-    const form = useForm<FormValues>({
-        initialValues: { files: [] },
-    })
+    const [error, setError] = useState('')
+    const formData = new FormData()
 
-    const [previews, setPreviews] = useState<JSX.Element[]>([])
+    // const [previews, setPreviews] = useState<JSX.Element[]>([])
 
-    const handleDrop = (files: FileWithPath[]) => {
-        form.setFieldValue('files', files)
+    // const selectedFile = form.values.files.map((file, index) => (
+    //     <Text key={file.name}>
+    //         <b>{file.name}</b> ({(file.size / 1024).toFixed(2)} kb)
+    //         <CloseButton
+    //             size="xs"
+    //             onClick={() =>
+    //                 form.setFieldValue(
+    //                     'files',
+    //                     form.values.files.filter((_, i) => i !== index)
+    //                 )
+    //             }
+    //         />
+    //     </Text>
+    // ))
+    async function handleSubmit() {
+        try {
+            await uploadProfilePicture(formData, user_id)
+        } catch (error) {
+            if (error instanceof Error)
+                notifications.show({
+                    title: 'Error',
+                    message: error.message,
+                })
+        }
     }
-
-    const selectedFiles = form.values.files.map((file, index) => (
-        <Text key={file.name}>
-            <b>{file.name}</b> ({(file.size / 1024).toFixed(2)} kb)
-            <CloseButton
-                size="xs"
-                onClick={() =>
-                    form.setFieldValue(
-                        'files',
-                        form.values.files.filter((_, i) => i !== index)
-                    )
-                }
-            />
-        </Text>
-    ))
 
     return (
         <>
             <Dropzone
                 {...props}
-                onDrop={(files) => handleDrop(files)}
+                onDrop={(files) => formData.append('file', files[0])}
                 onReject={() =>
-                    form.setFieldError('files', 'Select images only')
+                    setError(
+                        'Only select image files from the type jpg, jpeg, png, webp'
+                    )
                 }
             >
                 <Group
@@ -100,27 +115,27 @@ export function DataDropzone({
                         </Text>
                     </div>
                 </Group>
-                <SimpleGrid
+                {/* <SimpleGrid
                     cols={{ base: 1, sm: 4 }}
-                    mt={previews.length > 0 ? 'xl' : 0}
                 >
                     {previews}
-                </SimpleGrid>
+                </SimpleGrid> */}
             </Dropzone>
-            {form.errors.files && (
-                <Text c="red" mt={5}>
-                    {form.errors.files}
-                </Text>
-            )}
 
-            {selectedFiles.length > 0 && (
+            {/* {selectedFiles.length > 0 && (
                 <>
                     <Text mb={5} mt="md">
                         Selected files:
                     </Text>
                     {selectedFiles}
                 </>
+            )} */}
+            {error !== '' && (
+                <Text c="red" mt={5}>
+                    {error}
+                </Text>
             )}
+            <Button onClick={handleSubmit}>Submit</Button>
         </>
     )
 }

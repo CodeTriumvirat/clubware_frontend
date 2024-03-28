@@ -4,10 +4,10 @@ import { Modal, Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
 import { FormEvent, useState } from 'react'
-import { updateUserProfile, rawFunction, rawFunction2 } from '@/profile/actions'
+import { updateUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
-import { DataDropzone } from '@/_components/DataDropzone'
-import { IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone'
+import { DataDropzone } from '@/profile/DataDropzone'
+import { FileWithPath, MIME_TYPES } from '@mantine/dropzone'
 
 export function EditProfileModal({
     userProfile,
@@ -59,20 +59,6 @@ export function EditProfileModal({
                         title: 'Error',
                         message: error.message,
                     })
-                }
-            }
-            try {
-                const userId = userProfile.user_id
-                console.log(file)
-                console.log(userId)
-                // await rawFunction2()
-                // await rawFunction(userId)
-                console.log('"Upload successful"')
-                // setFile(undefined)
-            } catch (error) {
-                console.log(error)
-                if (error instanceof Error) {
-                    console.log(error)
                 }
             }
         } else {
@@ -131,16 +117,16 @@ export function EditProfileModal({
         <>
             <Modal opened={opened} onClose={close} title="Edit Profile">
                 {/* Modal content */}
+                <DataDropzone
+                    maxSize={2 * 1024 ** 2}
+                    accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}
+                    multiple={false}
+                    topText="Drag and drop your profile picture here or click to browse"
+                    bottomText="Attach one file, it should not exceed 2mb"
+                    user_id={userProfile.user_id}
+                />
                 <form onSubmit={handleSubmit}>
                     <Stack>
-                        <DataDropzone
-                            maxSize={2 * 1024 ** 2}
-                            accept={IMAGE_MIME_TYPE}
-                            multiple={false}
-                            topText="Drag and drop your profile picture here or click to browse"
-                            bottomText="Attach one file, it should not exceed 2mb"
-                        />
-
                         {formFields}
                         <Button type="submit" mx="xs">
                             Save Changes
