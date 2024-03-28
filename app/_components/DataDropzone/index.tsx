@@ -1,98 +1,126 @@
-import { Group, Text, rem, Image, SimpleGrid } from '@mantine/core'
+import { Group, Text, rem, Image, SimpleGrid, CloseButton } from '@mantine/core'
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react'
 import { Dropzone, DropzoneProps, FileWithPath } from '@mantine/dropzone'
 import { useState } from 'react'
+import { useForm } from '@mantine/form'
 
 export interface DataDropzoneProps extends Partial<DropzoneProps> {
     topText?: string
     bottomText?: string
-    newFile: FileWithPath | undefined
-    setNewFile: (files: FileWithPath) => void
+}
+
+interface FormValues {
+    files: File[]
 }
 
 export function DataDropzone({
     topText,
     bottomText,
-    newFile,
-    setNewFile,
     ...props
 }: DataDropzoneProps) {
+    const form = useForm<FormValues>({
+        initialValues: { files: [] },
+    })
+
     const [previews, setPreviews] = useState<JSX.Element[]>([])
 
     const handleDrop = (files: FileWithPath[]) => {
-        setNewFile(files[0])
-        const previewElements = files.map((file, index) => {
-            const imageUrl = URL.createObjectURL(file)
-            return (
-                <Image
-                    key={index}
-                    src={imageUrl}
-                    onLoad={() => URL.revokeObjectURL(imageUrl)}
-                />
-            )
-        })
-        setPreviews(previewElements)
+        form.setFieldValue('files', files)
     }
 
-    return (
-        <Dropzone
-            {...props}
-            onDrop={handleDrop}
-            onReject={(files) => console.log('rejected files', files)}
-        >
-            <Group
-                justify="center"
-                gap="xl"
-                mih={220}
-                style={{ pointerEvents: 'none' }}
-            >
-                <Dropzone.Accept>
-                    <IconUpload
-                        style={{
-                            width: rem(52),
-                            height: rem(52),
-                            color: 'var(--mantine-color-blue-6)',
-                        }}
-                        stroke={1.5}
-                    />
-                </Dropzone.Accept>
-                <Dropzone.Reject>
-                    <IconX
-                        style={{
-                            width: rem(52),
-                            height: rem(52),
-                            color: 'var(--mantine-color-red-6)',
-                        }}
-                        stroke={1.5}
-                    />
-                </Dropzone.Reject>
-                <Dropzone.Idle>
-                    <IconPhoto
-                        style={{
-                            width: rem(52),
-                            height: rem(52),
-                            color: 'var(--mantine-color-dimmed)',
-                        }}
-                        stroke={1.5}
-                    />
-                </Dropzone.Idle>
+    const selectedFiles = form.values.files.map((file, index) => (
+        <Text key={file.name}>
+            <b>{file.name}</b> ({(file.size / 1024).toFixed(2)} kb)
+            <CloseButton
+                size="xs"
+                onClick={() =>
+                    form.setFieldValue(
+                        'files',
+                        form.values.files.filter((_, i) => i !== index)
+                    )
+                }
+            />
+        </Text>
+    ))
 
-                <div>
-                    <Text size="xl" inline>
-                        {topText || ' Drag files here or click to select files'}
-                    </Text>
-                    <Text size="sm" c="dimmed" inline mt={7}>
-                        {bottomText ||
-                            'Attach as many files as you like, each file should not exceed 5mb'}
-                    </Text>
-                </div>
-            </Group>
-            <SimpleGrid
-                cols={{ base: 1, sm: 4 }}
-                mt={previews.length > 0 ? 'xl' : 0}
+    return (
+        <>
+            <Dropzone
+                {...props}
+                onDrop={(files) => handleDrop(files)}
+                onReject={() =>
+                    form.setFieldError('files', 'Select images only')
+                }
             >
-                {previews}
-            </SimpleGrid>
-        </Dropzone>
+                <Group
+                    justify="center"
+                    gap="xl"
+                    mih={220}
+                    style={{ pointerEvents: 'none' }}
+                >
+                    <Dropzone.Accept>
+                        <IconUpload
+                            style={{
+                                width: rem(52),
+                                height: rem(52),
+                                color: 'var(--mantine-color-blue-6)',
+                            }}
+                            stroke={1.5}
+                        />
+                    </Dropzone.Accept>
+                    <Dropzone.Reject>
+                        <IconX
+                            style={{
+                                width: rem(52),
+                                height: rem(52),
+                                color: 'var(--mantine-color-red-6)',
+                            }}
+                            stroke={1.5}
+                        />
+                    </Dropzone.Reject>
+                    <Dropzone.Idle>
+                        <IconPhoto
+                            style={{
+                                width: rem(52),
+                                height: rem(52),
+                                color: 'var(--mantine-color-dimmed)',
+                            }}
+                            stroke={1.5}
+                        />
+                    </Dropzone.Idle>
+
+                    <div>
+                        <Text size="xl" inline>
+                            {topText ||
+                                ' Drag files here or click to select files'}
+                        </Text>
+                        <Text size="sm" c="dimmed" inline mt={7}>
+                            {bottomText ||
+                                'Attach as many files as you like, each file should not exceed 5mb'}
+                        </Text>
+                    </div>
+                </Group>
+                <SimpleGrid
+                    cols={{ base: 1, sm: 4 }}
+                    mt={previews.length > 0 ? 'xl' : 0}
+                >
+                    {previews}
+                </SimpleGrid>
+            </Dropzone>
+            {form.errors.files && (
+                <Text c="red" mt={5}>
+                    {form.errors.files}
+                </Text>
+            )}
+
+            {selectedFiles.length > 0 && (
+                <>
+                    <Text mb={5} mt="md">
+                        Selected files:
+                    </Text>
+                    {selectedFiles}
+                </>
+            )}
+        </>
     )
 }

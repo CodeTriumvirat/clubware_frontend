@@ -136,8 +136,7 @@ export function EditProfileModal({
                         <DataDropzone
                             maxSize={2 * 1024 ** 2}
                             accept={IMAGE_MIME_TYPE}
-                            newFile={file}
-                            setNewFile={setFile}
+                            multiple={false}
                             topText="Drag and drop your profile picture here or click to browse"
                             bottomText="Attach one file, it should not exceed 2mb"
                         />
