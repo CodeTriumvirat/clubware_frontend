@@ -3,9 +3,11 @@ import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 import { updateUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
+import { DataDropzone } from '@/profile/DataDropzone'
+import { FileWithPath, MIME_TYPES } from '@mantine/dropzone'
 
 export function EditProfileModal({
     userProfile,
@@ -13,6 +15,7 @@ export function EditProfileModal({
     userProfile: UserProfile
 }) {
     const [opened, { open, close }] = useDisclosure(false)
+    const [file, setFile] = useState<FileWithPath>()
 
     const form = useForm({
         initialValues: {
@@ -43,24 +46,23 @@ export function EditProfileModal({
         event.preventDefault()
 
         let errors = form.validate()
+        console.log('Form errors:', errors)
 
         if (!errors.hasErrors) {
             try {
                 await updateUserProfile(form.values)
-                close()
+                console.log('Profile updated')
             } catch (error) {
-                if (error instanceof Error)
+                if (error instanceof Error) {
+                    console.log(error)
                     notifications.show({
                         title: 'Error',
                         message: error.message,
                     })
+                }
             }
-        }
-        if (errors.hasErrors) {
-            notifications.show({
-                title: 'There has been an error',
-                message: 'Profile could not be updated. Please try again.',
-            })
+        } else {
+            console.log('Form has errors, cannot submit')
         }
     }
     const userFields = [
@@ -115,6 +117,14 @@ export function EditProfileModal({
         <>
             <Modal opened={opened} onClose={close} title="Edit Profile">
                 {/* Modal content */}
+                <DataDropzone
+                    maxSize={2 * 1024 ** 2}
+                    accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}
+                    multiple={false}
+                    topText="Drag and drop your profile picture here or click to browse"
+                    bottomText="Attach one file, it should not exceed 2mb"
+                    user_id={userProfile.user_id}
+                />
                 <form onSubmit={handleSubmit}>
                     <Stack>
                         {formFields}
