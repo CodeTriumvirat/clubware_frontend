@@ -52,6 +52,13 @@ export function EditProfileModal({
             try {
                 await updateUserProfile(form.values)
                 console.log('Profile updated')
+                if (file) {
+                    await uploadProfilePicture(file, userProfile.id)
+                    console.log('Upload successful')
+                    setFile(undefined)
+                    close()
+                }
+                close()
             } catch (error) {
                 if (error instanceof Error) {
                     notifications.show({
@@ -62,25 +69,6 @@ export function EditProfileModal({
             }
         } else {
             console.log('Form has errors, cannot submit')
-        }
-
-        if (file) {
-            try {
-                await uploadProfilePicture(file, userProfile.id)
-                console.log('Upload successful')
-                setFile(undefined)
-                close()
-            } catch (error) {
-                if (error instanceof Error) {
-                    notifications.show({
-                        title: 'Error',
-                        message: error.message,
-                    })
-                    console.log(error.message)
-                }
-            }
-        } else {
-            console.log('No file selected for upload')
         }
     }
     const userFields = [

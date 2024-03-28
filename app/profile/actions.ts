@@ -26,17 +26,14 @@ export async function uploadProfilePicture(file: File | undefined, id: string) {
     if (file) {
         console.log('File type:', file.type)
         console.log('File:', file)
-        try {
-            const { error } = await supabase.storage
-                .from('profile_picture')
-                .upload(`${id}.${file.type}`, file, { upsert: true })
-            if (error) {
-                console.error('Error uploading file:', error.message)
-            } else {
-                console.log('Upload successful')
-            }
-        } catch (error: any) {
+
+        const { error } = await supabase.storage
+            .from('profile_picture')
+            .upload(`${id}/profile_picture.png`, file, { upsert: true })
+        if (error) {
             console.error('Error uploading file:', error.message)
+        } else {
+            console.log('Upload successful')
         }
     } else {
         console.log('No file provided for upload')
