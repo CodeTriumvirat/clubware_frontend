@@ -1,0 +1,36 @@
+.appShell {
+    height: 100vh;
+
+    background-color: var(--app-color-appshell);
+
+    header,
+    nav {
+        background-color: var(--app-color-appshell);
+        @mixin smaller-than $mantine-breakpoint-sm {
+            background-color: var(--mantine-color-body);
+        }
+    }
+
+    header {
+        padding-right: 16px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        @mixin smaller-than $mantine-breakpoint-sm {
+            background-color: var(--mantine-color-body);
+        }
+    }
+}
+
+.mainContainer {
+    background-color: var(--mantine-color-body);
+    flex-grow: 1;
+    border-radius: 16px;
+    overflow-y: auto;
+    padding: 1rem;
+    @mixin smaller-than $mantine-breakpoint-sm {
+        border-radius: 0;
+    }
+}

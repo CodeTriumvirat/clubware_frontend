@@ -1,0 +1,22 @@
+.headerContainer {
+    height: 100%;
+}
+
+.headerLeft {
+    width: 100vw;
+    @mixin larger-than $mantine-breakpoint-sm {
+        width: 250px;
+    }
+    @mixin larger-than $mantine-breakpoint-md {
+        width: 250px;
+    }
+    @mixin larger-than $mantine-breakpoint-lg {
+        width: 300px;
+    }
+}
+
+.searchInput {
+    input {
+        background-color: var(--mantine-color-body);
+    }
+}

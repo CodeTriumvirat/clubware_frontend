@@ -4,13 +4,7 @@ export default function Page() {
     return (
         <div>
             <Title ta="center" mt={100}>
-                <Text
-                    inherit
-                    variant="gradient"
-                    gradient={{ from: 'funkyPurple', to: 'white', deg: 1 }}
-                >
-                    Welcome to Clubware
-                </Text>
+                <Text inherit>Welcome</Text>
             </Title>
         </div>
     )

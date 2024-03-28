@@ -26,18 +26,6 @@ export const theme = createTheme({
             '#6b1baf',
             '#5d1499',
         ],
-        flashEgg: [
-            '#fff2e8',
-            '#fae4d5',
-            '#f2c7a8',
-            '#eca778',
-            '#e68c51',
-            '#e37b36',
-            '#e27328',
-            '#c9611c',
-            '#b35616',
-            '#9c480d',
-        ],
         habibiViolet: [
             '#fceef8',
             '#f4d8ed',

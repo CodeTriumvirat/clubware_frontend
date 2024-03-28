@@ -1,15 +1,20 @@
+@import '@/_styles/normalize.css';
 @import '@mantine/core/styles.css';
 @import '@mantine/notifications/styles.css';
 @import '@mantine/dropzone/styles.css';
 
-:root {
-    --funkyPurpleDarkBackground: #151020;
-    --funkyPurpleLightBackground: #faf5fc;
 
-    @mixin light-root {
-        --mantine-color-body: var(--funkyPurpleLightBackground);
-    }
+:root {
+    --funkyPurpleDarkBody: #201c2c;
+    --funkyPurpleDarkAppshell: #191523;
+    --funkyPurpleLightBody: #fbfbfb;
+    --funkyPurpleLightAppshell: #d7d1d1;
+
+    --mantine-color-body: var(--funkyPurpleLightBody);
+    --app-color-appshell: var(--funkyPurpleLightAppshell);
+
     @mixin dark-root {
-        --mantine-color-body: var(--funkyPurpleDarkBackground);
+        --mantine-color-body: var(--funkyPurpleDarkBody);
+        --app-color-appshell: var(--funkyPurpleDarkAppshell);
     }
 }
