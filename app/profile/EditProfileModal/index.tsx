@@ -3,11 +3,11 @@ import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
-import { FormEvent, useState } from 'react'
+import { FormEvent } from 'react'
 import { updateUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
 import { DataDropzone } from '@/profile/DataDropzone'
-import { FileWithPath, MIME_TYPES } from '@mantine/dropzone'
+import { MIME_TYPES } from '@mantine/dropzone'
 
 export function EditProfileModal({
     userProfile,
@@ -15,7 +15,6 @@ export function EditProfileModal({
     userProfile: UserProfile
 }) {
     const [opened, { open, close }] = useDisclosure(false)
-    const [file, setFile] = useState<FileWithPath>()
 
     const form = useForm({
         initialValues: {
@@ -46,15 +45,14 @@ export function EditProfileModal({
         event.preventDefault()
 
         let errors = form.validate()
-        console.log('Form errors:', errors)
 
         if (!errors.hasErrors) {
             try {
                 await updateUserProfile(form.values)
                 console.log('Profile updated')
+                close()
             } catch (error) {
                 if (error instanceof Error) {
-                    console.log(error)
                     notifications.show({
                         title: 'Error',
                         message: error.message,
@@ -116,7 +114,6 @@ export function EditProfileModal({
     return (
         <>
             <Modal opened={opened} onClose={close} title="Edit Profile">
-                {/* Modal content */}
                 <DataDropzone
                     maxSize={2 * 1024 ** 2}
                     accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}

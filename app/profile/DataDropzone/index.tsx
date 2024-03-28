@@ -1,14 +1,6 @@
-import {
-    Group,
-    Text,
-    rem,
-    Image,
-    SimpleGrid,
-    CloseButton,
-    Button,
-} from '@mantine/core'
+import { Group, Text, rem, Image, CloseButton, Button } from '@mantine/core'
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react'
-import { Dropzone, DropzoneProps, FileWithPath } from '@mantine/dropzone'
+import { Dropzone, DropzoneProps } from '@mantine/dropzone'
 import { useState } from 'react'
 import { notifications } from '@mantine/notifications'
 import { uploadProfilePicture } from '../actions'
@@ -30,8 +22,6 @@ export function DataDropzone({
     const [imageUrl, setImageUrl] = useState<string>('')
     const formData = new FormData()
 
-    // const [previews, setPreviews] = useState<JSX.Element[]>([])
-
     let selectedFileDisplay
 
     if (selectedFile) {
@@ -52,7 +42,6 @@ export function DataDropzone({
     }
 
     async function onDrop(file: File) {
-        formData.append('file', file)
         setSelectedFile(file)
         setImageUrl(URL.createObjectURL(file))
         setError('')
@@ -60,7 +49,12 @@ export function DataDropzone({
 
     async function handleSubmit() {
         try {
-            await uploadProfilePicture(formData, user_id)
+            if (selectedFile) {
+                formData.append('file', selectedFile)
+                await uploadProfilePicture(formData, user_id)
+            } else {
+                console.log('No file selected for upload')
+            }
         } catch (error) {
             if (error instanceof Error)
                 notifications.show({
@@ -81,7 +75,6 @@ export function DataDropzone({
                     )
                 }
             >
-                {' '}
                 {!selectedFile && (
                     <Group
                         justify="center"
@@ -119,7 +112,6 @@ export function DataDropzone({
                                 stroke={1.5}
                             />
                         </Dropzone.Idle>
-
                         <div>
                             <Text size="xl" inline>
                                 {topText ||
@@ -142,7 +134,6 @@ export function DataDropzone({
                     />
                 )}
             </Dropzone>
-
             {selectedFileDisplay && (
                 <>
                     <Text mb={5} mt="md">
