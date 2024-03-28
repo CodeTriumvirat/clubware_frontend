@@ -3,7 +3,6 @@
 @import '@mantine/notifications/styles.css';
 @import '@mantine/dropzone/styles.css';
 
-
 :root {
     --funkyPurpleDarkBody: #201c2c;
     --funkyPurpleDarkAppshell: #191523;
