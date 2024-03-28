@@ -21,21 +21,24 @@ export async function updateUserProfile(profileData: UserProfile) {
 
     if (error) throw new Error('Failed to update profile')
 }
-export async function uploadProfilePicture(file: File | undefined, id: string) {
-    const supabase = createClient()
-    if (file) {
-        console.log('File type:', file.type)
-        console.log('File:', file)
+export async function rawFunction(user_id: string) {
+    throw new Error('Failed to upload profile picture')
+    //     console.log(file, id)
+    //     const supabase = createClient()
+    //     if (file) {
+    //         const { error } = await supabase.storage
+    //             .from('profile_picture')
+    //             .upload(`${id}/profile_picture.png`, file, { upsert: true })
+    //         if (error) {
+    //             console.error('Error uploading file:', error.message)
+    //         } else {
+    //             console.log('Upload successful')
+    //         }
+    //     } else {
+    //         console.log('No file provided for upload')
+    //     }
+}
 
-        const { error } = await supabase.storage
-            .from('profile_picture')
-            .upload(`${id}/profile_picture.png`, file, { upsert: true })
-        if (error) {
-            console.error('Error uploading file:', error.message)
-        } else {
-            console.log('Upload successful')
-        }
-    } else {
-        console.log('No file provided for upload')
-    }
+export async function rawFunction2() {
+    throw new Error('Raw function 2 throwing error')
 }

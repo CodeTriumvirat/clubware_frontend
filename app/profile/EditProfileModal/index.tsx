@@ -4,7 +4,7 @@ import { Modal, Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
 import { FormEvent, useState } from 'react'
-import { updateUserProfile, uploadProfilePicture } from '@/profile/actions'
+import { updateUserProfile, rawFunction, rawFunction2 } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
 import { DataDropzone } from '@/_components/DataDropzone'
 import { IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone'
@@ -52,19 +52,27 @@ export function EditProfileModal({
             try {
                 await updateUserProfile(form.values)
                 console.log('Profile updated')
-                if (file) {
-                    await uploadProfilePicture(file, userProfile.id)
-                    console.log('Upload successful')
-                    setFile(undefined)
-                    close()
-                }
-                close()
             } catch (error) {
                 if (error instanceof Error) {
+                    console.log(error)
                     notifications.show({
                         title: 'Error',
                         message: error.message,
                     })
+                }
+            }
+            try {
+                const userId = userProfile.user_id
+                console.log(file)
+                console.log(userId)
+                // await rawFunction2()
+                // await rawFunction(userId)
+                console.log('"Upload successful"')
+                // setFile(undefined)
+            } catch (error) {
+                console.log(error)
+                if (error instanceof Error) {
+                    console.log(error)
                 }
             }
         } else {
