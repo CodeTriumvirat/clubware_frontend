@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
-import { MantineProvider, ColorSchemeScript } from '@mantine/core'
+import { ColorSchemeScript } from '@mantine/core'
 import '@/_styles/globals.css'
-import { theme } from '@/_styles/theme'
-import { Notifications } from '@mantine/notifications'
-import AppContainer from '@/_components/AppContainer'
 import { createClient } from '@/_utils/supabase/server'
+import { Provider } from './_components/Provider'
 
 export const metadata: Metadata = {
     title: 'ClubWare ERP',
@@ -35,12 +33,7 @@ export default async function RootLayout({
                 />
             </head>
             <body>
-                <MantineProvider theme={theme} defaultColorScheme="auto">
-                    <Notifications />
-                    <AppContainer isLoggedIn={isLoggedIn}>
-                        {children}
-                    </AppContainer>
-                </MantineProvider>
+                <Provider isLoggedIn={isLoggedIn}>{children}</Provider>
             </body>
         </html>
     )

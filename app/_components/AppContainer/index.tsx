@@ -11,9 +11,11 @@ import { UserButtonCard } from './UserButtonCard'
 export default function AppContainer({
     children,
     isLoggedIn,
+    setPrimaryColor,
 }: Readonly<{
     children: React.ReactNode
     isLoggedIn: boolean
+    setPrimaryColor: (color: string) => void
 }>) {
     const [isNavOpened, { toggle }] = useDisclosure()
 
@@ -43,7 +45,11 @@ export default function AppContainer({
                     padding="md"
                 >
                     <AppShell.Header>
-                        <Header isNavOpened={isNavOpened} toggle={toggle} />
+                        <Header
+                            isNavOpened={isNavOpened}
+                            toggle={toggle}
+                            setPrimaryColor={setPrimaryColor}
+                        />
                     </AppShell.Header>
                     <AppShell.Navbar p="sm">
                         <Stack justify="space-between" flex={1}>
