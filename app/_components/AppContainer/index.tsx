@@ -6,6 +6,7 @@ import styles from './styles.module.css'
 import { useState } from 'react'
 import { Header } from '@/_components/Header'
 import { navData } from './nav-data'
+import { UserButtonCard } from './UserButtonCard'
 
 export default function AppContainer({
     children,
@@ -35,7 +36,7 @@ export default function AppContainer({
                     withBorder={false}
                     header={{ height: { base: 50, md: 50, lg: 50 } }}
                     navbar={{
-                        width: { base: 250, md: 250, lg: 300 },
+                        width: { base: 300, md: 300, lg: 300 },
                         breakpoint: 'sm',
                         collapsed: { mobile: !isNavOpened },
                     }}
@@ -44,8 +45,11 @@ export default function AppContainer({
                     <AppShell.Header>
                         <Header isNavOpened={isNavOpened} toggle={toggle} />
                     </AppShell.Header>
-                    <AppShell.Navbar p="md">
-                        <Stack>{links}</Stack>
+                    <AppShell.Navbar p="sm">
+                        <Stack justify="space-between" flex={1}>
+                            <Stack>{links}</Stack>
+                            <UserButtonCard />
+                        </Stack>
                     </AppShell.Navbar>
                     <AppShell.Main>
                         <div className={styles.mainContainer}>{children}</div>

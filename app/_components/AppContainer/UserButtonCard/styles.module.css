@@ -1,0 +1,11 @@
+.card {
+    border-radius: var(--mantine-radius-default);
+}
+
+.card:hover {
+    background-color: darken(var(--funkyPurpleLightAppshell), 5%);
+
+    @mixin dark {
+        background-color: lighten(var(--funkyPurpleDarkAppshell), 5%);
+    }
+}
