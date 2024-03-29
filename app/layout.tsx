@@ -4,17 +4,26 @@ import '@/_styles/globals.css'
 import { theme } from '@/_styles/theme'
 import { Notifications } from '@mantine/notifications'
 import AppContainer from '@/_components/AppContainer'
+import { createClient } from '@/_utils/supabase/server'
 
 export const metadata: Metadata = {
     title: 'ClubWare ERP',
     description: 'Enterprise-Resource-Planning-System for Clubs & Festivals',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode
 }>) {
+    const supabase = createClient()
+    const { error } = await supabase.auth.getUser()
+
+    let isLoggedIn = false
+    if (!error) {
+        isLoggedIn = true
+    }
+
     return (
         <html lang="de">
             <head>
@@ -28,7 +37,9 @@ export default function RootLayout({
             <body>
                 <MantineProvider theme={theme} defaultColorScheme="auto">
                     <Notifications />
-                    <AppContainer>{children}</AppContainer>
+                    <AppContainer isLoggedIn={isLoggedIn}>
+                        {children}
+                    </AppContainer>
                 </MantineProvider>
             </body>
         </html>
