@@ -1,3 +1,4 @@
 .mantine-Card-root {
     background-color: var(--app-color-card);
+    box-shadow: var(--app-shadow-default);
 }
