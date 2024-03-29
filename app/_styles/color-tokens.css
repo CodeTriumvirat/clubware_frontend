@@ -9,15 +9,38 @@
     --funkyPurpleDarkAppshell: #191523;
     --funkyPurpleDarkCard: #332d47;
 
+    /* Habibi Violet Light*/
+    --habibiVioletLightBody: #fbfbfb;
+    --habibiVioletLightAppshell: #d7d1d1;
+    --habibiVioletLightCard: #e2e2e2;
+
+    /* Habibi Violet Dark */
+    --habibiVioletDarkBody: #1a1529;
+    --habibiVioletDarkAppshell: #1a1034;
+    --habibiVioletDarkCard: #292146;
+
     /* App */
     --app-shadow-default: var(--mantine-shadow-md);
 
-    --mantine-color-body: var(--funkyPurpleLightBody);
-    --app-color-appshell: var(--funkyPurpleLightAppshell);
-    --app-color-card: var(--funkyPurpleLightCard);
-    @mixin dark-root {
-        --mantine-color-body: var(--funkyPurpleDarkBody);
-        --app-color-appshell: var(--funkyPurpleDarkAppshell);
-        --app-color-card: var(--funkyPurpleDarkCard);
+    &[primary-color='funkyPurple'] {
+        --mantine-color-body: var(--funkyPurpleLightBody);
+        --app-color-appshell: var(--funkyPurpleLightAppshell);
+        --app-color-card: var(--funkyPurpleLightCard);
+        @mixin dark-root {
+            --mantine-color-body: var(--funkyPurpleDarkBody);
+            --app-color-appshell: var(--funkyPurpleDarkAppshell);
+            --app-color-card: var(--funkyPurpleDarkCard);
+        }
+    }
+
+    &[primary-color='habibiViolet'] {
+        --mantine-color-body: var(--habibiVioletLightBody);
+        --app-color-appshell: var(--habibiVioletLightAppshell);
+        --app-color-card: var(--habibiVioletLightCard);
+        @mixin dark-root {
+            --mantine-color-body: var(--habibiVioletDarkBody);
+            --app-color-appshell: var(--habibiVioletDarkAppshell);
+            --app-color-card: var(--habibiVioletDarkCard);
+        }
     }
 }
