@@ -6,7 +6,7 @@ export function ColorSchemeToggle() {
     const { setColorScheme } = useMantineColorScheme()
 
     return (
-        <Group>
+        <Group data-testid="colorSchemeToggle">
             <Button onClick={() => setColorScheme('light')}>Light</Button>
             <Button onClick={() => setColorScheme('dark')}>Dark</Button>
         </Group>
