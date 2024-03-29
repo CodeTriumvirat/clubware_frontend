@@ -5,10 +5,10 @@
 .headerLeft {
     width: 100vw;
     @mixin larger-than $mantine-breakpoint-sm {
-        width: 250px;
+        width: 300px;
     }
     @mixin larger-than $mantine-breakpoint-md {
-        width: 250px;
+        width: 300px;
     }
     @mixin larger-than $mantine-breakpoint-lg {
         width: 300px;

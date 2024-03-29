@@ -1,8 +1,16 @@
 .logo {
     text-decoration: none;
-    color: var(--mantine-color-funkyPurple-1);
+    color: var(--mantine-color-funkyPurple-5);
 
     span {
         color: var(--mantine-color-habibiViolet-5);
+    }
+
+    @mixin dark {
+        color: var(--mantine-color-funkyPurple-2);
+
+        span {
+            color: var(--mantine-color-habibiViolet-5);
+        }
     }
 }
