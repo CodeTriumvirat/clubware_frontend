@@ -11,18 +11,24 @@ export const Header = ({
     toggle: () => void
 }) => {
     return (
-        <Group gap={0} className={styles.headerContainer}>
+        <Group
+            gap={0}
+            className={styles.headerContainer}
+            data-testid="headerContainer"
+        >
             <Flex
                 align="center"
                 ml="md"
                 justify="space-between"
                 className={styles.headerLeft}
+                data-testid="headerLeft"
             >
                 <Burger
                     hiddenFrom="sm"
                     opened={isNavOpened}
                     onClick={toggle}
                     size="sm"
+                    data-testid="burger"
                 />
                 <Logo />
             </Flex>
@@ -30,6 +36,7 @@ export const Header = ({
                 align="center"
                 className={styles.headerRight}
                 visibleFrom="sm"
+                data-testid="headerRight"
             >
                 <TextInput
                     placeholder="Suche:"
