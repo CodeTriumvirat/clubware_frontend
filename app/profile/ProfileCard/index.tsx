@@ -6,6 +6,7 @@ import {
     Image,
     Stack,
     Group,
+    Card,
 } from '@mantine/core'
 import NextImage from 'next/image'
 import myImage from '/public/images/bg-9.png'
@@ -85,7 +86,7 @@ export async function ProfileCard() {
         <>
             {userProfile && (
                 <Container size={620} my={40}>
-                    <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
+                    <Card p={30} radius="md" mt="xl">
                         <Stack justify="center" align="center">
                             <Title order={2}>User Profile</Title>
                             <Image
@@ -102,7 +103,7 @@ export async function ProfileCard() {
                                 <EditProfileModal userProfile={userProfile} />
                             </Stack>
                         </Stack>
-                    </Paper>
+                    </Card>
                 </Container>
             )}
         </>

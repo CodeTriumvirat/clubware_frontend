@@ -1,8 +1,10 @@
 'use client'
 
-import { createTheme } from '@mantine/core'
+import { Card, createTheme } from '@mantine/core'
 
 import { Nunito, Nunito_Sans } from 'next/font/google'
+
+import cardClasses from './mantine-components/card.module.css'
 
 const NunitoFont = Nunito({ subsets: ['latin'] })
 const NunitoSansFont = Nunito_Sans({ subsets: ['latin'] })
@@ -66,4 +68,14 @@ export const theme = createTheme({
     autoContrast: true,
     defaultRadius: 'md',
     cursorType: 'pointer',
+
+    // Component styles
+
+    components: {
+        Card: Card.extend({
+            classNames: {
+                root: cardClasses.root,
+            },
+        }),
+    },
 })

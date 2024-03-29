@@ -1,0 +1,23 @@
+:root {
+    /* Funky Purple Light*/
+    --funkyPurpleLightBody: #fbfbfb;
+    --funkyPurpleLightAppshell: #d7d1d1;
+    --funkyPurpleLightCard: #e2e2e2;
+
+    /* Funky Purple Dark */
+    --funkyPurpleDarkBody: #201c2c;
+    --funkyPurpleDarkAppshell: #191523;
+    --funkyPurpleDarkCard: #332d47;
+
+    /* App */
+    --app-shadow-default: var(--mantine-shadow-md);
+
+    --mantine-color-body: var(--funkyPurpleLightBody);
+    --app-color-appshell: var(--funkyPurpleLightAppshell);
+    --app-color-card: var(--funkyPurpleLightCard);
+    @mixin dark-root {
+        --mantine-color-body: var(--funkyPurpleDarkBody);
+        --app-color-appshell: var(--funkyPurpleDarkAppshell);
+        --app-color-card: var(--funkyPurpleDarkCard);
+    }
+}
