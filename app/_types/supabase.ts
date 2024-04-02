@@ -32,37 +32,13 @@ export type Database = {
             [_ in never]: never
         }
     }
-    pgbouncer: {
-        Tables: {
-            [_ in never]: never
-        }
-        Views: {
-            [_ in never]: never
-        }
-        Functions: {
-            get_auth: {
-                Args: {
-                    p_usename: string
-                }
-                Returns: {
-                    username: string
-                    password: string
-                }[]
-            }
-        }
-        Enums: {
-            [_ in never]: never
-        }
-        CompositeTypes: {
-            [_ in never]: never
-        }
-    }
     public: {
         Tables: {
             user_profile: {
                 Row: {
                     address: string
                     date_of_birth: string | null
+                    email: string
                     employment_date: string | null
                     first_name: string
                     id: string
@@ -74,6 +50,7 @@ export type Database = {
                 Insert: {
                     address?: string
                     date_of_birth?: string | null
+                    email?: string
                     employment_date?: string | null
                     first_name?: string
                     id?: string
@@ -85,6 +62,7 @@ export type Database = {
                 Update: {
                     address?: string
                     date_of_birth?: string | null
+                    email?: string
                     employment_date?: string | null
                     first_name?: string
                     id?: string
@@ -95,7 +73,7 @@ export type Database = {
                 }
                 Relationships: [
                     {
-                        foreignKeyName: 'public_user_profile_user_id_fkey'
+                        foreignKeyName: 'user_profile_user_id_fkey'
                         columns: ['user_id']
                         referencedRelation: 'users'
                         referencedColumns: ['id']

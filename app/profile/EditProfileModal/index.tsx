@@ -3,41 +3,44 @@ import { useDisclosure } from '@mantine/hooks'
 import { Modal, Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
-import { FormEvent } from 'react'
+import { FormEvent, useContext } from 'react'
 import { updateUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
 import { DataDropzone } from '@/profile/DataDropzone'
 import { MIME_TYPES } from '@mantine/dropzone'
+import { UserContext } from '@/_context/UserContext'
 
-export function EditProfileModal({
-    userProfile,
-}: {
-    userProfile: UserProfile
-}) {
+export function EditProfileModal({ user }: { user: UserProfile }) {
     const [opened, { open, close }] = useDisclosure(false)
+    const { setUser } = useContext(UserContext)
 
     const form = useForm({
         initialValues: {
-            ...userProfile,
+            ...user,
         },
 
         validate: {
-            date_of_birth: (value) =>
+            date_of_birth: (value = null) =>
                 value === null ||
                 /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
                     ? null
                     : 'Invalid Date of Birth',
-
-            employment_date: (value) =>
+            employment_date: (value = null) =>
                 value === null ||
                 /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
                     ? null
                     : 'Invalid Employent Date',
-            phone_number: (value) =>
-                value === null ||
+            phone_number: (value = '') =>
+                value !== '' &&
                 /^(?:(?:\+|00)(?:[0-9] ?){6,14}[0-9])?$/.test(value)
                     ? null
                     : 'Number needs to start with a + or 00',
+            address: (value = '') =>
+                value.length > 0 ? null : 'Invalid Address',
+            first_name: (value = '') =>
+                value.length > 0 ? null : 'Invalid Firstname',
+            last_name: (value = '') =>
+                value.length > 0 ? null : 'Invalid Lastname',
         },
     })
 
@@ -49,6 +52,7 @@ export function EditProfileModal({
         if (!errors.hasErrors) {
             try {
                 await updateUserProfile(form.values)
+                setUser(form.values)
                 console.log('Profile updated')
                 close()
             } catch (error) {
@@ -120,7 +124,7 @@ export function EditProfileModal({
                     multiple={false}
                     topText="Drag and drop your profile picture here or click to browse"
                     bottomText="Attach one file, it should not exceed 2mb"
-                    user_id={userProfile.user_id}
+                    user_id={user.user_id}
                 />
                 <form onSubmit={handleSubmit}>
                     <Stack>

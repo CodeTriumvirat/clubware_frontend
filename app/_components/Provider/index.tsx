@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { Notifications } from '@mantine/notifications'
 import AppContainer from '@/_components/AppContainer'
 import { getCookie } from 'cookies-next'
+import { UserProvider } from '@/_context/UserContext'
 
 export function Provider({
     children,
@@ -31,13 +32,15 @@ export function Provider({
             {isLoading && <div>Loading...</div>}
             {!isLoading && (
                 <MantineProvider theme={theme} defaultColorScheme="auto">
-                    <AppContainer
-                        isLoggedIn={isLoggedIn}
-                        setPrimaryColor={setPrimaryColor}
-                    >
-                        <Notifications />
-                        {children}
-                    </AppContainer>
+                    <UserProvider>
+                        <AppContainer
+                            isLoggedIn={isLoggedIn}
+                            setPrimaryColor={setPrimaryColor}
+                        >
+                            <Notifications />
+                            {children}
+                        </AppContainer>
+                    </UserProvider>
                 </MantineProvider>
             )}
         </>

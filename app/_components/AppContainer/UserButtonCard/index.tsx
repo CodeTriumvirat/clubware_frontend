@@ -1,5 +1,6 @@
+'use client'
+
 import {
-    Card,
     Group,
     Text,
     UnstyledButton,
@@ -9,8 +10,11 @@ import {
 } from '@mantine/core'
 import Link from 'next/link'
 import styles from './styles.module.css'
+import { useContext } from 'react'
+import { UserContext } from '@/_context/UserContext'
 
 export function UserButtonCard() {
+    const { user } = useContext(UserContext)
     return (
         <>
             <UnstyledButton component={Link} href="/profile">
@@ -19,11 +23,11 @@ export function UserButtonCard() {
                     <Avatar alt="user avatar"></Avatar>
                     <Stack gap={0}>
                         <Text size="sm" fw={500}>
-                            Harriette Spoonlicker
+                            {user?.first_name} {user?.last_name}
                         </Text>
 
                         <Text c="dimmed" size="xs">
-                            hspoonlicker@outlook.com
+                            {user?.email}
                         </Text>
                     </Stack>
                 </Group>
