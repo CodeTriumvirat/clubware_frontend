@@ -20,22 +20,27 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
         },
 
         validate: {
-            date_of_birth: (value) =>
+            date_of_birth: (value = null) =>
                 value === null ||
                 /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
                     ? null
                     : 'Invalid Date of Birth',
-
-            employment_date: (value) =>
+            employment_date: (value = null) =>
                 value === null ||
                 /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
                     ? null
                     : 'Invalid Employent Date',
-            phone_number: (value) =>
-                value === null ||
+            phone_number: (value = '') =>
+                value !== '' &&
                 /^(?:(?:\+|00)(?:[0-9] ?){6,14}[0-9])?$/.test(value)
                     ? null
                     : 'Number needs to start with a + or 00',
+            address: (value = '') =>
+                value.length > 0 ? null : 'Invalid Address',
+            first_name: (value = '') =>
+                value.length > 0 ? null : 'Invalid Firstname',
+            last_name: (value = '') =>
+                value.length > 0 ? null : 'Invalid Lastname',
         },
     })
 
