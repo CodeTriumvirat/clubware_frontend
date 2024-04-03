@@ -300,13 +300,17 @@ export default function Page() {
                     </thead>
                     <tbody>
                         {sortedData.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.name}</td>
-                                <td>{item.stock}</td>
-                                <td>{item.purchasePrice}</td>
-                                <td>{item.sellingPrice}</td>
-                                <td>{item.category}</td>
-                                <td>{item.note}</td>
+                            <tr key={index} className={classes.tr}>
+                                <td className={classes.td}>{item.name}</td>
+                                <td className={classes.td}>{item.stock}</td>
+                                <td className={classes.td}>
+                                    {item.purchasePrice}
+                                </td>
+                                <td className={classes.td}>
+                                    {item.sellingPrice}
+                                </td>
+                                <td className={classes.td}>{item.category}</td>
+                                <td className={classes.td}>{item.note}</td>
                             </tr>
                         ))}
                     </tbody>
