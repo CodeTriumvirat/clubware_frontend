@@ -11,19 +11,17 @@ export function ColorSchemeToggle() {
         setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
 
     return (
-        <div data-testid="colorSchemeToggle">
-            <ActionIcon
-                onClick={toggleColorScheme}
-                variant="filled"
-                size="lg"
-                aria-label="Toggle color scheme"
-            >
-                {colorScheme === 'dark' ? (
-                    <IconSun stroke={1.5} />
-                ) : (
-                    <IconMoon stroke={1.5} />
-                )}
-            </ActionIcon>
-        </div>
+        <ActionIcon
+            onClick={toggleColorScheme}
+            variant="filled"
+            size="lg"
+            aria-label="Toggle color scheme"
+        >
+            {colorScheme === 'dark' ? (
+                <IconSun stroke={1.5} />
+            ) : (
+                <IconMoon stroke={1.5} />
+            )}
+        </ActionIcon>
     )
 }
