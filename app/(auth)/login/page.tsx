@@ -11,7 +11,7 @@ import {
     Title,
 } from '@mantine/core'
 
-export default function Page() {
+export default function LoginPage() {
     return (
         <Container size={420} my={40}>
             <Title mb={12}>Log dich ein, Habibi!</Title>

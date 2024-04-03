@@ -7,6 +7,7 @@ import { Notifications } from '@mantine/notifications'
 import AppContainer from '@/_components/AppContainer'
 import { getCookie } from 'cookies-next'
 import { UserProvider } from '@/_context/UserContext'
+import LoginPage from '@/(auth)/login/page'
 
 export function Provider({
     children,
@@ -32,15 +33,15 @@ export function Provider({
             {isLoading && <div>Loading...</div>}
             {!isLoading && (
                 <MantineProvider theme={theme} defaultColorScheme="auto">
-                    <UserProvider>
-                        <AppContainer
-                            isLoggedIn={isLoggedIn}
-                            setPrimaryColor={setPrimaryColor}
-                        >
-                            <Notifications />
-                            {children}
-                        </AppContainer>
-                    </UserProvider>
+                    {isLoggedIn && (
+                        <UserProvider>
+                            <AppContainer setPrimaryColor={setPrimaryColor}>
+                                <Notifications />
+                                {children}
+                            </AppContainer>
+                        </UserProvider>
+                    )}
+                    {!isLoggedIn && <LoginPage />}
                 </MantineProvider>
             )}
         </>

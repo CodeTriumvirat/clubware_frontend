@@ -7,7 +7,6 @@ export async function getUserProfileClient() {
 
     let authUser = (await supabase.auth.getUser()).data.user as User
 
-    if (!authUser) return null
     let userProfile = (
         await supabase
             .from('user_profile')
