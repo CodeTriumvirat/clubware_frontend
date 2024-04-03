@@ -20,7 +20,7 @@ export function LinkGroup({
 }: {
     label: string
     icon: React.ElementType
-    link: string
+    link?: string
     links?: { label: string; link: string }[]
     openedNav: string
     setOpenedNav: (label: string) => void
@@ -42,7 +42,7 @@ export function LinkGroup({
                         leftSection={IconComponent && <IconComponent />}
                     />
                 )}
-                {!links && (
+                {!links && link && (
                     <NavLink
                         component={Link}
                         href={link}
