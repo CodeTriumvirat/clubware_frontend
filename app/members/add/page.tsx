@@ -44,7 +44,7 @@ export default function Page() {
                 <Divider my="xl" />
 
                 <form onSubmit={form.onSubmit((values) => console.log(values))}>
-                    <Stack spacing="md">
+                    <Stack>
                         <TextInput
                             required
                             label="Name"
