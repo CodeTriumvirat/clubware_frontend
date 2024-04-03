@@ -26,17 +26,17 @@ export const navData = [
         label: 'inventory',
         icon: IconBuildingWarehouse,
         links: [
-            { label: 'Overview', link: 'inventory' },
-            { label: 'Shopping List', link: 'inventory/shoppinglist' },
-            { label: 'Add Product', link: 'inventory/add' },
+            { label: 'Overview', link: '/inventory' },
+            { label: 'Shopping List', link: '/inventory/shoppinglist' },
+            { label: 'Add Product', link: '/inventory/add' },
         ],
     },
     {
         label: 'Events',
         icon: IconConfetti,
         links: [
-            { label: 'Overview', link: 'events' },
-            { label: 'Add Event', link: 'events/add' },
+            { label: 'Overview', link: '/events' },
+            { label: 'Add Event', link: '/events/add' },
         ],
     },
     {
@@ -44,8 +44,8 @@ export const navData = [
         icon: IconUsers,
 
         links: [
-            { label: 'Overview', link: 'members' },
-            { label: 'Add Member', link: 'members/add' },
+            { label: 'Overview', link: '/members' },
+            { label: 'Add Member', link: '/members/add' },
         ],
     },
 
@@ -54,8 +54,8 @@ export const navData = [
         link: '/shifts',
         icon: IconJumpRope,
         links: [
-            { label: 'Overview', link: 'shifts' },
-            { label: 'Add Shift', link: 'shifts/add' },
+            { label: 'Overview', link: '/shifts' },
+            { label: 'Add Shift', link: '/shifts/add' },
         ],
     },
     { label: 'F.A.Q.', link: '/faq', icon: IconHelpOctagon },
