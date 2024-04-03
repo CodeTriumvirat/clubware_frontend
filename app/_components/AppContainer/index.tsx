@@ -27,6 +27,7 @@ export default function AppContainer({
             openedNav={openedNav}
             setOpenedNav={setOpenedNav}
             key={index}
+            toggle={toggle}
         />
     ))
 

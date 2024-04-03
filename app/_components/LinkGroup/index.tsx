@@ -17,6 +17,7 @@ export function LinkGroup({
     links,
     openedNav,
     setOpenedNav,
+    toggle,
 }: {
     label: string
     icon: React.ElementType
@@ -24,6 +25,7 @@ export function LinkGroup({
     links?: { label: string; link: string }[]
     openedNav: string
     setOpenedNav: (label: string) => void
+    toggle: () => void
 }) {
     const toggleOpenedNav = () => {
         if (openedNav === label) {
@@ -46,7 +48,10 @@ export function LinkGroup({
                     <NavLink
                         component={Link}
                         href={link}
-                        onClick={() => toggleOpenedNav()}
+                        onClick={() => {
+                            toggleOpenedNav()
+                            toggle()
+                        }}
                         label={label}
                         leftSection={IconComponent && <IconComponent />}
                     />
@@ -66,6 +71,9 @@ export function LinkGroup({
                                 key={index}
                                 href={link.link}
                                 label={link.label}
+                                onClick={() => {
+                                    toggle()
+                                }}
                             ></NavLink>
                         ))}
                     </Stack>
