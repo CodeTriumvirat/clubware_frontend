@@ -35,8 +35,11 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
                 /^(?:(?:\+|00)(?:[0-9] ?){6,14}[0-9])?$/.test(value)
                     ? null
                     : 'Number needs to start with a + or 00',
-            address: (value = '') =>
+            street: (value = '') =>
                 value.length > 0 ? null : 'Invalid Address',
+            postcode: (value = '') =>
+                value.length > 0 ? null : 'Invalid Postcode',
+            city: (value = '') => (value.length > 0 ? null : 'Invalid City'),
             first_name: (value = '') =>
                 value.length > 0 ? null : 'Invalid Firstname',
             last_name: (value = '') =>
@@ -94,8 +97,18 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
             type: 'text',
         },
         {
-            label: 'Address',
-            id: 'address',
+            label: 'Street',
+            id: 'street',
+            type: 'text',
+        },
+        {
+            label: 'Postcode',
+            id: 'postcode',
+            type: 'text',
+        },
+        {
+            label: 'City',
+            id: 'city',
             type: 'text',
         },
         {

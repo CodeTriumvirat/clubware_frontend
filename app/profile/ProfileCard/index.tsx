@@ -40,8 +40,16 @@ const userFields = [
         id: 'profile_bio',
     },
     {
-        label: 'Address',
-        id: 'address',
+        label: 'Street',
+        id: 'street',
+    },
+    {
+        label: 'Postcode',
+        id: 'postcode',
+    },
+    {
+        label: 'City',
+        id: 'city',
     },
     {
         label: 'Employment Date',
