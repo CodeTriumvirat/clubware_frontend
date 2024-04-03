@@ -14,13 +14,13 @@ import { useContext } from 'react'
 import { UserContext } from '@/_context/UserContext'
 
 export function UserButtonCard() {
-    const { user } = useContext(UserContext)
+    const { user, profilePictureUrl } = useContext(UserContext)
     return (
         <>
             <UnstyledButton component={Link} href="/profile">
                 <Divider mb="sm" />
                 <Group wrap="nowrap" className={styles.card} p={4}>
-                    <Avatar alt="user avatar"></Avatar>
+                    <Avatar src={profilePictureUrl} alt="user avatar"></Avatar>
                     <Stack gap={0}>
                         <Text size="sm" fw={500}>
                             {user?.first_name} {user?.last_name}
