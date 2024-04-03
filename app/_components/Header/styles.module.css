@@ -15,6 +15,11 @@
     }
 }
 
+.headerRight {
+    /* width: 100%; */
+    flex-grow: 1;
+}
+
 .searchInput {
     input {
         background-color: var(--mantine-color-body);

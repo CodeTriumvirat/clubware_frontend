@@ -6,3 +6,8 @@
 .mantine-Avatar-image {
     background-color: var(--mantine-color-body);
 }
+
+.mantine-Popover-dropdown {
+    background-color: var(--app-color-card);
+    box-shadow: var(--app-shadow-default);
+}

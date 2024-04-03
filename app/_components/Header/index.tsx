@@ -15,6 +15,7 @@ export const Header = ({
 }) => {
     return (
         <Group
+            pt="xs"
             gap={0}
             className={styles.headerContainer}
             data-testid="headerContainer"
@@ -35,19 +36,23 @@ export const Header = ({
                 />
                 <Logo />
             </Flex>
-            <Flex
-                align="center"
+            <Group
                 className={styles.headerRight}
+                justify="space-between"
+                // mt="xs"
                 visibleFrom="sm"
                 data-testid="headerRight"
             >
                 <TextInput
+                    visibleFrom="sm"
                     placeholder="Suche:"
                     className={styles.searchInput}
                 ></TextInput>
-                <ColorSchemeToggle />
-                <PrimaryColorToggle setPrimaryColor={setPrimaryColor} />
-            </Flex>
+                <Group>
+                    <ColorSchemeToggle />
+                    <PrimaryColorToggle setPrimaryColor={setPrimaryColor} />
+                </Group>
+            </Group>
         </Group>
     )
 }
