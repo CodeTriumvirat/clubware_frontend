@@ -1,14 +1,29 @@
 'use client'
 
-import { Button, Group, useMantineColorScheme } from '@mantine/core'
+import { ActionIcon, useMantineColorScheme } from '@mantine/core'
+import { IconSun, IconMoon } from '@tabler/icons-react'
 
 export function ColorSchemeToggle() {
-    const { setColorScheme } = useMantineColorScheme()
+    const { colorScheme, setColorScheme } = useMantineColorScheme()
+
+    // Funktion zum Wechseln des Farbschemas.
+    const toggleColorScheme = () =>
+        setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
 
     return (
-        <Group data-testid="colorSchemeToggle">
-            <Button onClick={() => setColorScheme('light')}>Light</Button>
-            <Button onClick={() => setColorScheme('dark')}>Dark</Button>
-        </Group>
+        <div data-testid="colorSchemeToggle">
+            <ActionIcon
+                onClick={toggleColorScheme}
+                variant="filled"
+                size="lg"
+                aria-label="Toggle color scheme"
+            >
+                {colorScheme === 'dark' ? (
+                    <IconSun stroke={1.5} />
+                ) : (
+                    <IconMoon stroke={1.5} />
+                )}
+            </ActionIcon>
+        </div>
     )
 }
