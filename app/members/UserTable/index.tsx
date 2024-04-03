@@ -16,13 +16,41 @@ import {
 } from '@mantine/core'
 import styles from './styles.module.css'
 import { UserProfile } from '@/_types'
+import { fetchUserProfilePicture } from '@/profile/actions'
 
 export default function UserTable({
     userProfiles,
 }: {
     userProfiles: UserProfile[]
 }) {
+    interface UserProfileWithPicture extends UserProfile {
+        pictureUrl: string | null
+    }
+
     const [selection, setSelection] = useState(['1'])
+
+    const [userProfilesWithPicture, setUserProfilesWithPicture] = useState<
+        UserProfileWithPicture[]
+    >([])
+
+    useEffect(() => {
+        const fetchPictures = async () => {
+            const profilesWithPictures: UserProfileWithPicture[] =
+                await Promise.all(
+                    userProfiles.map(
+                        async (item): Promise<UserProfileWithPicture> => ({
+                            ...item,
+                            pictureUrl: await fetchUserProfilePicture(
+                                item.user_id
+                            ),
+                        })
+                    )
+                )
+            setUserProfilesWithPicture(profilesWithPictures)
+        }
+
+        fetchPictures()
+    }, [userProfiles])
 
     const toggleRow = (user_id: string) =>
         setSelection((current) =>
@@ -33,12 +61,12 @@ export default function UserTable({
 
     const toggleAll = () =>
         setSelection((current) =>
-            current.length === userProfiles.length
+            current.length === userProfilesWithPicture.length
                 ? []
-                : userProfiles.map((item) => item.user_id)
+                : userProfilesWithPicture.map((item) => item.user_id)
         )
 
-    const rows = userProfiles.map((item) => {
+    const rows = userProfilesWithPicture.map((item) => {
         const selected = selection.includes(item.user_id)
         return (
             <Table.Tr
@@ -53,7 +81,7 @@ export default function UserTable({
                 </Table.Td>
                 <Table.Td>
                     <Group gap="sm">
-                        <Avatar size={26} radius={26} />
+                        <Avatar src={item.pictureUrl} size={26} radius={26} />
                         <Text size="sm" fw={500}>
                             {item.first_name}
                         </Text>
@@ -86,11 +114,13 @@ export default function UserTable({
                                 <Checkbox
                                     onChange={toggleAll}
                                     checked={
-                                        selection.length === userProfiles.length
+                                        selection.length ===
+                                        userProfilesWithPicture.length
                                     }
                                     indeterminate={
                                         selection.length > 0 &&
-                                        selection.length !== userProfiles.length
+                                        selection.length !==
+                                            userProfilesWithPicture.length
                                     }
                                 />
                             </Table.Th>

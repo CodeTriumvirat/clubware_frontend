@@ -23,8 +23,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     async function getUser() {
         const _user = await getUserProfileClient()
         setUser(_user)
-        const _profilePictureUrl = await fetchUserProfilePicture(_user.user_id)
-        setProfilePictureUrl(_profilePictureUrl)
+        if (_user?.user_id) {
+            const _profilePictureUrl = await fetchUserProfilePicture(
+                _user.user_id
+            )
+            setProfilePictureUrl(_profilePictureUrl)
+        }
     }
 
     useEffect(() => {
