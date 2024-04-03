@@ -1,11 +1,11 @@
-import { Title, Text } from '@mantine/core'
+import { Title, Text, Container } from '@mantine/core'
 
 export default function Page() {
     return (
-        <div>
+        <Container>
             <Title ta="center" mt={100}>
                 <Text inherit>Welcome</Text>
             </Title>
-        </div>
+        </Container>
     )
 }
