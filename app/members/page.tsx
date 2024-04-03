@@ -99,7 +99,7 @@ export default function Page() {
     })
 
     return (
-        <Container>
+        <>
             <Title order={4}>Member Overview</Title>
 
             <MultiSelect
@@ -133,6 +133,6 @@ export default function Page() {
             </ScrollArea>
 
             <Pagination total={2} my="xl" />
-        </Container>
+        </>
     )
 }

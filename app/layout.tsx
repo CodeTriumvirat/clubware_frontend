@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { ColorSchemeScript } from '@mantine/core'
+import { ColorSchemeScript, Container } from '@mantine/core'
 import '@/_styles/globals.css'
 import { createClient } from '@/_utils/supabase/server'
 import { Provider } from './_components/Provider'
@@ -33,7 +33,9 @@ export default async function RootLayout({
                 />
             </head>
             <body>
-                <Provider isLoggedIn={isLoggedIn}>{children}</Provider>
+                <Provider isLoggedIn={isLoggedIn}>
+                    <Container>{children}</Container>
+                </Provider>
             </body>
         </html>
     )
