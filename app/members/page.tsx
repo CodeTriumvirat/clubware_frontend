@@ -3,6 +3,7 @@
 import cx from 'clsx'
 import { useState } from 'react'
 import {
+    Container,
     Text,
     TextInput,
     Paper,
@@ -98,11 +99,11 @@ export default function Page() {
     })
 
     return (
-        <>
+        <Container>
             <Title order={4}>Member Overview</Title>
 
             <MultiSelect
-                mt="lg"
+                my="xl"
                 label="Categorie"
                 placeholder="Filter"
                 data={['Barkeeper', 'Technik', 'Abendleitung', 'Chef']}
@@ -131,7 +132,7 @@ export default function Page() {
                 </Table>
             </ScrollArea>
 
-            <Pagination total={2} mt="lg" />
-        </>
+            <Pagination total={2} my="xl" />
+        </Container>
     )
 }
