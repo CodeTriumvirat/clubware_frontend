@@ -25,6 +25,9 @@
 
     /* App */
     --app-shadow-default: var(--mantine-shadow-md);
+    body {
+        background-color: var(--app-color-appshell);
+    }
 
     &[primary-color='funkyPurple'] {
         --mantine-color-body: var(--funkyPurpleLightBody);
