@@ -8,7 +8,6 @@ import {
     IconHelpOctagon,
     IconBrandHipchat,
     IconAdjustments,
-    IconClipboardData,
 } from '@tabler/icons-react'
 
 export const navData = [
@@ -52,24 +51,13 @@ export const navData = [
 
     {
         label: 'Shifts',
+        link: '/shifts',
         icon: IconJumpRope,
         links: [
             { label: 'Overview', link: '/shifts' },
             { label: 'Add Shift', link: '/shifts/add' },
         ],
     },
-
-    {
-        label: 'Guestlist',
-        link: '/guestlist',
-        icon: IconClipboardData,
-        links: [
-            { label: 'Personal Overview', link: '/guestlist' },
-            { label: 'Add Guests', link: '/guestlist/add' },
-            { label: 'Overview', link: '/guestlist/overview' },
-        ],
-    },
-
     { label: 'F.A.Q.', link: '/faq', icon: IconHelpOctagon },
     { label: 'Settings', link: '/settings', icon: IconAdjustments },
 ]
