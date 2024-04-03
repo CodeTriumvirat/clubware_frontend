@@ -87,8 +87,8 @@ export default function UserTable({
                         </Text>
                     </Group>
                 </Table.Td>
-                <Table.Td>{item.phone_number}</Table.Td>
-                <Table.Td>{item.address}</Table.Td>
+                <Table.Td>{item.email}</Table.Td>
+                <Table.Td>{item.user_role}</Table.Td>
             </Table.Tr>
         )
     })

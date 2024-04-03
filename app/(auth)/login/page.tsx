@@ -7,6 +7,7 @@ import {
     Paper,
     PasswordInput,
     Stack,
+    Text,
     TextInput,
     Title,
 } from '@mantine/core'
@@ -14,8 +15,10 @@ import {
 export default function LoginPage() {
     return (
         <Container size={420} my={40}>
-            <Title mb={12}>Log dich ein, Habibi!</Title>
-            <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
+            <Title ta="center" mb={12}>
+                Log dich ein, Habibi!
+            </Title>
+            <Paper shadow="md" p={30} radius="md" mt="xl">
                 <Stack>
                     <form>
                         <Stack>

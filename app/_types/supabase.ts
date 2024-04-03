@@ -32,44 +32,81 @@ export type Database = {
             [_ in never]: never
         }
     }
+    pgbouncer: {
+        Tables: {
+            [_ in never]: never
+        }
+        Views: {
+            [_ in never]: never
+        }
+        Functions: {
+            get_auth: {
+                Args: {
+                    p_usename: string
+                }
+                Returns: {
+                    username: string
+                    password: string
+                }[]
+            }
+        }
+        Enums: {
+            [_ in never]: never
+        }
+        CompositeTypes: {
+            [_ in never]: never
+        }
+    }
     public: {
         Tables: {
             user_profile: {
                 Row: {
-                    address: string
+                    city: string
                     date_of_birth: string | null
                     email: string
                     employment_date: string | null
                     first_name: string
                     id: string
                     last_name: string
+                    notes: string
                     phone_number: string
+                    postcode: string
                     profile_bio: string
+                    street: string
                     user_id: string
+                    user_role: string
                 }
                 Insert: {
-                    address?: string
+                    city?: string
                     date_of_birth?: string | null
                     email?: string
                     employment_date?: string | null
                     first_name?: string
                     id?: string
                     last_name?: string
+                    notes?: string
                     phone_number?: string
+                    postcode?: string
                     profile_bio?: string
+                    street?: string
                     user_id: string
+                    user_role?: string
                 }
                 Update: {
-                    address?: string
+                    city?: string
                     date_of_birth?: string | null
                     email?: string
                     employment_date?: string | null
                     first_name?: string
                     id?: string
                     last_name?: string
+                    notes?: string
                     phone_number?: string
+                    postcode?: string
                     profile_bio?: string
+                    street?: string
                     user_id?: string
+                    user_role?: string
                 }
                 Relationships: [
                     {
