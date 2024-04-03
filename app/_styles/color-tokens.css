@@ -3,21 +3,25 @@
     --funkyPurpleLightBody: #fbfbfb;
     --funkyPurpleLightAppshell: #d7d1d1;
     --funkyPurpleLightCard: #e2e2e2;
+    --funkyPurpleLightActive: var(--mantine-color-funkyPurple-2);
 
     /* Funky Purple Dark */
     --funkyPurpleDarkBody: #201c2c;
     --funkyPurpleDarkAppshell: #191523;
     --funkyPurpleDarkCard: #332d47;
+    --funkyPurpleDarkActive: var(--mantine-color-funkyPurple-8);
 
     /* Habibi Violet Light*/
     --habibiVioletLightBody: #fbfbfb;
     --habibiVioletLightAppshell: #d7d1d1;
     --habibiVioletLightCard: #e2e2e2;
+    --habibiVioletLightActive: var(--mantine-color-habibiViolet-2);
 
     /* Habibi Violet Dark */
     --habibiVioletDarkBody: #1a1529;
     --habibiVioletDarkAppshell: #1a1034;
     --habibiVioletDarkCard: #292146;
+    --habibiVioletDarkActive: var(--mantine-color-habibiViolet-8);
 
     /* App */
     --app-shadow-default: var(--mantine-shadow-md);
@@ -26,10 +30,13 @@
         --mantine-color-body: var(--funkyPurpleLightBody);
         --app-color-appshell: var(--funkyPurpleLightAppshell);
         --app-color-card: var(--funkyPurpleLightCard);
+        --app-color-active: var(--funkyPurpleLightActive);
+
         @mixin dark-root {
             --mantine-color-body: var(--funkyPurpleDarkBody);
             --app-color-appshell: var(--funkyPurpleDarkAppshell);
             --app-color-card: var(--funkyPurpleDarkCard);
+            --app-color-active: var(--funkyPurpleDarkActive);
         }
     }
 
@@ -37,10 +44,13 @@
         --mantine-color-body: var(--habibiVioletLightBody);
         --app-color-appshell: var(--habibiVioletLightAppshell);
         --app-color-card: var(--habibiVioletLightCard);
+        --app-color-active: var(--habibiVioletLightActive);
+
         @mixin dark-root {
             --mantine-color-body: var(--habibiVioletDarkBody);
             --app-color-appshell: var(--habibiVioletDarkAppshell);
             --app-color-card: var(--habibiVioletDarkCard);
+            --app-color-active: var(--habibiVioletDarkActive);
         }
     }
 }
