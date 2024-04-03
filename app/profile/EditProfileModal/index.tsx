@@ -111,6 +111,7 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
             label={field.label}
             id={field.id}
             type={field.type}
+            size="md"
             {...form.getInputProps(field.id)}
         />
     ))
@@ -118,24 +119,32 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
     return (
         <>
             <Modal opened={opened} onClose={close} title="Edit Profile">
-                <DataDropzone
-                    maxSize={2 * 1024 ** 2}
-                    accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}
-                    multiple={false}
-                    topText="Drag and drop your profile picture here or click to browse"
-                    bottomText="Attach one file, it should not exceed 2mb"
-                    user_id={user.user_id}
-                />
+                <Stack>
+                    <DataDropzone
+                        maxSize={2 * 1024 ** 2}
+                        accept={[
+                            MIME_TYPES.png,
+                            MIME_TYPES.jpeg,
+                            MIME_TYPES.webp,
+                        ]}
+                        multiple={false}
+                        topText="Drag and drop your profile picture here or click to browse"
+                        bottomText="Attach one file, it should not exceed 2mb"
+                        user_id={user.user_id}
+                    />
+                </Stack>
                 <form onSubmit={handleSubmit}>
-                    <Stack>
+                    <Stack mt="md">
                         {formFields}
-                        <Button type="submit" mx="xs">
+                        <Button type="submit" mt="xs" mx="xl">
                             Save Changes
                         </Button>
                     </Stack>
                 </form>
             </Modal>
-            <Button onClick={open}>Edit Profile</Button>
+            <Button onClick={open} mt="lg" mx="auto">
+                Edit Profile
+            </Button>
         </>
     )
 }

@@ -7,7 +7,8 @@ import {
     Image,
     Stack,
     Group,
-    Card,
+    Divider,
+    Avatar,
 } from '@mantine/core'
 import NextImage from 'next/image'
 import myImage from '/public/images/bg-9.png'
@@ -49,7 +50,7 @@ const userFields = [
 ]
 
 export function ProfileCard() {
-    let { user } = useContext(UserContext)
+    let { user, profilePictureUrl } = useContext(UserContext)
 
     type UserProfileWithoutId = Omit<UserProfile, 'id' | 'user_id'> & {
         [key: string]: string | null
@@ -60,44 +61,43 @@ export function ProfileCard() {
     if (user) {
         const { id, user_id, ...rest } = user
         const userProfileWithoutId: UserProfileWithoutId = rest
-
         profileTextFields = userFields.map((field, index) => (
             <Group
+                w="85%"
                 key={index}
                 gap="md"
                 justify="space-between"
-                align="flex-start"
                 wrap="wrap"
+                mx="auto"
             >
-                <Text>{field.label}</Text>
-                <Text>{userProfileWithoutId[field.id]}</Text>
+                <Text fw={700}>{field.label}</Text>
+                <Text fw={500}>{userProfileWithoutId[field.id]}</Text>
+                <Divider w="100%" />
             </Group>
         ))
     }
+    console.log(profilePictureUrl)
 
     return (
         <>
             {user && (
-                <Container size={620} my={40}>
-                    <Card p={30} radius="md" mt="xl">
-                        <Stack justify="center" align="center">
-                            <Title order={2}>User Profile</Title>
-                            <Image
-                                component={NextImage}
-                                src={myImage}
-                                radius="md"
-                                alt="My image"
-                                w="60%"
-                                fit="contain"
-                                mt="md"
-                            />
-                            <Stack gap="sm" mt="md" w="80%">
-                                {profileTextFields}
-                                <EditProfileModal user={user} />
-                            </Stack>
-                        </Stack>
-                    </Card>
-                </Container>
+                <Stack align="stretch">
+                    <Title mx="auto" order={2}>
+                        User Profile
+                    </Title>
+                    <Avatar
+                        src={profilePictureUrl}
+                        alt="My image"
+                        size={300}
+                        mx="auto"
+                        mt="md"
+                    ></Avatar>
+                    <Stack gap="md">
+                        <Divider w="85%" mx="auto" />
+                        {profileTextFields}
+                        <EditProfileModal user={user} />
+                    </Stack>
+                </Stack>
             )}
         </>
     )

@@ -1,9 +1,15 @@
 import { Group, Text, rem, Image, CloseButton, Button } from '@mantine/core'
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react'
 import { Dropzone, DropzoneProps } from '@mantine/dropzone'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { notifications } from '@mantine/notifications'
-import { uploadProfilePicture } from '../actions'
+import {
+    fetchUserProfilePicture,
+    updateUserProfilePicture,
+    uploadProfilePicture,
+    existingProfilePicture,
+} from '../actions'
+import { UserContext } from '@/_context/UserContext'
 
 export interface DataDropzoneProps extends Partial<DropzoneProps> {
     topText?: string
@@ -20,6 +26,9 @@ export function DataDropzone({
     const [error, setError] = useState('')
     const [selectedFile, setSelectedFile] = useState<File>()
     const [imageUrl, setImageUrl] = useState<string>('')
+    const [hasProfilePicture, setHasProfilePicture] = useState<boolean>()
+    const { setProfilePictureUrl } = useContext(UserContext)
+
     const formData = new FormData()
 
     let selectedFileDisplay
@@ -42,6 +51,7 @@ export function DataDropzone({
     }
 
     async function onDrop(file: File) {
+        setHasProfilePicture(await existingProfilePicture(user_id))
         setSelectedFile(file)
         setImageUrl(URL.createObjectURL(file))
         setError('')
@@ -52,6 +62,25 @@ export function DataDropzone({
             if (selectedFile) {
                 formData.append('file', selectedFile)
                 await uploadProfilePicture(formData, user_id)
+                setProfilePictureUrl(await fetchUserProfilePicture(user_id))
+            } else {
+                console.log('No file selected for upload')
+            }
+        } catch (error) {
+            if (error instanceof Error)
+                notifications.show({
+                    title: 'Error',
+                    message: error.message,
+                })
+        }
+    }
+
+    async function handleUpdate() {
+        try {
+            if (selectedFile) {
+                formData.append('file', selectedFile)
+                updateUserProfilePicture(formData, user_id)
+                setProfilePictureUrl(await fetchUserProfilePicture(user_id))
             } else {
                 console.log('No file selected for upload')
             }
@@ -136,7 +165,7 @@ export function DataDropzone({
             </Dropzone>
             {selectedFileDisplay && (
                 <>
-                    <Text mb={5} mt="md">
+                    <Text mb={5} my="md">
                         Selected files:
                     </Text>
                     {selectedFileDisplay}
@@ -147,7 +176,17 @@ export function DataDropzone({
                     {error}
                 </Text>
             )}
-            <Button onClick={handleSubmit}>Submit</Button>
+            {!hasProfilePicture ? (
+                selectedFile && (
+                    <Button mt="xs" onClick={handleSubmit}>
+                        Submit
+                    </Button>
+                )
+            ) : (
+                <Button mt="xs" onClick={handleUpdate}>
+                    Update
+                </Button>
+            )}
         </>
     )
 }
