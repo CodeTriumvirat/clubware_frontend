@@ -1,103 +1,58 @@
 'use client'
 import {
     Button,
-    Divider,
-    Group,
-    NumberInput,
+    Container,
+    Paper,
+    PasswordInput,
     Stack,
     TextInput,
-    Textarea,
     Title,
 } from '@mantine/core'
-import { DatePickerInput } from '@mantine/dates'
-import { useForm } from '@mantine/form'
+import { signup } from '@/(auth)/login/actions'
+import { FormEvent } from 'react'
 
 export default function Page() {
-    const form = useForm({
-        initialValues: {
-            name: '',
-            lastname: '',
-            address: '',
-            postcode: '',
-            city: '',
-            tel: '',
-            email: '',
-            birthday: null as Date | null,
-            emergencyContact: '',
-        },
-
-        validate: {
-            email: (value) =>
-                /^\S+@\S+$/.test(value) ? null : 'Invalid email',
-            postcode: (value) =>
-                value && /^\d+$/.test(value)
-                    ? null
-                    : 'Postcode must be numeric',
-        },
-    })
+    // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault()
+    //     try {
+    //         console.log(signup)
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
     return (
-        <>
-            <Title order={4}>Add Member</Title>
-            <Divider my="xl" />
-
-            <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <Container size={420} my={40}>
+            <Title ta="center" mb={12}>
+                Neuen Nutzer hinzufügen
+            </Title>
+            <Paper shadow="md" p={30} radius="md" mt="xl">
                 <Stack>
-                    <TextInput
-                        required
-                        label="Name"
-                        {...form.getInputProps('name')}
-                    />
-                    <TextInput
-                        required
-                        label="Lastname"
-                        {...form.getInputProps('lastname')}
-                    />
-                    <TextInput
-                        required
-                        label="Address"
-                        {...form.getInputProps('address')}
-                    />
-                    <NumberInput
-                        required
-                        label="Postcode"
-                        rightSection=" "
-                        {...form.getInputProps('postcode')}
-                    />
-                    <TextInput
-                        required
-                        label="City"
-                        {...form.getInputProps('city')}
-                    />
-                    <TextInput
-                        required
-                        label="Tel"
-                        {...form.getInputProps('tel')}
-                    />
-                    <TextInput
-                        required
-                        label="Email"
-                        {...form.getInputProps('email')}
-                    />
-                    <DatePickerInput
-                        required
-                        label="Birthday"
-                        placeholder="Pick date"
-                        {...form.getInputProps('birthday')}
-                    />
-                    <Textarea
-                        required
-                        label="Emergency Contact"
-                        {...form.getInputProps('emergencyContact')}
-                    />
-                    <Group>
-                        <Button type="submit">Submit</Button>
-                        <Button color="red" onClick={() => form.reset()}>
-                            Delete
-                        </Button>
-                    </Group>
+                    <form>
+                        <Stack>
+                            <TextInput
+                                label="Email"
+                                placeholder="deinemail@example.com"
+                                id="email"
+                                name="email"
+                                type="email"
+                                required
+                            />
+                            <PasswordInput
+                                label="Passwort"
+                                placeholder="Dein Passwort"
+                                id="password"
+                                name="password"
+                                type="password"
+                                required
+                            />
+                            <Button type="submit" fullWidth formAction={signup}>
+                                Sign up
+                            </Button>
+                        </Stack>
+                    </form>
                 </Stack>
-            </form>
-        </>
+            </Paper>
+        </Container>
     )
 }

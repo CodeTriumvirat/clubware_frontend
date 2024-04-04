@@ -101,7 +101,7 @@ export default function UserTable({
                     {userRole === 'admin' && (
                         <Button
                             component={Link}
-                            href={`/members/edit/${item.user_id}`}
+                            href={`/members/edit/${item.email}`}
                         >
                             <IconEdit />
                         </Button>

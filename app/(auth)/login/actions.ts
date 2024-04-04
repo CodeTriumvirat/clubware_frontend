@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
 import { createClient } from '@/_utils/supabase/server'
 
@@ -34,15 +35,21 @@ export async function signup(formData: FormData) {
         email: formData.get('email') as string,
         password: formData.get('password') as string,
     }
+    const authSessionCookie = cookies().get('sb-api-auth-token')?.value
+    const authLocalSessionCookie = cookies().get('sb-127-auth-token')?.value
 
     const { error } = await supabase.auth.signUp(data)
+
+    if (authLocalSessionCookie)
+        cookies().set('sb-127-auth-token', authLocalSessionCookie)
+    if (authSessionCookie) cookies().set('sb-api-auth-token', authSessionCookie)
 
     if (error) {
         redirect('/error')
     }
 
-    revalidatePath('/', 'layout')
-    redirect('/')
+    revalidatePath('/members', 'layout')
+    redirect(`/members/edit/${data.email}`)
 }
 
 export async function logout() {

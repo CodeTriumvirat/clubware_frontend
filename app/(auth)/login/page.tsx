@@ -9,7 +9,7 @@ import {
     Title,
 } from '@mantine/core'
 import Link from 'next/link'
-import { login, logout, signup } from './actions'
+import { login, logout } from './actions'
 
 export default function LoginPage() {
     return (
@@ -40,9 +40,6 @@ export default function LoginPage() {
                             <Button type="submit" fullWidth formAction={login}>
                                 Log in
                             </Button>
-                            <Button type="submit" fullWidth formAction={signup}>
-                                Sign up
-                            </Button>{' '}
                         </Stack>
                     </form>
                     <Group justify="space-between" grow>
