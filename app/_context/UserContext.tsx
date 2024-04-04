@@ -1,8 +1,10 @@
 'use client'
 
 import { UserProfile } from '@/_types'
+import { createClient } from '@/_utils/supabase/client'
 import { getMyUserProfileClient } from '@/_utils/supabase/getMyUserProfileClient'
 import { fetchUserProfilePicture } from '@/profile/actions'
+import { useRouter } from 'next/navigation'
 import { createContext, useEffect, useState } from 'react'
 
 interface UserContext {
@@ -29,9 +31,24 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setProfilePictureUrl(_profilePictureUrl)
         setUserRole(_user.user_role)
     }
-
+    const supabase = createClient()
+    const router = useRouter()
     useEffect(() => {
         getUser()
+
+        const { data } = supabase.auth.onAuthStateChange((session) => {
+            console.log('session', session)
+            if (!session) {
+                setUser(null)
+                setProfilePictureUrl(null)
+                setUserRole(null)
+                router.push('/login')
+            }
+        })
+
+        return () => {
+            data.subscription.unsubscribe()
+        }
     }, [])
 
     return (
