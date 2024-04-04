@@ -10,6 +10,7 @@ interface UserContext {
     setUser: React.Dispatch<React.SetStateAction<UserProfile | null>>
     profilePictureUrl: string | null
     setProfilePictureUrl: React.Dispatch<React.SetStateAction<string | null>>
+    userRole: string | null
 }
 
 export const UserContext = createContext<UserContext>({} as UserContext)
@@ -19,12 +20,14 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const [profilePictureUrl, setProfilePictureUrl] = useState<string | null>(
         null
     )
+    const [userRole, setUserRole] = useState<string | null>(null)
 
     async function getUser() {
         const _user = await getMyUserProfileClient()
         setUser(_user)
         const _profilePictureUrl = await fetchUserProfilePicture(_user.user_id)
         setProfilePictureUrl(_profilePictureUrl)
+        setUserRole(_user.user_role)
     }
 
     useEffect(() => {
@@ -33,7 +36,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <UserContext.Provider
-            value={{ user, setUser, profilePictureUrl, setProfilePictureUrl }}
+            value={{
+                user,
+                setUser,
+                profilePictureUrl,
+                setProfilePictureUrl,
+                userRole,
+            }}
         >
             {children}
         </UserContext.Provider>

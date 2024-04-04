@@ -14,12 +14,13 @@ import {
     Button,
 } from '@mantine/core'
 import cx from 'clsx'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import styles from './styles.module.css'
 import { UserProfile } from '@/_types'
 import { fetchUserProfilePicture } from '@/profile/actions'
 import Link from 'next/link'
 import { IconEdit } from '@tabler/icons-react'
+import { UserContext } from '@/_context/UserContext'
 
 export default function UserTable({
     userProfiles,
@@ -35,6 +36,8 @@ export default function UserTable({
     const [userProfilesWithPicture, setUserProfilesWithPicture] = useState<
         UserProfileWithPicture[]
     >([])
+
+    const userRole = useContext(UserContext).userRole
 
     useEffect(() => {
         const fetchPictures = async () => {
@@ -95,12 +98,14 @@ export default function UserTable({
                 <Table.Td>{item.user_role}</Table.Td>
 
                 <Table.Td>
-                    <Button
-                        component={Link}
-                        href={`/members/edit/${item.user_id}`}
-                    >
-                        <IconEdit />
-                    </Button>
+                    {userRole === 'admin' && (
+                        <Button
+                            component={Link}
+                            href={`/members/edit/${item.user_id}`}
+                        >
+                            <IconEdit />
+                        </Button>
+                    )}
                 </Table.Td>
             </Table.Tr>
         )
