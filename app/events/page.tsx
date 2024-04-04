@@ -135,7 +135,6 @@ export default function Page() {
             <TextInput
                 placeholder="Search by any field"
                 mb="md"
-                icon={<IconSearch />}
                 value={search}
                 onChange={(event) => setSearch(event.currentTarget.value)}
             />
@@ -151,11 +150,7 @@ export default function Page() {
             />
 
             <Card>
-                <Calendar
-                    value={selectedDates}
-                    onChange={setSelectedDates}
-                    multiple
-                />
+                <Calendar />
             </Card>
 
             <Divider my="lg" />
