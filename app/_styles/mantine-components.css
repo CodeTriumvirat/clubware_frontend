@@ -17,7 +17,9 @@
 .mantine-DateTimePicker-input,
 .mantine-DateInput-input,
 .mantine-DatePickerInput-input,
-.mantine-PasswordInput-input {
+.mantine-PasswordInput-input,
+.mantine-TimeInput-input,
+.mantine-FileInput-input {
     background-color: var(--app-color-input);
     border: 0;
 }
