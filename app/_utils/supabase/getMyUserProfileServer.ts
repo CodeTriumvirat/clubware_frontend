@@ -2,7 +2,7 @@ import { User } from '@supabase/supabase-js'
 import { createClient } from './server'
 import { UserProfile } from '@/_types'
 
-export async function getUserProfileServer(user_id: string) {
+export async function getMyUserProfileServer() {
     const supabase = createClient()
 
     let authUser = (await supabase.auth.getUser()).data.user as User
@@ -11,7 +11,7 @@ export async function getUserProfileServer(user_id: string) {
         await supabase
             .from('user_profile')
             .select('*')
-            .eq('user_id', user_id)
+            .eq('user_id', authUser.id)
             .single()
     ).data
 

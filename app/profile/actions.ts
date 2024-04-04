@@ -30,7 +30,7 @@ export async function updateSelectedUserProfile(profileData: UserProfile) {
         revalidatePath('/members', 'layout')
         redirect('/members')
     }
-    if (error) throw new Error('Failed to update profile')
+    if (error) throw new Error(error.message)
 }
 
 export async function uploadProfilePicture(
