@@ -10,7 +10,7 @@ import {
     IconUsers,
 } from '@tabler/icons-react'
 
-export const navData = [
+export const navDataNoAdmin = [
     { label: 'Dashboard', link: '/dashboard', icon: IconGauge },
     {
         label: 'Calendar',
@@ -43,10 +43,7 @@ export const navData = [
         label: 'Members',
         icon: IconUsers,
 
-        links: [
-            { label: 'Overview', link: '/members' },
-            { label: 'Add Member', link: '/members/add' },
-        ],
+        links: [{ label: 'Overview', link: '/members' }],
     },
 
     {
@@ -72,3 +69,16 @@ export const navData = [
     { label: 'F.A.Q.', link: '/faq', icon: IconHelpOctagon },
     { label: 'Settings', link: '/settings', icon: IconAdjustments },
 ]
+
+export const navDataAdmin = navDataNoAdmin.map((item) => {
+    const newItem = { ...item }
+
+    if (newItem.label === 'Members' && newItem.links) {
+        newItem.links = [
+            ...newItem.links,
+            { label: 'Add Member', link: '/members/add' },
+        ]
+    }
+
+    return newItem
+})

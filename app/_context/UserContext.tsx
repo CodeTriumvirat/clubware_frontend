@@ -1,8 +1,10 @@
 'use client'
 
 import { UserProfile } from '@/_types'
+import { createClient } from '@/_utils/supabase/client'
 import { getMyUserProfileClient } from '@/_utils/supabase/getMyUserProfileClient'
 import { fetchUserProfilePicture } from '@/profile/actions'
+import { useRouter } from 'next/navigation'
 import { createContext, useEffect, useState } from 'react'
 
 interface UserContext {
@@ -11,6 +13,7 @@ interface UserContext {
     profilePictureUrl: string | null
     setProfilePictureUrl: React.Dispatch<React.SetStateAction<string | null>>
     userRole: string | null
+    isLoadingUser: boolean
 }
 
 export const UserContext = createContext<UserContext>({} as UserContext)
@@ -21,6 +24,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         null
     )
     const [userRole, setUserRole] = useState<string | null>(null)
+    const [isLoadingUser, setIsLoadingUser] = useState(true)
 
     async function getUser() {
         const _user = await getMyUserProfileClient()
@@ -28,10 +32,26 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         const _profilePictureUrl = await fetchUserProfilePicture(_user.user_id)
         setProfilePictureUrl(_profilePictureUrl)
         setUserRole(_user.user_role)
+        setIsLoadingUser(false)
     }
-
+    const supabase = createClient()
+    const router = useRouter()
     useEffect(() => {
         getUser()
+
+        const { data } = supabase.auth.onAuthStateChange((session) => {
+            console.log('session', session)
+            if (!session) {
+                setUser(null)
+                setProfilePictureUrl(null)
+                setUserRole(null)
+                router.push('/login')
+            }
+        })
+
+        return () => {
+            data.subscription.unsubscribe()
+        }
     }, [])
 
     return (
@@ -42,6 +62,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
                 profilePictureUrl,
                 setProfilePictureUrl,
                 userRole,
+                isLoadingUser,
             }}
         >
             {children}

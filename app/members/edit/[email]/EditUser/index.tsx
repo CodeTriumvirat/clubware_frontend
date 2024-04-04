@@ -2,15 +2,32 @@
 import { Button, Stack, TextInput } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
-import { FormEvent } from 'react'
+import { FormEvent, useContext, useState } from 'react'
 import { updateSelectedUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
+import { UserContext } from '@/_context/UserContext'
+import { useRouter } from 'next/navigation'
 
 export default function EditUser({
     userProfile,
 }: {
     userProfile: UserProfile
 }) {
+    const router = useRouter()
+
+    const { userRole } = useContext(UserContext)
+
+    const [notificationShown, setNotificationShown] = useState(false)
+
+    if (userRole !== 'admin' && !notificationShown) {
+        notifications.show({
+            title: 'Error',
+            message: 'You are not authorized to view this page',
+        })
+        setNotificationShown(true)
+        router.push('/members')
+    }
+
     const form = useForm({
         initialValues: {
             ...userProfile,

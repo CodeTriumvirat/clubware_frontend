@@ -109,7 +109,6 @@ export async function existingProfilePicture(user_id: string) {
         )
 
         if (!profilePicture) {
-            console.log('No profile picture found.')
             return false
         }
         return true
@@ -137,7 +136,6 @@ export async function fetchUserProfilePicture(user_id: string) {
     )
 
     if (!profilePicture) {
-        console.log('No profile picture found.')
         return null
     }
 
