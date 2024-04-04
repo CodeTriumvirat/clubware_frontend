@@ -98,14 +98,22 @@ export default function UserTable({
                 <Table.Td>{item.user_role}</Table.Td>
 
                 <Table.Td>
-                    {userRole === 'admin' && (
+                    <Group>
                         <Button
                             component={Link}
-                            href={`/members/edit/${item.email}`}
+                            href={`/members/${item.user_id}`}
                         >
-                            <IconEdit />
+                            Details
                         </Button>
-                    )}
+                        {userRole === 'admin' && (
+                            <Button
+                                component={Link}
+                                href={`/members/edit/${item.email}`}
+                            >
+                                <IconEdit />
+                            </Button>
+                        )}
+                    </Group>
                 </Table.Td>
             </Table.Tr>
         )
