@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import { login, logout, signup } from './actions'
 import {
     Button,
     Container,
@@ -7,10 +5,11 @@ import {
     Paper,
     PasswordInput,
     Stack,
-    Text,
     TextInput,
     Title,
 } from '@mantine/core'
+import Link from 'next/link'
+import { login, logout, signup } from './actions'
 
 export default function LoginPage() {
     return (

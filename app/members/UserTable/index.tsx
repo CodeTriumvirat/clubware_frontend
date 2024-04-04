@@ -1,22 +1,22 @@
 'use client'
 
-import cx from 'clsx'
-import { useEffect, useState } from 'react'
-import {
-    Text,
-    Title,
-    MultiSelect,
-    Pagination,
-    Table,
-    Checkbox,
-    ScrollArea,
-    Group,
-    Avatar,
-    rem,
-} from '@mantine/core'
-import styles from './styles.module.css'
 import { UserProfile } from '@/_types'
 import { fetchUserProfilePicture } from '@/profile/actions'
+import {
+    Avatar,
+    Checkbox,
+    Group,
+    MultiSelect,
+    Pagination,
+    ScrollArea,
+    Table,
+    Text,
+    Title,
+    rem,
+} from '@mantine/core'
+import cx from 'clsx'
+import { useEffect, useState } from 'react'
+import styles from './styles.module.css'
 
 export default function UserTable({
     userProfiles,

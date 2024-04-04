@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { Text } from '@mantine/core'
+import Link from 'next/link'
 import styles from './styles.module.css'
 
 export const Logo = () => {

@@ -1,14 +1,13 @@
 import {
-    IconGauge,
-    IconCalendar,
-    IconBuildingWarehouse,
-    IconConfetti,
-    IconUsers,
-    IconJumpRope,
-    IconHelpOctagon,
-    IconBrandHipchat,
     IconAdjustments,
+    IconBuildingWarehouse,
+    IconCalendar,
     IconClipboardData,
+    IconConfetti,
+    IconGauge,
+    IconHelpOctagon,
+    IconJumpRope,
+    IconUsers,
 } from '@tabler/icons-react'
 
 export const navData = [
