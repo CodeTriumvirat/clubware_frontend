@@ -1,25 +1,28 @@
 'use client'
 
-import cx from 'clsx'
-import { useEffect, useState } from 'react'
+import { UserProfile } from '@/_types'
+import { fetchUserProfilePicture } from '@/profile/actions'
 import {
-    Text,
-    Title,
+    Avatar,
+    Checkbox,
+    Group,
     MultiSelect,
     Pagination,
-    Table,
-    Checkbox,
     ScrollArea,
-    Group,
-    Avatar,
+    Table,
+    Text,
+    Title,
     rem,
     Button,
 } from '@mantine/core'
+import cx from 'clsx'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { UserProfile } from '@/_types'
 import { fetchUserProfilePicture } from '@/profile/actions'
 import Link from 'next/link'
 import { IconEdit } from '@tabler/icons-react'
+
 
 export default function UserTable({
     userProfiles,

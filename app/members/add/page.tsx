@@ -1,14 +1,13 @@
 'use client'
 import {
-    Container,
     Button,
     Divider,
-    TextInput,
-    Stack,
-    Textarea,
-    NumberInput,
-    Title,
     Group,
+    NumberInput,
+    Stack,
+    TextInput,
+    Textarea,
+    Title,
 } from '@mantine/core'
 import { DatePickerInput } from '@mantine/dates'
 import { useForm } from '@mantine/form'
@@ -62,6 +61,7 @@ export default function Page() {
                     <NumberInput
                         required
                         label="Postcode"
+                        rightSection=" "
                         {...form.getInputProps('postcode')}
                     />
                     <TextInput
@@ -69,7 +69,7 @@ export default function Page() {
                         label="City"
                         {...form.getInputProps('city')}
                     />
-                    <NumberInput
+                    <TextInput
                         required
                         label="Tel"
                         {...form.getInputProps('tel')}

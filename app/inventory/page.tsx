@@ -1,23 +1,23 @@
 'use client'
-import { useState, useEffect } from 'react'
 import {
-    Table,
-    ScrollArea,
-    UnstyledButton,
-    Group,
-    Text,
     Center,
+    Group,
+    MultiSelect,
+    ScrollArea,
+    Table,
+    Text,
     TextInput,
     Title,
-    MultiSelect,
+    UnstyledButton,
     rem,
 } from '@mantine/core'
 import {
-    IconSelector,
     IconChevronDown,
     IconChevronUp,
     IconSearch,
+    IconSelector,
 } from '@tabler/icons-react'
+import { useEffect, useState } from 'react'
 import classes from './styles.module.css'
 
 interface RowData {

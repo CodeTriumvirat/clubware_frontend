@@ -1,12 +1,12 @@
 'use client'
+import { Header } from '@/_components/Header'
+import { LinkGroup } from '@/_components/LinkGroup'
 import { AppShell, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { LinkGroup } from '@/_components/LinkGroup'
-import styles from './styles.module.css'
 import { useState } from 'react'
-import { Header } from '@/_components/Header'
-import { navData } from './nav-data'
 import { UserButtonCard } from './UserButtonCard'
+import { navData } from './nav-data'
+import styles from './styles.module.css'
 
 export default function AppContainer({
     children,
@@ -52,7 +52,7 @@ export default function AppContainer({
                 <AppShell.Navbar p="sm">
                     <Stack justify="space-between" flex={1}>
                         <Stack>{links}</Stack>
-                        <UserButtonCard />
+                        <UserButtonCard setPrimaryColor={setPrimaryColor} />
                     </Stack>
                 </AppShell.Navbar>
                 <AppShell.Main>

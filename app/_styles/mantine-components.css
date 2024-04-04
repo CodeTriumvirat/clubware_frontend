@@ -18,11 +18,16 @@
 .mantine-DateInput-input,
 .mantine-DatePickerInput-input,
 .mantine-PasswordInput-input {
-    background-color: var(--app-color-card);
+    background-color: var(--app-color-input);
     border: 0;
 }
 
 .mantine-Popover-dropdown,
 .mantine-Button-root {
     box-shadow: var(--app-shadow-default);
+}
+
+.mantine-Divider-root {
+    border-color: var(--app-color-divider);
+    opacity: 0.3;
 }

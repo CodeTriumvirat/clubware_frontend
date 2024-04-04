@@ -1,10 +1,9 @@
 'use client'
 
-import { createContext, useState, useEffect } from 'react'
 import { UserProfile } from '@/_types'
 import { getMyUserProfileClient } from '@/_utils/supabase/getMyUserProfileClient'
 import { fetchUserProfilePicture } from '@/profile/actions'
-import { createClient } from '@/_utils/supabase/client'
+import { createContext, useEffect, useState } from 'react'
 
 interface UserContext {
     user: UserProfile | null

@@ -1,8 +1,8 @@
-import { Group, Flex, Burger, TextInput } from '@mantine/core'
 import { Logo } from '@/_components/Logo'
-import styles from './styles.module.css'
+import { Burger, Flex, Group, TextInput } from '@mantine/core'
 import { ColorSchemeToggle } from '../ColorSchemeToggle'
 import { PrimaryColorToggle } from '../PrimaryColorToggle'
+import styles from './styles.module.css'
 
 export const Header = ({
     isNavOpened,

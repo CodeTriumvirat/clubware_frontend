@@ -1,13 +1,13 @@
 'use client'
-import React, { useState } from 'react'
 import {
-    Title,
-    Text,
-    Divider,
-    Table,
     Checkbox,
+    Divider,
     ScrollArea,
+    Table,
+    Text,
+    Title,
 } from '@mantine/core'
+import { useState } from 'react'
 import styles from './styles.module.css'
 
 interface Shift {

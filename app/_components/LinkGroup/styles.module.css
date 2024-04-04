@@ -9,12 +9,26 @@
     a {
         border-radius: var(--mantine-radius-default);
     }
+    a:hover {
+        background-color: darken(var(--funkyPurpleLightAppshell), 5%);
+
+        @mixin dark {
+            background-color: lighten(var(--funkyPurpleDarkAppshell), 5%);
+        }
+    }
 }
 
 .linkGroupContainer {
     margin-left: 1.5rem;
     a {
         border-radius: var(--mantine-radius-default);
+    }
+    a:hover {
+        background-color: darken(var(--funkyPurpleLightAppshell), 5%);
+
+        @mixin dark {
+            background-color: lighten(var(--funkyPurpleDarkAppshell), 5%);
+        }
     }
 }
 

@@ -1,12 +1,4 @@
-import {
-    Button,
-    Divider,
-    Flex,
-    Group,
-    NavLink,
-    Stack,
-    Text,
-} from '@mantine/core'
+import { Divider, Flex, Group, NavLink, Stack } from '@mantine/core'
 import Link from 'next/link'
 import styles from './styles.module.css'
 

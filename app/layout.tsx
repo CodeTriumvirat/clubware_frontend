@@ -1,7 +1,7 @@
-import type { Metadata } from 'next'
-import { ColorSchemeScript, Container } from '@mantine/core'
 import '@/_styles/globals.css'
 import { createClient } from '@/_utils/supabase/server'
+import { ColorSchemeScript, Container } from '@mantine/core'
+import type { Metadata } from 'next'
 import { Provider } from './_components/Provider'
 
 export const metadata: Metadata = {
