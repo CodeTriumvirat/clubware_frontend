@@ -9,17 +9,26 @@ import {
     Title,
 } from '@mantine/core'
 import { signup } from '@/(auth)/login/actions'
-import { FormEvent } from 'react'
+import { UserContext } from '@/_context/UserContext'
+import { notifications } from '@mantine/notifications'
+import { useContext, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
-    // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault()
-    //     try {
-    //         console.log(signup)
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
+    const { userRole } = useContext(UserContext)
+
+    const [notificationShown, setNotificationShown] = useState(false)
+
+    const router = useRouter()
+
+    if (userRole !== 'admin' && !notificationShown) {
+        notifications.show({
+            title: 'Error',
+            message: 'You are not authorized to view this page',
+        })
+        setNotificationShown(true)
+        router.push('/members')
+    }
 
     return (
         <Container size={420} my={40}>
