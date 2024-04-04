@@ -1,4 +1,4 @@
-import { Button, Popover, Stack } from '@mantine/core'
+import { ActionIcon, Button, Popover, Stack } from '@mantine/core'
 import { setPrimaryColorCookie } from './actions'
 import { IconPalette } from '@tabler/icons-react'
 
@@ -14,11 +14,16 @@ export function PrimaryColorToggle({
                 position="bottom-end"
                 clickOutsideEvents={['mouseup', 'touchend']}
                 offset={18}
+                aria-hidden="true"
             >
                 <Popover.Target>
-                    <Button>
+                    <ActionIcon
+                        variant="filled"
+                        size="lg"
+                        aria-label="Toggle color variant"
+                    >
                         <IconPalette aria-label="Toggle color variant" />
-                    </Button>
+                    </ActionIcon>
                 </Popover.Target>
                 <Popover.Dropdown>
                     <Stack my="xs" gap="lg">

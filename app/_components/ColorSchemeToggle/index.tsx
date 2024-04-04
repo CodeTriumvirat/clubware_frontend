@@ -27,6 +27,7 @@ export function ColorSchemeToggle() {
             variant="filled"
             size="lg"
             aria-label="Toggle color scheme"
+            aria-hidden="true"
         >
             {colorScheme === 'dark' ? (
                 <IconSun stroke={1.5} />
