@@ -24,7 +24,7 @@ export default function Page() {
     return (
         <Container size={420} my={40}>
             <Title ta="center" mb={12}>
-                Neuen Nutzer hinzufügen
+                Add new User
             </Title>
             <Paper shadow="md" p={30} radius="md" mt="xl">
                 <Stack>
@@ -32,15 +32,15 @@ export default function Page() {
                         <Stack>
                             <TextInput
                                 label="Email"
-                                placeholder="deinemail@example.com"
+                                placeholder="yourmail@example.com"
                                 id="email"
                                 name="email"
                                 type="email"
                                 required
                             />
                             <PasswordInput
-                                label="Passwort"
-                                placeholder="Dein Passwort"
+                                label="Password"
+                                placeholder="Your Password"
                                 id="password"
                                 name="password"
                                 type="password"
