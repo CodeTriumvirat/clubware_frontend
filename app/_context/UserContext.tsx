@@ -13,6 +13,7 @@ interface UserContext {
     profilePictureUrl: string | null
     setProfilePictureUrl: React.Dispatch<React.SetStateAction<string | null>>
     userRole: string | null
+    isLoadingUser: boolean
 }
 
 export const UserContext = createContext<UserContext>({} as UserContext)
@@ -23,6 +24,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         null
     )
     const [userRole, setUserRole] = useState<string | null>(null)
+    const [isLoadingUser, setIsLoadingUser] = useState(true)
 
     async function getUser() {
         const _user = await getMyUserProfileClient()
@@ -30,6 +32,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         const _profilePictureUrl = await fetchUserProfilePicture(_user.user_id)
         setProfilePictureUrl(_profilePictureUrl)
         setUserRole(_user.user_role)
+        setIsLoadingUser(false)
     }
     const supabase = createClient()
     const router = useRouter()
@@ -38,7 +41,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
         const { data } = supabase.auth.onAuthStateChange((session) => {
             console.log('session', session)
-            if (!session) {
+            if (session) {
                 setUser(null)
                 setProfilePictureUrl(null)
                 setUserRole(null)
@@ -59,6 +62,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
                 profilePictureUrl,
                 setProfilePictureUrl,
                 userRole,
+                isLoadingUser,
             }}
         >
             {children}

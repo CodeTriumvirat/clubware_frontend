@@ -20,7 +20,7 @@ export default function AppContainer({
     const [openedNav, setOpenedNav] = useState('')
     const [navData, setNavData] = useState(navDataNoAdmin)
 
-    const { userRole } = useContext(UserContext)
+    const { user, userRole, isLoadingUser } = useContext(UserContext)
 
     useEffect(() => {
         if (userRole === 'admin') {
@@ -42,34 +42,37 @@ export default function AppContainer({
 
     return (
         <>
-            <AppShell
-                className={styles.appShell}
-                withBorder={false}
-                header={{ height: { base: 50, md: 50, lg: 50 } }}
-                navbar={{
-                    width: { base: 300, md: 300, lg: 300 },
-                    breakpoint: 'sm',
-                    collapsed: { mobile: !isNavOpened },
-                }}
-                padding="md"
-            >
-                <AppShell.Header>
-                    <Header
-                        isNavOpened={isNavOpened}
-                        toggle={toggle}
-                        setPrimaryColor={setPrimaryColor}
-                    />
-                </AppShell.Header>
-                <AppShell.Navbar p="sm">
-                    <Stack justify="space-between" flex={1}>
-                        <Stack>{links}</Stack>
-                        <UserButtonCard setPrimaryColor={setPrimaryColor} />
-                    </Stack>
-                </AppShell.Navbar>
-                <AppShell.Main>
-                    <div className={styles.mainContainer}>{children}</div>
-                </AppShell.Main>
-            </AppShell>
+            {user && !isLoadingUser && (
+                <AppShell
+                    className={styles.appShell}
+                    withBorder={false}
+                    header={{ height: { base: 50, md: 50, lg: 50 } }}
+                    navbar={{
+                        width: { base: 300, md: 300, lg: 300 },
+                        breakpoint: 'sm',
+                        collapsed: { mobile: !isNavOpened },
+                    }}
+                    padding="md"
+                >
+                    <AppShell.Header>
+                        <Header
+                            isNavOpened={isNavOpened}
+                            toggle={toggle}
+                            setPrimaryColor={setPrimaryColor}
+                        />
+                    </AppShell.Header>
+                    <AppShell.Navbar p="sm">
+                        <Stack justify="space-between" flex={1}>
+                            <Stack>{links}</Stack>
+                            <UserButtonCard setPrimaryColor={setPrimaryColor} />
+                        </Stack>
+                    </AppShell.Navbar>
+                    <AppShell.Main>
+                        <div className={styles.mainContainer}>{children}</div>
+                    </AppShell.Main>
+                </AppShell>
+            )}
+            {!user && !isLoadingUser && children}
         </>
     )
 }
