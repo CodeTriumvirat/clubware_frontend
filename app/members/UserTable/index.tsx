@@ -13,10 +13,16 @@ import {
     Text,
     Title,
     rem,
+    Button,
 } from '@mantine/core'
 import cx from 'clsx'
 import { useEffect, useState } from 'react'
 import styles from './styles.module.css'
+import { UserProfile } from '@/_types'
+import { fetchUserProfilePicture } from '@/profile/actions'
+import Link from 'next/link'
+import { IconEdit } from '@tabler/icons-react'
+
 
 export default function UserTable({
     userProfiles,
@@ -68,6 +74,7 @@ export default function UserTable({
 
     const rows = userProfilesWithPicture.map((item) => {
         const selected = selection.includes(item.user_id)
+
         return (
             <Table.Tr
                 key={item.user_id}
@@ -89,11 +96,18 @@ export default function UserTable({
                 </Table.Td>
                 <Table.Td>{item.email}</Table.Td>
                 <Table.Td>{item.user_role}</Table.Td>
+
+                <Table.Td>
+                    <Button
+                        component={Link}
+                        href={`/members/edit/${item.user_id}`}
+                    >
+                        <IconEdit />
+                    </Button>
+                </Table.Td>
             </Table.Tr>
         )
     })
-
-    useEffect(() => {}, [])
 
     return (
         <>

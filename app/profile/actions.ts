@@ -18,6 +18,21 @@ export async function updateUserProfile(profileData: UserProfile) {
     }
     if (error) throw new Error('Failed to update profile')
 }
+
+export async function updateSelectedUserProfile(profileData: UserProfile) {
+    const supabase = createClient()
+    const { error } = await supabase
+        .from('user_profile')
+        .update({ ...profileData })
+        .eq('user_id', profileData.user_id)
+
+    if (!error) {
+        revalidatePath('/members', 'layout')
+        redirect('/members')
+    }
+    if (error) throw new Error(error.message)
+}
+
 export async function uploadProfilePicture(
     formData: FormData,
     user_id: string
