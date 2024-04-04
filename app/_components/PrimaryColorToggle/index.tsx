@@ -11,11 +11,8 @@ export function PrimaryColorToggle({
             <Popover
                 width={200}
                 position="bottom-end"
-                withArrow
-                arrowPosition="side"
                 clickOutsideEvents={['mouseup', 'touchend']}
-                offset={12}
-                arrowSize={12}
+                offset={18}
             >
                 <Popover.Target>
                     <Button>Toggle Styles</Button>
