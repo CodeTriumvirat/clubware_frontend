@@ -1,5 +1,6 @@
 import { Button, Popover, Stack } from '@mantine/core'
 import { setPrimaryColorCookie } from './actions'
+import { IconPalette } from '@tabler/icons-react'
 
 export function PrimaryColorToggle({
     setPrimaryColor,
@@ -15,7 +16,9 @@ export function PrimaryColorToggle({
                 offset={18}
             >
                 <Popover.Target>
-                    <Button>Styles</Button>
+                    <Button>
+                        <IconPalette aria-label="Toggle color variant" />
+                    </Button>
                 </Popover.Target>
                 <Popover.Dropdown>
                     <Stack my="xs" gap="lg">
