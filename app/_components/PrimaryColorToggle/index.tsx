@@ -15,7 +15,7 @@ export function PrimaryColorToggle({
                 offset={18}
             >
                 <Popover.Target>
-                    <Button>Toggle Styles</Button>
+                    <Button>Styles</Button>
                 </Popover.Target>
                 <Popover.Dropdown>
                     <Stack my="xs" gap="lg">

@@ -52,7 +52,7 @@ export default function AppContainer({
                 <AppShell.Navbar p="sm">
                     <Stack justify="space-between" flex={1}>
                         <Stack>{links}</Stack>
-                        <UserButtonCard />
+                        <UserButtonCard setPrimaryColor={setPrimaryColor} />
                     </Stack>
                 </AppShell.Navbar>
                 <AppShell.Main>

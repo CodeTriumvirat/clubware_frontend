@@ -12,26 +12,41 @@ import Link from 'next/link'
 import styles from './styles.module.css'
 import { useContext } from 'react'
 import { UserContext } from '@/_context/UserContext'
+import { ColorSchemeToggle } from '@/_components/ColorSchemeToggle'
+import { PrimaryColorToggle } from '@/_components/PrimaryColorToggle'
 
-export function UserButtonCard() {
+export function UserButtonCard({
+    setPrimaryColor,
+}: Readonly<{ setPrimaryColor: (color: string) => void }>) {
     const { user, profilePictureUrl } = useContext(UserContext)
     return (
         <>
-            <UnstyledButton component={Link} href="/profile">
+            <div>
                 <Divider mb="sm" />
-                <Group wrap="nowrap" className={styles.card} p={4}>
-                    <Avatar src={profilePictureUrl} alt="user avatar"></Avatar>
-                    <Stack gap={0}>
-                        <Text size="sm" fw={500}>
-                            {user?.first_name} {user?.last_name}
-                        </Text>
+                <Group justify="space-between">
+                    <UnstyledButton component={Link} href="/profile">
+                        <Group wrap="nowrap" className={styles.card} p={4}>
+                            <Avatar
+                                src={profilePictureUrl}
+                                alt="user avatar"
+                            ></Avatar>
+                            <Stack gap={0}>
+                                <Text size="sm" fw={500}>
+                                    {user?.first_name} {user?.last_name}
+                                </Text>
 
-                        <Text c="dimmed" size="xs">
-                            {user?.email}
-                        </Text>
-                    </Stack>
+                                <Text c="dimmed" size="xs">
+                                    {user?.email}
+                                </Text>
+                            </Stack>
+                        </Group>
+                    </UnstyledButton>
+                    <Group hiddenFrom="sm">
+                        <ColorSchemeToggle />
+                        <PrimaryColorToggle setPrimaryColor={setPrimaryColor} />
+                    </Group>
                 </Group>
-            </UnstyledButton>
+            </div>
         </>
     )
 }

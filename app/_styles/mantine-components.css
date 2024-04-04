@@ -26,3 +26,8 @@
 .mantine-Button-root {
     box-shadow: var(--app-shadow-default);
 }
+
+.mantine-Divider-root {
+    border-color: var(--app-color-divider);
+    opacity: 0.3;
+}

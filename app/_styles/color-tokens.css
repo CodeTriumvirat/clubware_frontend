@@ -34,12 +34,14 @@
         --app-color-appshell: var(--funkyPurpleLightAppshell);
         --app-color-card: var(--funkyPurpleLightCard);
         --app-color-active: var(--funkyPurpleLightActive);
+        --app-color-divider: var(--mantine-color-funkyPurple-9);
 
         @mixin dark-root {
             --mantine-color-body: var(--funkyPurpleDarkBody);
             --app-color-appshell: var(--funkyPurpleDarkAppshell);
             --app-color-card: var(--funkyPurpleDarkCard);
             --app-color-active: var(--funkyPurpleDarkActive);
+            --app-color-divider: var(--mantine-color-funkyPurple-0);
         }
     }
 
@@ -48,12 +50,14 @@
         --app-color-appshell: var(--habibiVioletLightAppshell);
         --app-color-card: var(--habibiVioletLightCard);
         --app-color-active: var(--habibiVioletLightActive);
+        --app-color-divider: var(--mantine-color-habibiViolet-9);
 
         @mixin dark-root {
             --mantine-color-body: var(--habibiVioletDarkBody);
             --app-color-appshell: var(--habibiVioletDarkAppshell);
             --app-color-card: var(--habibiVioletDarkCard);
             --app-color-active: var(--habibiVioletDarkActive);
+            --app-color-divider: var(--mantine-color-habibiViolet-0);
         }
     }
 }
