@@ -1,14 +1,17 @@
+import { User } from '@supabase/supabase-js'
 import { createClient } from './client'
 import { UserProfile } from '@/_types'
 
-export async function getUserProfileClient(user_id: string) {
+export async function getMyUserProfileClient() {
     const supabase = createClient()
+
+    let authUser = (await supabase.auth.getUser()).data.user as User
 
     let userProfile = (
         await supabase
             .from('user_profile')
             .select('*')
-            .eq('user_id', user_id)
+            .eq('user_id', authUser.id)
             .single()
     ).data
 

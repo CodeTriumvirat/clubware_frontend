@@ -1,7 +1,7 @@
 'use client'
 
 import { UserProfile } from '@/_types'
-import { getUserProfileClient } from '@/_utils/supabase/getUserProfileClient'
+import { getMyUserProfileClient } from '@/_utils/supabase/getMyUserProfileClient'
 import { fetchUserProfilePicture } from '@/profile/actions'
 import { createContext, useEffect, useState } from 'react'
 
@@ -21,7 +21,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     )
 
     async function getUser() {
-        const _user = await getUserProfileClient()
+        const _user = await getMyUserProfileClient()
         setUser(_user)
         const _profilePictureUrl = await fetchUserProfilePicture(_user.user_id)
         setProfilePictureUrl(_profilePictureUrl)
