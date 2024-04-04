@@ -13,10 +13,12 @@ import {
     Group,
     Avatar,
     rem,
+    Button,
 } from '@mantine/core'
 import styles from './styles.module.css'
 import { UserProfile } from '@/_types'
 import { fetchUserProfilePicture } from '@/profile/actions'
+import { EditUserModal } from './EditUserModal'
 
 export default function UserTable({
     userProfiles,
@@ -68,6 +70,7 @@ export default function UserTable({
 
     const rows = userProfilesWithPicture.map((item) => {
         const selected = selection.includes(item.user_id)
+
         return (
             <Table.Tr
                 key={item.user_id}
@@ -89,11 +92,12 @@ export default function UserTable({
                 </Table.Td>
                 <Table.Td>{item.email}</Table.Td>
                 <Table.Td>{item.user_role}</Table.Td>
+                <Table.Td>
+                    <EditUserModal user_id={item.user_id} />
+                </Table.Td>
             </Table.Tr>
         )
     })
-
-    useEffect(() => {}, [])
 
     return (
         <>
