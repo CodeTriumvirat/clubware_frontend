@@ -41,7 +41,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
         const { data } = supabase.auth.onAuthStateChange((session) => {
             console.log('session', session)
-            if (session) {
+            if (!session) {
                 setUser(null)
                 setProfilePictureUrl(null)
                 setUserRole(null)
