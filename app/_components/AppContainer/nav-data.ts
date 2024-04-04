@@ -24,7 +24,7 @@ export const navData = [
         ],
     },
     {
-        label: 'inventory',
+        label: 'Inventory',
         icon: IconBuildingWarehouse,
         links: [
             { label: 'Overview', link: '/inventory' },
