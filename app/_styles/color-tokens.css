@@ -1,26 +1,30 @@
 :root {
     /* Funky Purple Light*/
     --funkyPurpleLightBody: #fbfbfb;
-    --funkyPurpleLightAppshell: #d7d1d1;
+    --funkyPurpleLightAppshell: #e7e2e9;
     --funkyPurpleLightCard: #e2e2e2;
+    --funkyPurpleLightInput: #ebebeb;
     --funkyPurpleLightActive: var(--mantine-color-funkyPurple-2);
 
     /* Funky Purple Dark */
     --funkyPurpleDarkBody: #201c2c;
     --funkyPurpleDarkAppshell: #191523;
     --funkyPurpleDarkCard: #332d47;
+    --funkyPurpleDarkInput: #2d273f;
     --funkyPurpleDarkActive: var(--mantine-color-funkyPurple-8);
 
     /* Habibi Violet Light*/
     --habibiVioletLightBody: #fbfbfb;
-    --habibiVioletLightAppshell: #d7d1d1;
+    --habibiVioletLightAppshell: #e9e2e8;
     --habibiVioletLightCard: #e2e2e2;
+    --habibiVioletLightInput: #ebebeb;
     --habibiVioletLightActive: var(--mantine-color-habibiViolet-2);
 
     /* Habibi Violet Dark */
-    --habibiVioletDarkBody: #1a1529;
-    --habibiVioletDarkAppshell: #1a1034;
-    --habibiVioletDarkCard: #292146;
+    --habibiVioletDarkBody: #201c2c;
+    --habibiVioletDarkAppshell: #191523;
+    --habibiVioletDarkCard: #332d47;
+    --habibiVioletDarkInput: #2d273f;
     --habibiVioletDarkActive: var(--mantine-color-habibiViolet-8);
 
     /* App */
@@ -35,6 +39,7 @@
         --app-color-card: var(--funkyPurpleLightCard);
         --app-color-active: var(--funkyPurpleLightActive);
         --app-color-divider: var(--mantine-color-funkyPurple-9);
+        --app-color-input: var(--funkyPurpleLightInput);
 
         @mixin dark-root {
             --mantine-color-body: var(--funkyPurpleDarkBody);
@@ -42,6 +47,7 @@
             --app-color-card: var(--funkyPurpleDarkCard);
             --app-color-active: var(--funkyPurpleDarkActive);
             --app-color-divider: var(--mantine-color-funkyPurple-0);
+            --app-color-input: var(--funkyPurpleDarkInput);
         }
     }
 
@@ -51,6 +57,7 @@
         --app-color-card: var(--habibiVioletLightCard);
         --app-color-active: var(--habibiVioletLightActive);
         --app-color-divider: var(--mantine-color-habibiViolet-9);
+        --app-color-input: var(--habibiVioletLightInput);
 
         @mixin dark-root {
             --mantine-color-body: var(--habibiVioletDarkBody);
@@ -58,6 +65,7 @@
             --app-color-card: var(--habibiVioletDarkCard);
             --app-color-active: var(--habibiVioletDarkActive);
             --app-color-divider: var(--mantine-color-habibiViolet-0);
+            --app-color-input: var(--habibiVioletDarkInput);
         }
     }
 }

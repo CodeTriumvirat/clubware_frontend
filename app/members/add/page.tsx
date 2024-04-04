@@ -62,6 +62,7 @@ export default function Page() {
                     <NumberInput
                         required
                         label="Postcode"
+                        rightSection=" "
                         {...form.getInputProps('postcode')}
                     />
                     <TextInput
@@ -69,7 +70,7 @@ export default function Page() {
                         label="City"
                         {...form.getInputProps('city')}
                     />
-                    <NumberInput
+                    <TextInput
                         required
                         label="Tel"
                         {...form.getInputProps('tel')}
