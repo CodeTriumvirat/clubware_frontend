@@ -3,10 +3,11 @@ import { Header } from '@/_components/Header'
 import { LinkGroup } from '@/_components/LinkGroup'
 import { AppShell, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { useState } from 'react'
+import { use, useContext, useEffect, useState } from 'react'
 import { UserButtonCard } from './UserButtonCard'
-import { navData } from './nav-data'
+import { navDataAdmin, navDataNoAdmin } from './nav-data'
 import styles from './styles.module.css'
+import { UserContext } from '@/_context/UserContext'
 
 export default function AppContainer({
     children,
@@ -16,8 +17,16 @@ export default function AppContainer({
     setPrimaryColor: (color: string) => void
 }>) {
     const [isNavOpened, { toggle }] = useDisclosure()
-
     const [openedNav, setOpenedNav] = useState('')
+    const [navData, setNavData] = useState(navDataNoAdmin)
+
+    const { userRole } = useContext(UserContext)
+
+    useEffect(() => {
+        if (userRole === 'admin') {
+            setNavData(navDataAdmin)
+        }
+    }, [])
 
     const links = navData.map((item, index) => (
         <LinkGroup
