@@ -25,8 +25,10 @@ export default function AppContainer({
     useEffect(() => {
         if (userRole === 'admin') {
             setNavData(navDataAdmin)
+        } else {
+            setNavData(navDataNoAdmin)
         }
-    }, [])
+    }, [userRole])
 
     const links = navData.map((item, index) => (
         <LinkGroup
