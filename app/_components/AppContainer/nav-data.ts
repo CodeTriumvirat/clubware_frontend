@@ -70,4 +70,15 @@ export const navDataNoAdmin = [
     { label: 'Settings', link: '/settings', icon: IconAdjustments },
 ]
 
-export const navDataAdmin = [...navDataNoAdmin]
+export const navDataAdmin = navDataNoAdmin.map((item) => {
+    const newItem = { ...item }
+
+    if (newItem.label === 'Members' && newItem.links) {
+        newItem.links = [
+            ...newItem.links,
+            { label: 'Add Member', link: '/members/add' },
+        ]
+    }
+
+    return newItem
+})
