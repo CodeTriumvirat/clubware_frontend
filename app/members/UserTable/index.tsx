@@ -1,7 +1,5 @@
 'use client'
 
-import { UserProfile } from '@/_types'
-import { fetchUserProfilePicture } from '@/profile/actions'
 import {
     Avatar,
     Checkbox,
@@ -22,7 +20,6 @@ import { UserProfile } from '@/_types'
 import { fetchUserProfilePicture } from '@/profile/actions'
 import Link from 'next/link'
 import { IconEdit } from '@tabler/icons-react'
-
 
 export default function UserTable({
     userProfiles,
