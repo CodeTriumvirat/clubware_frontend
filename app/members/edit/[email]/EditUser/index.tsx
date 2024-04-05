@@ -1,5 +1,5 @@
 'use client'
-import { Button, Stack, TextInput, Textarea } from '@mantine/core'
+import { Button, Select, Stack, TextInput, Textarea } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
 import { DateInput } from '@mantine/dates'
@@ -8,6 +8,7 @@ import { updateSelectedUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
 import { UserContext } from '@/_context/UserContext'
 import { useRouter } from 'next/navigation'
+import { userRoleOptions } from '@/_types'
 
 export default function EditUser({
     userProfile,
@@ -132,6 +133,7 @@ export default function EditUser({
             type: 'date',
         },
         { label: 'Notes', id: 'notes', type: 'textarea' },
+        { label: 'User Role', id: 'user_role', type: 'user_role' },
     ]
 
     const formFields = userFields.map((field, index) => {
@@ -153,6 +155,17 @@ export default function EditUser({
                     id={field.id}
                     valueFormat="DD.MM.YYYY"
                     size="md"
+                    {...form.getInputProps(field.id)}
+                />
+            )
+        } else if (field.type === 'user_role') {
+            return (
+                <Select
+                    key={index}
+                    label={field.label}
+                    id={field.id}
+                    size="md"
+                    data={userRoleOptions}
                     {...form.getInputProps(field.id)}
                 />
             )

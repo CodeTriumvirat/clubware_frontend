@@ -26,11 +26,29 @@ export async function updateSelectedUserProfile(profileData: UserProfile) {
         .update({ ...profileData })
         .eq('user_id', profileData.user_id)
 
-    if (!error) {
+    const { error: roleError } = await supabase.rpc('set_claim', {
+        uid: profileData.user_id,
+        claim: 'user_role',
+        value: profileData.user_role,
+    })
+
+    let adminError
+    if (profileData.user_role === 'admin') {
+        const { error: errorAdmin } = await supabase.rpc('set_claim', {
+            uid: profileData.user_id,
+            claim: 'claims_admin',
+            value: true,
+        })
+        adminError = errorAdmin
+    }
+
+    if (!error && !roleError && !adminError) {
         revalidatePath('/members', 'layout')
         redirect('/members')
     }
     if (error) throw new Error(error.message)
+    if (roleError) throw new Error(roleError.message)
+    if (adminError) throw new Error(adminError.message)
 }
 
 export async function uploadProfilePicture(

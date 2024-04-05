@@ -32,31 +32,6 @@ export type Database = {
             [_ in never]: never
         }
     }
-    pgbouncer: {
-        Tables: {
-            [_ in never]: never
-        }
-        Views: {
-            [_ in never]: never
-        }
-        Functions: {
-            get_auth: {
-                Args: {
-                    p_usename: string
-                }
-                Returns: {
-                    username: string
-                    password: string
-                }[]
-            }
-        }
-        Enums: {
-            [_ in never]: never
-        }
-        CompositeTypes: {
-            [_ in never]: never
-        }
-    }
     public: {
         Tables: {
             user_profile: {
@@ -74,7 +49,7 @@ export type Database = {
                     profile_bio: string
                     street: string
                     user_id: string
-                    user_role: string
+                    user_role: Database['public']['Enums']['user_role']
                 }
                 Insert: {
                     city?: string
@@ -90,7 +65,7 @@ export type Database = {
                     profile_bio?: string
                     street?: string
                     user_id: string
-                    user_role?: string
+                    user_role?: Database['public']['Enums']['user_role']
                 }
                 Update: {
                     city?: string
@@ -106,7 +81,7 @@ export type Database = {
                     profile_bio?: string
                     street?: string
                     user_id?: string
-                    user_role?: string
+                    user_role?: Database['public']['Enums']['user_role']
                 }
                 Relationships: [
                     {
@@ -166,7 +141,7 @@ export type Database = {
             }
         }
         Enums: {
-            [_ in never]: never
+            user_role: 'admin' | 'worker'
         }
         CompositeTypes: {
             [_ in never]: never
