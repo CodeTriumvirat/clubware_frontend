@@ -24,7 +24,11 @@ export function UserButtonCard({
             <div>
                 <Divider mb="sm" />
                 <Group justify="space-between">
-                    <UnstyledButton component={Link} href="/profile">
+                    <UnstyledButton
+                        component={Link}
+                        href="/profile"
+                        className={styles.userButton}
+                    >
                         <Group wrap="nowrap" className={styles.card} p={4}>
                             <Avatar
                                 src={profilePictureUrl}

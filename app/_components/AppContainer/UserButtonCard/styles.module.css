@@ -9,3 +9,7 @@
         background-color: lighten(var(--funkyPurpleDarkAppshell), 5%);
     }
 }
+
+.userButton {
+    flex-grow: 1;
+}
