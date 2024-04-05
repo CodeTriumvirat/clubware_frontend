@@ -1,7 +1,7 @@
 'use client'
 import { Header } from '@/_components/Header'
 import { LinkGroup } from '@/_components/LinkGroup'
-import { AppShell, Stack } from '@mantine/core'
+import { AppShell, Container, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { use, useContext, useEffect, useState } from 'react'
 import { UserButtonCard } from './UserButtonCard'
@@ -68,7 +68,9 @@ export default function AppContainer({
                         </Stack>
                     </AppShell.Navbar>
                     <AppShell.Main>
-                        <div className={styles.mainContainer}>{children}</div>
+                        <div className={styles.mainContainer}>
+                            <Container>{children}</Container>
+                        </div>
                     </AppShell.Main>
                 </AppShell>
             )}

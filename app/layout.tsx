@@ -33,9 +33,7 @@ export default async function RootLayout({
                 />
             </head>
             <body>
-                <Provider isLoggedIn={isLoggedIn}>
-                    <Container>{children}</Container>
-                </Provider>
+                <Provider isLoggedIn={isLoggedIn}>{children}</Provider>
             </body>
         </html>
     )
