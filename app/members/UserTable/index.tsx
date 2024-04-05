@@ -101,7 +101,7 @@ export default function UserTable({
                     <Group>
                         <Button
                             component={Link}
-                            href={`/members/${item.user_id}`}
+                            href={`/members/${item.email}`}
                         >
                             Details
                         </Button>
