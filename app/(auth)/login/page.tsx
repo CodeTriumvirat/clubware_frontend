@@ -9,7 +9,7 @@ import {
     Title,
 } from '@mantine/core'
 import Link from 'next/link'
-import { login, logout } from './actions'
+import { login, logout } from '../actions'
 
 export default function LoginPage() {
     return (

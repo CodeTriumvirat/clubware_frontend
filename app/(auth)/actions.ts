@@ -45,11 +45,13 @@ export async function signup(formData: FormData) {
     if (authSessionCookie) cookies().set('sb-api-auth-token', authSessionCookie)
 
     if (error) {
-        redirect('/error')
+        throw new Error(error.message)
     }
 
-    revalidatePath('/members', 'layout')
-    redirect(`/members/edit/${data.email}`)
+    if (!error) {
+        revalidatePath('/members', 'layout')
+        redirect(`/members/edit/${data.email}`)
+    }
 }
 
 export async function logout() {
