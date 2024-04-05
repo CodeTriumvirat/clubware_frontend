@@ -1,2 +1,2 @@
-export * from '@/_types/supabase-tables'
+export * from '@/_types/supabase-types'
 export * from '@/_types/supabase'
