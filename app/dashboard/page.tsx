@@ -7,7 +7,7 @@ export default async function Page() {
             <Button component={Link} href={`/login`}>
                 Back to Loginpage
             </Button>
-            <Text>Dashboard</Text>
+            <Text>Hallo Dashboard</Text>
         </>
     )
 }
