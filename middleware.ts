@@ -24,8 +24,9 @@ export const config = {
          * - favicon.ico (favicon file)
          * - /login (login route)
          * - /confirm (confirm route)
+         * - /templates (email templates route)
          * Feel free to modify this pattern to include more paths.
          */
-        '/((?!_next/static|_next/image|favicon.ico|login|confirm|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+        '/((?!_next/static|_next/image|favicon.ico|login|templates|confirm|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
     ],
 }
