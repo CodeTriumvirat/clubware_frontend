@@ -30,7 +30,7 @@ export function Provider({
     const theme = getTheme(primaryColor)
     return (
         <>
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <div>Loading..</div>}
             {!isLoading && (
                 <MantineProvider theme={theme} defaultColorScheme="auto">
                     {isLoggedIn && (
