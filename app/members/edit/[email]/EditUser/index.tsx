@@ -2,6 +2,7 @@
 import { Button, Stack, TextInput, Textarea } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
+import { DateInput } from '@mantine/dates'
 import { FormEvent, useContext, useState } from 'react'
 import { updateSelectedUserProfile } from '@/profile/actions'
 import { notifications } from '@mantine/notifications'
@@ -140,6 +141,17 @@ export default function EditUser({
                     key={index}
                     label={field.label}
                     id={field.id}
+                    size="md"
+                    {...form.getInputProps(field.id)}
+                />
+            )
+        } else if (field.type === 'date') {
+            return (
+                <DateInput
+                    key={index}
+                    label={field.label}
+                    id={field.id}
+                    valueFormat="DD.MM.YYYY"
                     size="md"
                     {...form.getInputProps(field.id)}
                 />

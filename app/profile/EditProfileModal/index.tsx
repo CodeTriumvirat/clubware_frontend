@@ -9,6 +9,7 @@ import { notifications } from '@mantine/notifications'
 import { DataDropzone } from '@/profile/DataDropzone'
 import { MIME_TYPES } from '@mantine/dropzone'
 import { UserContext } from '@/_context/UserContext'
+import { DateInput } from '@mantine/dates'
 
 export function EditProfileModal({ user }: { user: UserProfile }) {
     const [opened, { open, close }] = useDisclosure(false)
@@ -118,16 +119,31 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
         },
     ]
 
-    const formFields = userFields.map((field, index) => (
-        <TextInput
-            key={index}
-            label={field.label}
-            id={field.id}
-            type={field.type}
-            size="md"
-            {...form.getInputProps(field.id)}
-        />
-    ))
+    const formFields = userFields.map((field, index) => {
+        if (field.type === 'date') {
+            return (
+                <DateInput
+                    key={index}
+                    label={field.label}
+                    id={field.id}
+                    valueFormat="DD.MM.YYYY"
+                    size="md"
+                    {...form.getInputProps(field.id)}
+                />
+            )
+        } else {
+            return (
+                <TextInput
+                    key={index}
+                    label={field.label}
+                    id={field.id}
+                    type={field.type}
+                    size="md"
+                    {...form.getInputProps(field.id)}
+                />
+            )
+        }
+    })
 
     return (
         <>
