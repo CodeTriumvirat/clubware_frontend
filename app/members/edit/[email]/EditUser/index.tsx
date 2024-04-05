@@ -1,5 +1,5 @@
 'use client'
-import { Button, Stack, TextInput } from '@mantine/core'
+import { Button, Stack, TextInput, Textarea } from '@mantine/core'
 import { UserProfile } from '@/_types'
 import { useForm } from '@mantine/form'
 import { FormEvent, useContext, useState } from 'react'
@@ -130,18 +130,33 @@ export default function EditUser({
             id: 'employment_date',
             type: 'date',
         },
+        { label: 'Notes', id: 'notes', type: 'textarea' },
     ]
 
-    const formFields = userFields.map((field, index) => (
-        <TextInput
-            key={index}
-            label={field.label}
-            id={field.id}
-            type={field.type}
-            size="md"
-            {...form.getInputProps(field.id)}
-        />
-    ))
+    const formFields = userFields.map((field, index) => {
+        if (field.type === 'textarea') {
+            return (
+                <Textarea
+                    key={index}
+                    label={field.label}
+                    id={field.id}
+                    size="md"
+                    {...form.getInputProps(field.id)}
+                />
+            )
+        } else {
+            return (
+                <TextInput
+                    key={index}
+                    label={field.label}
+                    id={field.id}
+                    type={field.type}
+                    size="md"
+                    {...form.getInputProps(field.id)}
+                />
+            )
+        }
+    })
 
     return (
         <>
