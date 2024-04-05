@@ -1,6 +1,4 @@
 .appShell {
-    height: 100vh;
-
     background-color: var(--app-color-appshell);
 
     header,
@@ -16,6 +14,7 @@
     }
 
     main {
+        height: 100svh;
         display: flex;
         flex-direction: column;
         @mixin smaller-than $mantine-breakpoint-sm {
