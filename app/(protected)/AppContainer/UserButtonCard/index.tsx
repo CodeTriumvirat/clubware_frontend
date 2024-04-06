@@ -12,8 +12,8 @@ import Link from 'next/link'
 import styles from './styles.module.css'
 import { useContext } from 'react'
 import { UserContext } from '@/_context/UserContext'
-import { ColorSchemeToggle } from '@/_components/ColorSchemeToggle'
-import { PrimaryColorToggle } from '@/_components/PrimaryColorToggle'
+import { ColorSchemeToggle } from '@/(protected)/AppContainer/ColorSchemeToggle'
+import { PrimaryColorToggle } from '@/(protected)/AppContainer/PrimaryColorToggle'
 
 export function UserButtonCard() {
     const { user, profilePictureUrl } = useContext(UserContext)

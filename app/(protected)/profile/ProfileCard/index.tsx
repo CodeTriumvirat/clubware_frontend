@@ -1,22 +1,9 @@
 'use client'
-import {
-    Container,
-    Paper,
-    Title,
-    Text,
-    Image,
-    Stack,
-    Group,
-    Divider,
-    Avatar,
-} from '@mantine/core'
-import NextImage from 'next/image'
-import myImage from '/public/images/bg-9.png'
 import { EditProfileModal } from '@/(protected)/profile/EditProfileModal'
-import { notFound } from 'next/navigation'
-import { UserProfile } from '@/_types'
-import { useContext } from 'react'
 import { UserContext } from '@/_context/UserContext'
+import { UserProfile } from '@/_types'
+import { Avatar, Divider, Group, Stack, Text, Title } from '@mantine/core'
+import { useContext } from 'react'
 
 const userFields = [
     {

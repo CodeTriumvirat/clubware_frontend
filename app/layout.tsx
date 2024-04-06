@@ -1,7 +1,7 @@
 import '@/_styles/globals.css'
 import { ColorSchemeScript } from '@mantine/core'
 import type { Metadata } from 'next'
-import { Provider } from '@/Provider'
+import { Provider } from './Provider'
 import { ThemeProvider } from './_context/ThemeContext'
 
 export const metadata: Metadata = {

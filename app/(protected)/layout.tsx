@@ -1,5 +1,5 @@
-import AppContainer from '@/_components/AppContainer'
-import { UserProvider } from '@/_context/UserContext'
+import AppContainer from '@/(protected)/AppContainer'
+import { Provider } from './Provider'
 
 export default async function RootLayout({
     children,
@@ -8,9 +8,9 @@ export default async function RootLayout({
 }>) {
     return (
         <>
-            <UserProvider>
+            <Provider>
                 <AppContainer>{children}</AppContainer>
-            </UserProvider>
+            </Provider>
         </>
     )
 }

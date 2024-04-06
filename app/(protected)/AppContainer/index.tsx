@@ -1,6 +1,6 @@
 'use client'
-import { Header } from '@/_components/Header'
-import { LinkGroup } from '@/_components/LinkGroup'
+import { Header } from '@/(protected)/AppContainer/Header'
+import { LinkGroup } from '@/(protected)/AppContainer/LinkGroup'
 import { AppShell, Container, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useContext, useEffect, useState } from 'react'

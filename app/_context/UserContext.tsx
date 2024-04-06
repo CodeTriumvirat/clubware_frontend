@@ -8,11 +8,11 @@ import { useRouter } from 'next/navigation'
 import { createContext, useEffect, useState } from 'react'
 
 interface UserContext {
-    user: UserProfile | null
+    user: UserProfile
     setUser: React.Dispatch<React.SetStateAction<UserProfile | null>>
     profilePictureUrl: string | null
     setProfilePictureUrl: React.Dispatch<React.SetStateAction<string | null>>
-    userRole: string | null
+    userRole: string
     isLoadingUser: boolean
 }
 
@@ -23,7 +23,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const [profilePictureUrl, setProfilePictureUrl] = useState<string | null>(
         null
     )
-    const [userRole, setUserRole] = useState<string | null>(null)
+    const [userRole, setUserRole] = useState<string>('worker')
     const [isLoadingUser, setIsLoadingUser] = useState(true)
 
     async function getUser() {
@@ -32,7 +32,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         const _profilePictureUrl = await fetchUserProfilePicture(_user.user_id)
         setProfilePictureUrl(_profilePictureUrl)
         setUserRole(_user.user_role)
-        setIsLoadingUser(false)
+        if (_user) setIsLoadingUser(false)
+        if (!_user) setIsLoadingUser(true)
     }
     const supabase = createClient()
     const router = useRouter()
@@ -44,7 +45,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             if (!session) {
                 setUser(null)
                 setProfilePictureUrl(null)
-                setUserRole(null)
+                setUserRole('worker')
                 router.push('/login')
             }
         })
@@ -57,7 +58,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     return (
         <UserContext.Provider
             value={{
-                user,
+                user: user as UserProfile,
                 setUser,
                 profilePictureUrl,
                 setProfilePictureUrl,
