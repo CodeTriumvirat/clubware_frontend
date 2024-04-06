@@ -1,7 +1,7 @@
 'use client'
 import { Header } from '@/_components/Header'
 import { LinkGroup } from '@/_components/LinkGroup'
-import { AppShell, Container, Stack } from '@mantine/core'
+import { AppShell, Container, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useContext, useEffect, useState } from 'react'
 import { UserButtonCard } from './UserButtonCard'
@@ -68,7 +68,7 @@ export default function AppContainer({
                     </AppShell.Main>
                 </AppShell>
             )}
-            {!user && !isLoadingUser && children}
+            {!user && !isLoadingUser && <Text>No User Profile found</Text>}
         </>
     )
 }

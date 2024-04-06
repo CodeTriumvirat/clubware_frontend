@@ -14,7 +14,6 @@ export function Provider({
 
     return (
         <>
-            {isLoadingTheme && <div>Loading..</div>}
             {!isLoadingTheme && (
                 <MantineProvider theme={theme} defaultColorScheme="auto">
                     <Notifications />

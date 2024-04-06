@@ -20,7 +20,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
     const [primaryColor, setPrimaryColor] = useState<string>('funkyPurple')
     const [theme, setTheme] = useState<MantineThemeOverride>(
-        getTheme(primaryColor)
+        getTheme('funkyPurple')
     )
     const [isLoadingTheme, setIsLoadingTheme] = useState<boolean>(true)
 
@@ -28,9 +28,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
         const color = getCookie('primaryColor') || 'funkyPurple'
         document.documentElement.setAttribute('primary-color', color)
         setPrimaryColor(color)
-        setTheme(getTheme(color))
         setIsLoadingTheme(false)
     }, [])
+
+    useEffect(() => {
+        setTheme(getTheme(primaryColor))
+    }, [primaryColor])
 
     return (
         <ThemeContext.Provider
