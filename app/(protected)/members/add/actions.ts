@@ -5,13 +5,9 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-export async function signup(formData: FormData) {
+export async function signup(data: { email: string; password: string }) {
     const supabase = createClient()
 
-    const data = {
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
-    }
     const authSessionCookie = cookies().get('sb-api-auth-token')?.value
     const authLocalSessionCookie = cookies().get('sb-127-auth-token')?.value
 
@@ -22,7 +18,7 @@ export async function signup(formData: FormData) {
     if (authSessionCookie) cookies().set('sb-api-auth-token', authSessionCookie)
 
     if (error) {
-        throw new Error(error.message)
+        throw new Error('Error signing up user')
     }
 
     if (!error) {

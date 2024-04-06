@@ -14,16 +14,13 @@ import { notifications } from '@mantine/notifications'
 import { signup } from './actions'
 import { useAdminCheck } from '@/_hooks/useAdminCheck'
 import { validateEmail, validatePassword } from '@/_utils/form-validation'
+import { useState } from 'react'
 
 export default function Page() {
     useAdminCheck('members')
+    const [isClicked, setIsClicked] = useState(false)
 
     const form = useForm({
-        initialValues: {
-            email: '',
-            password: '',
-        },
-
         validate: {
             email: validateEmail,
             password: validatePassword,
@@ -37,16 +34,18 @@ export default function Page() {
         event.preventDefault()
 
         if (!form.validate()) return
+        setIsClicked(true)
 
         try {
-            await signup(new FormData(event.currentTarget))
+            await signup(form.values)
         } catch (error) {
             if (error instanceof Error) {
                 notifications.show({
-                    title: 'Signup Error',
+                    title: 'Error',
                     message: error.message,
                 })
-            } else console.error(error)
+                setIsClicked(false)
+            }
         }
     }
 
@@ -73,7 +72,11 @@ export default function Page() {
                             {...form.getInputProps('password')}
                             required
                         />
-                        <Button type="submit" disabled={!isFormValid} fullWidth>
+                        <Button
+                            type="submit"
+                            disabled={!isFormValid || isClicked}
+                            fullWidth
+                        >
                             Sign up
                         </Button>
                     </Stack>
