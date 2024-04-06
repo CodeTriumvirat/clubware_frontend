@@ -1,5 +1,5 @@
 'use client'
-import { signup } from '@/(auth)/actions'
+import { signup } from './actions'
 import { UserContext } from '@/_context/UserContext'
 import {
     Button,
