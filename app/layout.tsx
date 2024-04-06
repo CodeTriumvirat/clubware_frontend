@@ -1,8 +1,8 @@
 import '@/_styles/globals.css'
-import { createClient } from '@/_utils/supabase/server'
-import { ColorSchemeScript, Container } from '@mantine/core'
+import { ColorSchemeScript } from '@mantine/core'
 import type { Metadata } from 'next'
-import { Provider } from './_components/Provider'
+import { Provider } from '@/Provider'
+import { ThemeProvider } from './_context/ThemeContext'
 
 export const metadata: Metadata = {
     title: 'ClubWare ERP',
@@ -14,14 +14,6 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    const supabase = createClient()
-    const { error } = await supabase.auth.getUser()
-
-    let isLoggedIn = false
-    if (!error) {
-        isLoggedIn = true
-    }
-
     return (
         <html lang="de">
             <head>
@@ -33,7 +25,9 @@ export default async function RootLayout({
                 />
             </head>
             <body>
-                <Provider isLoggedIn={isLoggedIn}>{children}</Provider>
+                <ThemeProvider>
+                    <Provider>{children}</Provider>
+                </ThemeProvider>
             </body>
         </html>
     )

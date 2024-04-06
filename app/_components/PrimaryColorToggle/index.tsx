@@ -1,12 +1,14 @@
+'use client'
+
 import { ActionIcon, Button, Popover, Stack } from '@mantine/core'
 import { setPrimaryColorCookie } from './actions'
 import { IconPalette } from '@tabler/icons-react'
+import { ThemeContext } from '@/_context/ThemeContext'
+import { useContext } from 'react'
 
-export function PrimaryColorToggle({
-    setPrimaryColor,
-}: Readonly<{
-    setPrimaryColor: (color: string) => void
-}>) {
+export function PrimaryColorToggle() {
+    const { setPrimaryColor } = useContext(ThemeContext)
+
     return (
         <>
             <Popover

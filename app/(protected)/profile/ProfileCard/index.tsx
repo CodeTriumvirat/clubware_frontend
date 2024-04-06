@@ -12,7 +12,7 @@ import {
 } from '@mantine/core'
 import NextImage from 'next/image'
 import myImage from '/public/images/bg-9.png'
-import { EditProfileModal } from '@/profile/EditProfileModal'
+import { EditProfileModal } from '@/(protected)/profile/EditProfileModal'
 import { notFound } from 'next/navigation'
 import { UserProfile } from '@/_types'
 import { useContext } from 'react'

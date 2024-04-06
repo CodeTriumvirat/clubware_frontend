@@ -3,7 +3,7 @@
 import { UserProfile } from '@/_types'
 import { createClient } from '@/_utils/supabase/client'
 import { getMyUserProfileClient } from '@/_utils/supabase/getMyUserProfileClient'
-import { fetchUserProfilePicture } from '@/profile/actions'
+import { fetchUserProfilePicture } from '@/(protected)/profile/actions'
 import { useRouter } from 'next/navigation'
 import { createContext, useEffect, useState } from 'react'
 

@@ -15,9 +15,7 @@ import { UserContext } from '@/_context/UserContext'
 import { ColorSchemeToggle } from '@/_components/ColorSchemeToggle'
 import { PrimaryColorToggle } from '@/_components/PrimaryColorToggle'
 
-export function UserButtonCard({
-    setPrimaryColor,
-}: Readonly<{ setPrimaryColor: (color: string) => void }>) {
+export function UserButtonCard() {
     const { user, profilePictureUrl } = useContext(UserContext)
     return (
         <>
@@ -47,7 +45,7 @@ export function UserButtonCard({
                     </UnstyledButton>
                     <Group hiddenFrom="sm">
                         <ColorSchemeToggle />
-                        <PrimaryColorToggle setPrimaryColor={setPrimaryColor} />
+                        <PrimaryColorToggle />
                     </Group>
                 </Group>
             </div>
