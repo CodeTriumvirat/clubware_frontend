@@ -1,6 +1,5 @@
 'use client'
-import { signup } from './actions'
-import { UserContext } from '@/_context/UserContext'
+import { useAdminCheck } from '@/_hooks/useAdminCheck'
 import {
     Button,
     Container,
@@ -11,25 +10,13 @@ import {
     Title,
 } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import { useRouter } from 'next/navigation'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { signup } from './actions'
 
 export default function Page() {
-    const { userRole } = useContext(UserContext)
+    useAdminCheck('members')
 
-    const [notificationShown, setNotificationShown] = useState(false)
     const [isClicked, setIsClicked] = useState(false)
-
-    const router = useRouter()
-
-    if (userRole !== 'admin' && !notificationShown) {
-        notifications.show({
-            title: 'Error',
-            message: 'You are not authorized to view this page',
-        })
-        setNotificationShown(true)
-        router.push('/members')
-    }
 
     async function handleSignup(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
