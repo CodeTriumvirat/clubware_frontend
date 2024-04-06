@@ -1,9 +1,9 @@
 'use client'
-import { Header } from '@/_components/Header'
-import { LinkGroup } from '@/_components/LinkGroup'
-import { AppShell, Container, Stack } from '@mantine/core'
+import { Header } from '@/(protected)/AppContainer/Header'
+import { LinkGroup } from '@/(protected)/AppContainer/LinkGroup'
+import { AppShell, Container, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { use, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserButtonCard } from './UserButtonCard'
 import { navDataAdmin, navDataNoAdmin } from './nav-data'
 import styles from './styles.module.css'
@@ -11,10 +11,8 @@ import { UserContext } from '@/_context/UserContext'
 
 export default function AppContainer({
     children,
-    setPrimaryColor,
 }: Readonly<{
     children: React.ReactNode
-    setPrimaryColor: (color: string) => void
 }>) {
     const [isNavOpened, { toggle }] = useDisclosure()
     const [openedNav, setOpenedNav] = useState('')
@@ -55,16 +53,12 @@ export default function AppContainer({
                     padding="md"
                 >
                     <AppShell.Header>
-                        <Header
-                            isNavOpened={isNavOpened}
-                            toggle={toggle}
-                            setPrimaryColor={setPrimaryColor}
-                        />
+                        <Header isNavOpened={isNavOpened} toggle={toggle} />
                     </AppShell.Header>
                     <AppShell.Navbar p="sm">
                         <Stack justify="space-between" flex={1}>
                             <Stack>{links}</Stack>
-                            <UserButtonCard setPrimaryColor={setPrimaryColor} />
+                            <UserButtonCard />
                         </Stack>
                     </AppShell.Navbar>
                     <AppShell.Main>
@@ -74,7 +68,7 @@ export default function AppContainer({
                     </AppShell.Main>
                 </AppShell>
             )}
-            {!user && !isLoadingUser && children}
+            {!user && !isLoadingUser && <Text>No User Profile found</Text>}
         </>
     )
 }

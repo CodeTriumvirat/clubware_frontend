@@ -7,11 +7,9 @@ import styles from './styles.module.css'
 export const Header = ({
     isNavOpened,
     toggle,
-    setPrimaryColor,
 }: {
     isNavOpened: boolean
     toggle: () => void
-    setPrimaryColor: (color: string) => void
 }) => {
     return (
         <Group
@@ -50,7 +48,7 @@ export const Header = ({
                 ></TextInput>
                 <Group>
                     <ColorSchemeToggle />
-                    <PrimaryColorToggle setPrimaryColor={setPrimaryColor} />
+                    <PrimaryColorToggle />
                 </Group>
             </Group>
         </Group>
