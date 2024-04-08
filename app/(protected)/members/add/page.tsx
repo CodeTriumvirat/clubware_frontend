@@ -15,6 +15,7 @@ import { signup } from './actions'
 import { useAdminCheck } from '@/_hooks/useAdminCheck'
 import { validateEmail, validatePassword } from '@/_utils/form-validation'
 import { useState } from 'react'
+import { AuthApiError, AuthError } from '@supabase/supabase-js'
 
 export default function Page() {
     useAdminCheck('members')
@@ -41,11 +42,12 @@ export default function Page() {
         } catch (error) {
             if (error instanceof Error) {
                 notifications.show({
-                    title: 'Error',
+                    title: 'Signup Error',
                     message: error.message,
                 })
-                setIsClicked(false)
             }
+            console.error(error)
+            setIsClicked(false)
         }
     }
 

@@ -11,12 +11,12 @@ export async function signup(data: { email: string; password: string }) {
 
     const emailError = validateEmail(data.email)
     if (emailError) {
-        throw new Error('Invalid email')
+        throw new Error(emailError)
     }
 
     const passwordError = validatePassword(data.password)
     if (passwordError) {
-        throw new Error('Invalid password')
+        throw new Error(passwordError)
     }
 
     const authSessionCookie = cookies().get('sb-api-auth-token')?.value
@@ -29,7 +29,7 @@ export async function signup(data: { email: string; password: string }) {
     if (authSessionCookie) cookies().set('sb-api-auth-token', authSessionCookie)
 
     if (error) {
-        throw new Error('Error signing up user')
+        throw error
     }
 
     if (!error) {
