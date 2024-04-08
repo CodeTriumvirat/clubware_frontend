@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Button,
     Container,
@@ -10,8 +12,38 @@ import {
 } from '@mantine/core'
 import Link from 'next/link'
 import { login, logout } from '../actions'
+import { useState } from 'react'
+import { useForm } from '@mantine/form'
+import { notifications } from '@mantine/notifications'
 
 export default function LoginPage() {
+    const [isClicked, setIsClicked] = useState(false)
+
+    const form = useForm({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+    })
+
+    async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setIsClicked(true)
+
+        try {
+            await login(form.values)
+        } catch (error) {
+            if (error instanceof Error) {
+                notifications.show({
+                    title: 'Signup Error',
+                    message: error.message,
+                })
+            }
+            console.error(error)
+            setIsClicked(false)
+        }
+    }
+
     return (
         <Container size={420} my={40}>
             <Title ta="center" mb={12}>
@@ -19,26 +51,27 @@ export default function LoginPage() {
             </Title>
             <Paper shadow="md" p={30} radius="md" mt="xl">
                 <Stack>
-                    <form>
+                    <form onSubmit={handleLogin}>
                         <Stack>
                             <TextInput
-                                label="Email"
-                                placeholder="deinemail@example.com"
-                                id="email"
-                                name="email"
                                 type="email"
+                                label="Email"
+                                placeholder="yourmail@example.com"
+                                {...form.getInputProps('email')}
                                 required
                             />
                             <PasswordInput
-                                label="Passwort"
-                                placeholder="Dein Passwort"
-                                id="password"
-                                name="password"
-                                type="password"
+                                label="Password"
+                                placeholder="Your Password"
+                                {...form.getInputProps('password')}
                                 required
                             />
-                            <Button type="submit" fullWidth formAction={login}>
-                                Log in
+                            <Button
+                                type="submit"
+                                disabled={isClicked}
+                                fullWidth
+                            >
+                                Login
                             </Button>
                         </Stack>
                     </form>
