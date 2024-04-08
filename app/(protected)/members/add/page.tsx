@@ -15,10 +15,9 @@ import { signup } from './actions'
 import { useAdminCheck } from '@/_hooks/useAdminCheck'
 import { validateEmail, validatePassword } from '@/_utils/form-validation'
 import { useState } from 'react'
-import { AuthApiError, AuthError } from '@supabase/supabase-js'
 
 export default function Page() {
-    useAdminCheck('members')
+    useAdminCheck('/members')
     const [isClicked, setIsClicked] = useState(false)
 
     const form = useForm({
