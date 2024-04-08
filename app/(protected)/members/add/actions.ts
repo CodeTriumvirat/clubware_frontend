@@ -21,8 +21,6 @@ export async function signup(data: { email: string; password: string }) {
         throw error
     }
 
-    if (!error) {
-        revalidatePath('/members', 'layout')
-        redirect(`/members/edit/${data.email}`)
-    }
+    revalidatePath('/members', 'layout')
+    redirect(`/members/edit/${data.email}`)
 }
