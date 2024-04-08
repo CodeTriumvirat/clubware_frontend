@@ -1,91 +1,77 @@
 'use client'
-import { Button, Select, Stack, TextInput, Textarea } from '@mantine/core'
-import { UserProfile } from '@/_types'
-import { useForm } from '@mantine/form'
-import { DateInput } from '@mantine/dates'
-import { FormEvent, useContext, useState } from 'react'
 import { updateSelectedUserProfile } from '@/(protected)/profile/actions'
+import { useAdminCheck } from '@/_hooks/useAdminCheck'
+import { UserProfile, userRoleOptions } from '@/_types'
+import {
+    validateCity,
+    validateFirstName,
+    validateLastName,
+    validatePhoneNumber,
+    validatePostcode,
+    validateStreet,
+} from '@/_utils/form-validation'
+import { formatDateToString, formatStringToDate } from '@/_utils/utils'
+import { Button, Select, Stack, TextInput, Textarea } from '@mantine/core'
+import { DateInput } from '@mantine/dates'
+import { useForm } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
-import { UserContext } from '@/_context/UserContext'
-import { useRouter } from 'next/navigation'
-import { userRoleOptions } from '@/_types'
+import { FormEvent, useState } from 'react'
 
 export default function EditUser({
     userProfile,
 }: {
     userProfile: UserProfile
 }) {
-    const router = useRouter()
-
-    const { userRole } = useContext(UserContext)
-
-    const [notificationShown, setNotificationShown] = useState(false)
-
-    if (userRole !== 'admin' && !notificationShown) {
-        notifications.show({
-            title: 'Error',
-            message: 'You are not authorized to view this page',
-        })
-        setNotificationShown(true)
-        router.push('/members')
-    }
+    useAdminCheck('/members')
+    const [isClicked, setIsClicked] = useState(false)
 
     const form = useForm({
         initialValues: {
             ...userProfile,
+            date_of_birth: formatStringToDate(userProfile.date_of_birth),
+            employment_date: formatStringToDate(userProfile.employment_date),
         },
 
         validate: {
-            date_of_birth: (value = null) =>
-                value === null ||
-                /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
-                    ? null
-                    : 'Invalid Date of Birth',
-            employment_date: (value = null) =>
-                value === null ||
-                /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
-                    ? null
-                    : 'Invalid Employent Date',
-            phone_number: (value = '') =>
-                value !== '' &&
-                /^(?:(?:\+|00)(?:[0-9] ?){6,14}[0-9])?$/.test(value)
-                    ? null
-                    : 'Number needs to start with a + or 00',
-            street: (value = '') =>
-                value.length > 0 ? null : 'Invalid Address',
-            postcode: (value = '') =>
-                value.length > 0 ? null : 'Invalid Postcode',
-            city: (value = '') => (value.length > 0 ? null : 'Invalid City'),
-            first_name: (value = '') =>
-                value.length > 0 ? null : 'Invalid Firstname',
-            last_name: (value = '') =>
-                value.length > 0 ? null : 'Invalid Lastname',
+            phone_number: validatePhoneNumber,
+            street: validateStreet,
+            postcode: validatePostcode,
+            city: validateCity,
+            first_name: validateFirstName,
+            last_name: validateLastName,
         },
+
+        validateInputOnBlur: true,
+        validateInputOnChange: true,
     })
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        if (!form.validate()) return
+        setIsClicked(true)
 
-        let errors = form.validate()
-
-        console.log(form.values)
-
-        if (!errors.hasErrors) {
-            try {
-                await updateSelectedUserProfile(form.values)
-            } catch (error) {
-                if (error instanceof Error) {
-                    notifications.show({
-                        title: 'Error',
-                        message: error.message,
-                    })
-                }
+        try {
+            await updateSelectedUserProfile({
+                ...form.values,
+                date_of_birth: formatDateToString(form.values.date_of_birth),
+                employment_date: formatDateToString(
+                    form.values.employment_date
+                ),
+            })
+        } catch (error) {
+            if (error instanceof Error) {
+                notifications.show({
+                    title: 'Error',
+                    message: error.message,
+                })
             }
-        } else {
-            console.log('Form has errors, cannot submit')
-            console.error(errors.errors)
+            console.error(error)
+            setIsClicked(false)
         }
     }
+
+    const isFormValid = form.isValid()
+
     const userFields = [
         {
             label: 'Firstname',
@@ -188,7 +174,12 @@ export default function EditUser({
             <form onSubmit={handleSubmit}>
                 <Stack mt="md">
                     {formFields}
-                    <Button type="submit" mt="xs" mx="xl">
+                    <Button
+                        type="submit"
+                        mt="xs"
+                        mx="xl"
+                        disabled={!isFormValid || isClicked}
+                    >
                         Save Changes
                     </Button>
                 </Stack>
