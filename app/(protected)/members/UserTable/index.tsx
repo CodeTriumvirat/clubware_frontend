@@ -121,7 +121,7 @@ export default function UserTable({
 
     return (
         <>
-            <Title order={4}>Member Overview</Title>
+            <Title order={2}>Member Overview</Title>
 
             <MultiSelect
                 my="xl"

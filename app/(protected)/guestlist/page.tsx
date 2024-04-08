@@ -75,7 +75,7 @@ export default function Page() {
 
     return (
         <>
-            <Title order={4}>Guestlist</Title>
+            <Title order={2}>Guestlist</Title>
             <Divider my="lg" />
             <Text size="lg">my next Shifts</Text>
             <ScrollArea>

@@ -14,6 +14,7 @@ import { useContext } from 'react'
 import { UserContext } from '@/_context/UserContext'
 import { ColorSchemeToggle } from '@/(protected)/AppContainer/ColorSchemeToggle'
 import { PrimaryColorToggle } from '@/(protected)/AppContainer/PrimaryColorToggle'
+import { LogoutButton } from '../LogoutButton'
 
 export function UserButtonCard() {
     const { user, profilePictureUrl } = useContext(UserContext)
@@ -44,6 +45,7 @@ export function UserButtonCard() {
                         </Group>
                     </UnstyledButton>
                     <Group hiddenFrom="sm">
+                        <LogoutButton />
                         <ColorSchemeToggle />
                         <PrimaryColorToggle />
                     </Group>

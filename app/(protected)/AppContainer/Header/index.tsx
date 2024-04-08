@@ -3,6 +3,7 @@ import { Burger, Flex, Group, TextInput } from '@mantine/core'
 import { ColorSchemeToggle } from '../ColorSchemeToggle'
 import { PrimaryColorToggle } from '../PrimaryColorToggle'
 import styles from './styles.module.css'
+import { LogoutButton } from '../LogoutButton'
 
 export const Header = ({
     isNavOpened,
@@ -37,7 +38,6 @@ export const Header = ({
             <Group
                 className={styles.headerRight}
                 justify="space-between"
-                // mt="xs"
                 visibleFrom="sm"
                 data-testid="headerRight"
             >
@@ -47,6 +47,7 @@ export const Header = ({
                     className={styles.searchInput}
                 ></TextInput>
                 <Group>
+                    <LogoutButton />
                     <ColorSchemeToggle />
                     <PrimaryColorToggle />
                 </Group>

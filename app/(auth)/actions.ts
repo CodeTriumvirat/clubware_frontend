@@ -15,14 +15,3 @@ export async function login(data: { email: string; password: string }) {
     revalidatePath('/', 'layout')
     redirect('/')
 }
-
-export async function logout() {
-    const supabase = createClient()
-
-    let { error } = await supabase.auth.signOut()
-
-    if (error) throw error
-
-    revalidatePath('/', 'layout')
-    redirect('/')
-}

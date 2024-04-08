@@ -11,7 +11,7 @@ import {
     Title,
 } from '@mantine/core'
 import Link from 'next/link'
-import { login, logout } from '../actions'
+import { login } from '../actions'
 import { useState } from 'react'
 import { useForm } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
@@ -84,17 +84,6 @@ export default function LoginPage() {
                         >
                             Passwort vergessen?
                         </Button>
-                        <form>
-                            <Button
-                                fullWidth
-                                type="submit"
-                                formAction={logout}
-                                variant="filled"
-                                size="xs"
-                            >
-                                Logout
-                            </Button>
-                        </form>
                     </Group>
                 </Stack>
             </Paper>

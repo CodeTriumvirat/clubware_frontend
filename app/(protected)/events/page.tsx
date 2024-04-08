@@ -1,5 +1,4 @@
 'use client'
-import { useState } from 'react'
 import {
     Card,
     Divider,
@@ -11,9 +10,8 @@ import {
     Title,
 } from '@mantine/core'
 import { Calendar } from '@mantine/dates'
-import { IconSearch } from '@tabler/icons-react'
 import dayjs from 'dayjs'
-import styles from './styles.module.css'
+import { useState } from 'react'
 
 interface Event {
     id: string
@@ -129,7 +127,7 @@ export default function Page() {
 
     return (
         <>
-            <Title order={3}>Event Overview</Title>
+            <Title order={2}>Event Overview</Title>
             <Divider my="lg" />
 
             <TextInput

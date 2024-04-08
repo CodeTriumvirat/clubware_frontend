@@ -252,7 +252,7 @@ export default function Page() {
 
     return (
         <>
-            <Title order={4}>Inventory Overview</Title>
+            <Title order={2}>Inventory Overview</Title>
             <MultiSelect
                 my="xl"
                 label="Kategorie"
