@@ -162,3 +162,40 @@ export async function fetchUserProfilePicture(user_id: string) {
 
     return supabaseData.data.publicUrl
 }
+
+export async function deleteUser(user_id: string) {
+    const supabase = createClient()
+    try {
+        const { error } = await supabase
+            .from('deletion_request')
+            .insert({ user_id })
+
+        if (error) {
+            throw error
+        }
+
+        const { data: files, error: errorStorage } = await supabase.storage
+            .from('user_data')
+            .list(user_id)
+
+        // Remove all files in the folder
+        const keys = files?.map((file) => `${user_id}/${file.name}`)
+        if (keys && keys.length > 0) {
+            await supabase.storage.from('user_data').remove(keys)
+        }
+
+        if (errorStorage) {
+            throw errorStorage
+        }
+
+        revalidatePath('/members', 'layout')
+        redirect('/members')
+    } catch (error) {
+        if (error instanceof Error) {
+            throw error
+        } else {
+            console.error('Unknown error occurred:', error)
+            throw new Error('Unknown error occurred:')
+        }
+    }
+}
