@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { createClient } from '@/_utils/supabase/server'
+import { createClient, createServiceRoleClient } from '@/_utils/supabase/server'
 import { UserProfile } from '@/_types'
 
 export async function updateUserProfile(profileData: UserProfile) {
@@ -161,4 +161,27 @@ export async function fetchUserProfilePicture(user_id: string) {
         .getPublicUrl(`${user_id}/${profilePicture.name}`)
 
     return supabaseData.data.publicUrl
+}
+
+export async function deleteUser(user_id: string) {
+    const supabase = createServiceRoleClient()
+    try {
+        const { error } = await supabase.auth.admin.deleteUser(user_id)
+        console.log('User deleted successfully')
+        if (error) {
+            throw error
+        }
+        revalidatePath('/members', 'layout')
+        redirect('/members')
+    } catch (error) {
+        if (error instanceof Error) {
+            throw new Error(error.message)
+        } else {
+            console.error('Unknown error occurred:', error)
+            // Handle the case where delete_user returns an empty string
+            // For example, you can log a message or show a confirmation to the user
+            revalidatePath('/members', 'layout')
+            redirect('/members')
+        }
+    }
 }

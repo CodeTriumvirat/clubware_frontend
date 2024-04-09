@@ -1,5 +1,8 @@
 'use client'
-import { updateSelectedUserProfile } from '@/(protected)/profile/actions'
+import {
+    deleteUser,
+    updateSelectedUserProfile,
+} from '@/(protected)/profile/actions'
 import { useAdminCheck } from '@/_hooks/useAdminCheck'
 import { UserProfile, userRoleOptions } from '@/_types'
 import {
@@ -11,11 +14,21 @@ import {
     validateStreet,
 } from '@/_utils/form-validation'
 import { formatDateToString, formatStringToDate } from '@/_utils/utils'
-import { Button, Select, Stack, TextInput, Textarea } from '@mantine/core'
+import {
+    Button,
+    Group,
+    Select,
+    Stack,
+    TextInput,
+    Textarea,
+    Modal,
+} from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
 import { DateInput } from '@mantine/dates'
 import { useForm } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
 import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/router'
 
 export default function EditUser({
     userProfile,
@@ -24,6 +37,7 @@ export default function EditUser({
 }) {
     useAdminCheck('/members')
     const [isClicked, setIsClicked] = useState(false)
+    const [opened, { open, close }] = useDisclosure(false)
 
     const form = useForm({
         initialValues: {
@@ -67,6 +81,22 @@ export default function EditUser({
             }
             console.error(error)
             setIsClicked(false)
+        }
+    }
+
+    const handleDelete = async () => {
+        try {
+            if (userProfile.user_id) {
+                await deleteUser(userProfile.user_id)
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                notifications.show({
+                    title: 'Error',
+                    message: error.message,
+                })
+            }
+            console.error(error)
         }
     }
 
@@ -174,15 +204,45 @@ export default function EditUser({
             <form onSubmit={handleSubmit}>
                 <Stack mt="md">
                     {formFields}
-                    <Button
-                        type="submit"
-                        mt="xs"
-                        mx="xl"
-                        disabled={!isFormValid || isClicked}
-                    >
-                        Save Changes
-                    </Button>
+                    <Group mt="xs" mx="xl" justify="space-around">
+                        <Button
+                            type="submit"
+                            disabled={!isFormValid || isClicked}
+                        >
+                            Save Changes
+                        </Button>
+                        <Button color="yellow" onClick={() => form.reset()}>
+                            Discard Changes
+                        </Button>
+                        <Button color="red" onClick={open}>
+                            Delete User
+                        </Button>
+                    </Group>
                 </Stack>
+                <Modal
+                    opened={opened}
+                    onClose={close}
+                    title="Are you sure you want to delete the User?"
+                    centered
+                >
+                    <Group justify="space-around">
+                        <Button
+                            w="47%"
+                            color="red"
+                            onClick={() => handleDelete()}
+                        >
+                            Yes, delete User
+                        </Button>
+                        <Button
+                            w="47%"
+                            fw="bold"
+                            color="yellow"
+                            onClick={close}
+                        >
+                            No
+                        </Button>
+                    </Group>
+                </Modal>
             </form>
         </>
     )

@@ -104,6 +104,12 @@ export type Database = {
                 }
                 Returns: string
             }
+            delete_user: {
+                Args: {
+                    id: string
+                }
+                Returns: undefined
+            }
             get_claim: {
                 Args: {
                     uid: string
