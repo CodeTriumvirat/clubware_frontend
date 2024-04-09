@@ -34,6 +34,28 @@ export type Database = {
     }
     public: {
         Tables: {
+            deletion_request: {
+                Row: {
+                    id: number
+                    user_id: string
+                }
+                Insert: {
+                    id?: number
+                    user_id: string
+                }
+                Update: {
+                    id?: number
+                    user_id?: string
+                }
+                Relationships: [
+                    {
+                        foreignKeyName: 'public_deletion_request_user_id_fkey'
+                        columns: ['user_id']
+                        referencedRelation: 'users'
+                        referencedColumns: ['id']
+                    },
+                ]
+            }
             user_profile: {
                 Row: {
                     city: string
@@ -103,12 +125,6 @@ export type Database = {
                     claim: string
                 }
                 Returns: string
-            }
-            delete_user: {
-                Args: {
-                    id: string
-                }
-                Returns: undefined
             }
             get_claim: {
                 Args: {

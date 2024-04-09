@@ -22,5 +22,5 @@ export async function signup(data: { email: string; password: string }) {
     }
 
     revalidatePath('/members', 'layout')
-    redirect(`/members/edit/${data.email}`)
+    redirect(`/members/edit/${data.email.toLowerCase()}`)
 }

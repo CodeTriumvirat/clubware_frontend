@@ -2,6 +2,7 @@ import React from 'react'
 import { UserProfile } from '@/_types'
 import { Text, Title, Divider, Stack, Avatar } from '@mantine/core'
 import { formatKeyToUppercaseWords } from '@/_utils/utils'
+import { notifications } from '@mantine/notifications'
 
 export function UserDetails({
     userProfile,

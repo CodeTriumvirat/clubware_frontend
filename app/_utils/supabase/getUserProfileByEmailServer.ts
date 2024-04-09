@@ -1,7 +1,9 @@
 import { createClient } from './server'
 import { UserProfile } from '@/_types'
 
-export async function getUserProfileByEmailServer(email: string) {
+export async function getUserProfileByEmailServer(
+    email: string
+): Promise<UserProfile | null> {
     const supabase = createClient()
 
     let userProfile = (
@@ -12,5 +14,5 @@ export async function getUserProfileByEmailServer(email: string) {
             .single()
     ).data
 
-    return userProfile as UserProfile
+    return userProfile
 }

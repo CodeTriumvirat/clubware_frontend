@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { createClient, createServiceRoleClient } from '@/_utils/supabase/server'
+import { createClient } from '@/_utils/supabase/server'
 import { UserProfile } from '@/_types'
 
 export async function updateUserProfile(profileData: UserProfile) {
@@ -164,24 +164,38 @@ export async function fetchUserProfilePicture(user_id: string) {
 }
 
 export async function deleteUser(user_id: string) {
-    const supabase = createServiceRoleClient()
+    const supabase = createClient()
     try {
-        const { error } = await supabase.auth.admin.deleteUser(user_id)
-        console.log('User deleted successfully')
+        const { error } = await supabase
+            .from('deletion_request')
+            .insert({ user_id })
+
         if (error) {
             throw error
         }
+
+        const { data: files, error: errorStorage } = await supabase.storage
+            .from('user_data')
+            .list(user_id)
+
+        // Remove all files in the folder
+        const keys = files?.map((file) => `${user_id}/${file.name}`)
+        if (keys && keys.length > 0) {
+            await supabase.storage.from('user_data').remove(keys)
+        }
+
+        if (errorStorage) {
+            throw errorStorage
+        }
+
         revalidatePath('/members', 'layout')
         redirect('/members')
     } catch (error) {
         if (error instanceof Error) {
-            throw new Error(error.message)
+            throw error
         } else {
             console.error('Unknown error occurred:', error)
-            // Handle the case where delete_user returns an empty string
-            // For example, you can log a message or show a confirmation to the user
-            revalidatePath('/members', 'layout')
-            redirect('/members')
+            throw new Error('Unknown error occurred:')
         }
     }
 }

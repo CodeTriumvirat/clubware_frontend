@@ -27,11 +27,3 @@ export function createClient() {
         }
     )
 }
-
-export function createServiceRoleClient() {
-    return createServerClient<Database>(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
-        { cookies: {} }
-    )
-}
