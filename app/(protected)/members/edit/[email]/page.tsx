@@ -8,6 +8,7 @@ export default async function Page({ params }: { params: { email: string } }) {
         decodeURIComponent(params.email)
     )
     if (!userProfile) {
+        console.log('User does not exist')
         revalidatePath('/members', 'layout')
         redirect('/members')
     }
