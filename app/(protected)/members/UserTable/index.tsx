@@ -22,6 +22,7 @@ import { fetchUserProfilePicture } from '@/(protected)/profile/actions'
 import Link from 'next/link'
 import { IconEdit } from '@tabler/icons-react'
 import { UserContext } from '@/_context/UserContext'
+import { formatKeyToUppercaseWords } from '@/_utils/utils'
 
 export default function UserTable({
     userProfiles,
@@ -84,7 +85,7 @@ export default function UserTable({
             const firstNameMatch = item.first_name
                 .toLowerCase()
                 .includes(filter.toLowerCase())
-            const userRoleMatch = item.user_role
+            const userRoleMatch = formatKeyToUppercaseWords(item.user_role)
                 .toLowerCase()
                 .includes(filter.toLowerCase())
             const emailMatch = item.email
@@ -95,6 +96,7 @@ export default function UserTable({
         })
         .map((item) => {
             const selected = selection.includes(item.user_id)
+            const formattedUserRole = formatKeyToUppercaseWords(item.user_role)
 
             return (
                 <Table.Tr
@@ -120,7 +122,7 @@ export default function UserTable({
                         </Group>
                     </Table.Td>
                     <Table.Td>{item.email}</Table.Td>
-                    <Table.Td>{item.user_role}</Table.Td>
+                    <Table.Td>{formattedUserRole}</Table.Td>
 
                     <Table.Td>
                         <Group>
@@ -147,7 +149,6 @@ export default function UserTable({
     return (
         <>
             <Title order={2}>Member Overview</Title>
-
             {/* <MultiSelect
                 
                 label="Categorie"

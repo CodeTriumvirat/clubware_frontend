@@ -163,7 +163,12 @@ export type Database = {
             }
         }
         Enums: {
-            user_role: 'admin' | 'worker'
+            user_role:
+                | 'admin'
+                | 'worker'
+                | 'barkeeper'
+                | 'technician'
+                | 'event_management'
         }
         CompositeTypes: {
             [_ in never]: never
