@@ -12,6 +12,7 @@ import {
     Title,
     rem,
     Button,
+    Input,
 } from '@mantine/core'
 import cx from 'clsx'
 import { useEffect, useState, useContext } from 'react'
@@ -32,12 +33,18 @@ export default function UserTable({
     }
 
     const [selection, setSelection] = useState(['1'])
+    const [filter, setFilter] = useState('')
 
     const [userProfilesWithPicture, setUserProfilesWithPicture] = useState<
         UserProfileWithPicture[]
     >([])
 
     const userRole = useContext(UserContext).userRole
+
+    const handleFilter = (e: string) => {
+        setFilter(e)
+        console.log(filter)
+    }
 
     useEffect(() => {
         const fetchPictures = async () => {
@@ -72,63 +79,85 @@ export default function UserTable({
                 : userProfilesWithPicture.map((item) => item.user_id)
         )
 
-    const rows = userProfilesWithPicture.map((item) => {
-        const selected = selection.includes(item.user_id)
+    const rows = userProfilesWithPicture
+        .filter((item) => {
+            const firstNameMatch = item.first_name
+                .toLowerCase()
+                .includes(filter.toLowerCase())
+            const userRoleMatch = item.user_role
+                .toLowerCase()
+                .includes(filter.toLowerCase())
+            const emailMatch = item.email
+                .toLowerCase()
+                .includes(filter.toLowerCase())
 
-        return (
-            <Table.Tr
-                key={item.user_id}
-                className={cx({ [styles.rowSelected]: selected })}
-            >
-                <Table.Td>
-                    <Checkbox
-                        checked={selection.includes(item.user_id)}
-                        onChange={() => toggleRow(item.user_id)}
-                    />
-                </Table.Td>
-                <Table.Td>
-                    <Group gap="sm">
-                        <Avatar src={item.pictureUrl} size={26} radius={26} />
-                        <Text size="sm" fw={500}>
-                            {item.first_name}
-                        </Text>
-                    </Group>
-                </Table.Td>
-                <Table.Td>{item.email}</Table.Td>
-                <Table.Td>{item.user_role}</Table.Td>
+            return firstNameMatch || userRoleMatch || emailMatch
+        })
+        .map((item) => {
+            const selected = selection.includes(item.user_id)
 
-                <Table.Td>
-                    <Group>
-                        <Button
-                            component={Link}
-                            href={`/members/${item.email}`}
-                        >
-                            Details
-                        </Button>
-                        {userRole === 'admin' && (
+            return (
+                <Table.Tr
+                    key={item.user_id}
+                    className={cx({ [styles.rowSelected]: selected })}
+                >
+                    <Table.Td>
+                        <Checkbox
+                            checked={selection.includes(item.user_id)}
+                            onChange={() => toggleRow(item.user_id)}
+                        />
+                    </Table.Td>
+                    <Table.Td>
+                        <Group gap="sm">
+                            <Avatar
+                                src={item.pictureUrl}
+                                size={26}
+                                radius={26}
+                            />
+                            <Text size="sm" fw={500}>
+                                {item.first_name}
+                            </Text>
+                        </Group>
+                    </Table.Td>
+                    <Table.Td>{item.email}</Table.Td>
+                    <Table.Td>{item.user_role}</Table.Td>
+
+                    <Table.Td>
+                        <Group>
                             <Button
                                 component={Link}
-                                href={`/members/edit/${item.email}`}
+                                href={`/members/${item.email}`}
                             >
-                                <IconEdit />
+                                Details
                             </Button>
-                        )}
-                    </Group>
-                </Table.Td>
-            </Table.Tr>
-        )
-    })
+                            {userRole === 'admin' && (
+                                <Button
+                                    component={Link}
+                                    href={`/members/edit/${item.email}`}
+                                >
+                                    <IconEdit />
+                                </Button>
+                            )}
+                        </Group>
+                    </Table.Td>
+                </Table.Tr>
+            )
+        })
 
     return (
         <>
             <Title order={2}>Member Overview</Title>
 
-            <MultiSelect
-                my="xl"
+            {/* <MultiSelect
+                
                 label="Categorie"
-                placeholder="Filter"
                 data={['Barkeeper', 'Technik', 'Abendleitung', 'Chef']}
-            />
+            /> */}
+            <Input
+                my="xl"
+                placeholder="Filter"
+                onChange={(e) => handleFilter(e.target.value)}
+            ></Input>
 
             <ScrollArea>
                 <Table miw={800} verticalSpacing="sm">
