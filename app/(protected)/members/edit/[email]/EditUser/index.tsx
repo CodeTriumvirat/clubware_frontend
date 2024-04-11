@@ -171,6 +171,7 @@ export default function EditUser({
                     id={field.id}
                     valueFormat="DD.MM.YYYY"
                     size="md"
+                    clearable
                     {...form.getInputProps(field.id)}
                 />
             )
