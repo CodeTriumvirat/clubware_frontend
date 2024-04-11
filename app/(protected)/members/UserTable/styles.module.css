@@ -1,3 +1,7 @@
 .rowSelected {
     background-color: var(--app-color-active);
 }
+
+.tableHead {
+    cursor: pointer;
+}

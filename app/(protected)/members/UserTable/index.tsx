@@ -23,6 +23,11 @@ import Link from 'next/link'
 import { IconEdit } from '@tabler/icons-react'
 import { UserContext } from '@/_context/UserContext'
 import { formatKeyToUppercaseWords } from '@/_utils/utils'
+import {
+    IconArrowsSort,
+    IconSortDescendingLetters,
+    IconSortAscendingLetters,
+} from '@tabler/icons-react'
 
 export default function UserTable({
     userProfiles,
@@ -35,6 +40,7 @@ export default function UserTable({
 
     const [selection, setSelection] = useState(['1'])
     const [filter, setFilter] = useState('')
+    const [sortColumn, setSortColumn] = useState('user')
 
     const [userProfilesWithPicture, setUserProfilesWithPicture] = useState<
         UserProfileWithPicture[]
@@ -45,6 +51,21 @@ export default function UserTable({
     const handleFilter = (e: string) => {
         setFilter(e)
         console.log(filter)
+    }
+
+    const handleSort = (column: string) => {
+        if (sortColumn === column || sortColumn === '-' + column) {
+            if (sortColumn.startsWith('-' + column)) {
+                setSortColumn('')
+                console.log(sortColumn)
+            } else {
+                setSortColumn(`-${column}`)
+                console.log(sortColumn)
+            }
+        } else {
+            setSortColumn(column)
+            console.log(sortColumn)
+        }
     }
 
     useEffect(() => {
@@ -93,6 +114,30 @@ export default function UserTable({
                 .includes(filter.toLowerCase())
 
             return firstNameMatch || userRoleMatch || emailMatch
+        })
+        .sort((a, b) => {
+            if (!sortColumn) return 0
+
+            const isAscending = !sortColumn.startsWith('-')
+            const column = sortColumn.replace(/^-/, '')
+
+            if (column === 'user') {
+                return (
+                    (isAscending ? 1 : -1) *
+                    a.first_name.localeCompare(b.first_name)
+                )
+            } else if (column === 'email') {
+                return (isAscending ? 1 : -1) * a.email.localeCompare(b.email)
+            } else if (column === 'job') {
+                return (
+                    (isAscending ? 1 : -1) *
+                    formatKeyToUppercaseWords(a.user_role).localeCompare(
+                        formatKeyToUppercaseWords(b.user_role)
+                    )
+                )
+            }
+
+            return 0
         })
         .map((item) => {
             const selected = selection.includes(item.user_id)
@@ -178,9 +223,57 @@ export default function UserTable({
                                     }
                                 />
                             </Table.Th>
-                            <Table.Th>User</Table.Th>
-                            <Table.Th>Email</Table.Th>
-                            <Table.Th>Job</Table.Th>
+                            <Table.Th onClick={() => handleSort('user')}>
+                                <Group className={styles.tableHead}>
+                                    User
+                                    {!sortColumn.endsWith('user') && (
+                                        <IconArrowsSort />
+                                    )}
+                                    {sortColumn.endsWith('user') && (
+                                        <>
+                                            {sortColumn.startsWith('-') ? (
+                                                <IconSortDescendingLetters />
+                                            ) : (
+                                                <IconSortAscendingLetters />
+                                            )}
+                                        </>
+                                    )}
+                                </Group>
+                            </Table.Th>
+                            <Table.Th onClick={() => handleSort('email')}>
+                                <Group className={styles.tableHead}>
+                                    Email
+                                    {!sortColumn.endsWith('email') && (
+                                        <IconArrowsSort />
+                                    )}
+                                    {sortColumn.endsWith('email') && (
+                                        <>
+                                            {sortColumn.startsWith('-') ? (
+                                                <IconSortDescendingLetters />
+                                            ) : (
+                                                <IconSortAscendingLetters />
+                                            )}
+                                        </>
+                                    )}
+                                </Group>
+                            </Table.Th>
+                            <Table.Th onClick={() => handleSort('job')}>
+                                <Group className={styles.tableHead}>
+                                    Job
+                                    {!sortColumn.endsWith('job') && (
+                                        <IconArrowsSort />
+                                    )}
+                                    {sortColumn.endsWith('job') && (
+                                        <>
+                                            {sortColumn.startsWith('-') ? (
+                                                <IconSortDescendingLetters />
+                                            ) : (
+                                                <IconSortAscendingLetters />
+                                            )}
+                                        </>
+                                    )}
+                                </Group>
+                            </Table.Th>
                         </Table.Tr>
                     </Table.Thead>
                     <Table.Tbody>{rows}</Table.Tbody>
