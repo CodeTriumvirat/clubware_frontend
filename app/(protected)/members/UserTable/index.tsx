@@ -1,28 +1,30 @@
 'use client'
 
+import { fetchUserProfilePicture } from '@/(protected)/profile/actions'
+import { UserContext } from '@/_context/UserContext'
+import { UserProfile } from '@/_types'
+import { formatKeyToUppercaseWords } from '@/_utils/utils'
 import {
     Avatar,
-    Checkbox,
+    Button,
     Group,
-    MultiSelect,
     Pagination,
     ScrollArea,
     Table,
     Text,
+    TextInput,
     Title,
-    rem,
-    Button,
-    Input,
 } from '@mantine/core'
+import {
+    IconArrowsSort,
+    IconEdit,
+    IconSortAscendingLetters,
+    IconSortDescendingLetters,
+} from '@tabler/icons-react'
 import cx from 'clsx'
-import { useEffect, useState, useContext } from 'react'
-import styles from './styles.module.css'
-import { UserProfile } from '@/_types'
-import { fetchUserProfilePicture } from '@/(protected)/profile/actions'
 import Link from 'next/link'
-import { IconEdit } from '@tabler/icons-react'
-import { UserContext } from '@/_context/UserContext'
-import { formatKeyToUppercaseWords } from '@/_utils/utils'
+import { useContext, useEffect, useState } from 'react'
+import styles from './styles.module.css'
 
 export default function UserTable({
     userProfiles,
@@ -35,6 +37,7 @@ export default function UserTable({
 
     const [selection, setSelection] = useState(['1'])
     const [filter, setFilter] = useState('')
+    const [sortColumn, setSortColumn] = useState('user')
 
     const [userProfilesWithPicture, setUserProfilesWithPicture] = useState<
         UserProfileWithPicture[]
@@ -45,6 +48,21 @@ export default function UserTable({
     const handleFilter = (e: string) => {
         setFilter(e)
         console.log(filter)
+    }
+
+    const handleSort = (column: string) => {
+        if (sortColumn === column || sortColumn === '-' + column) {
+            if (sortColumn.startsWith('-' + column)) {
+                setSortColumn('')
+                console.log(sortColumn)
+            } else {
+                setSortColumn(`-${column}`)
+                console.log(sortColumn)
+            }
+        } else {
+            setSortColumn(column)
+            console.log(sortColumn)
+        }
     }
 
     useEffect(() => {
@@ -66,23 +84,12 @@ export default function UserTable({
         fetchPictures()
     }, [userProfiles])
 
-    const toggleRow = (user_id: string) =>
-        setSelection((current) =>
-            current.includes(user_id)
-                ? current.filter((item) => item !== user_id)
-                : [...current, user_id]
-        )
-
-    const toggleAll = () =>
-        setSelection((current) =>
-            current.length === userProfilesWithPicture.length
-                ? []
-                : userProfilesWithPicture.map((item) => item.user_id)
-        )
-
     const rows = userProfilesWithPicture
         .filter((item) => {
             const firstNameMatch = item.first_name
+                .toLowerCase()
+                .includes(filter.toLowerCase())
+            const lastNameMatch = item.last_name
                 .toLowerCase()
                 .includes(filter.toLowerCase())
             const userRoleMatch = formatKeyToUppercaseWords(item.user_role)
@@ -92,7 +99,41 @@ export default function UserTable({
                 .toLowerCase()
                 .includes(filter.toLowerCase())
 
-            return firstNameMatch || userRoleMatch || emailMatch
+            const fullNameMatch = `${item.first_name} ${item.last_name}`
+                .toLowerCase()
+                .includes(filter.toLowerCase())
+
+            return (
+                firstNameMatch ||
+                userRoleMatch ||
+                emailMatch ||
+                lastNameMatch ||
+                fullNameMatch
+            )
+        })
+        .sort((a, b) => {
+            if (!sortColumn) return 0
+
+            const isAscending = !sortColumn.startsWith('-')
+            const column = sortColumn.replace(/^-/, '')
+
+            if (column === 'user') {
+                return (
+                    (isAscending ? 1 : -1) *
+                    a.last_name.localeCompare(b.last_name)
+                )
+            } else if (column === 'email') {
+                return (isAscending ? 1 : -1) * a.email.localeCompare(b.email)
+            } else if (column === 'job') {
+                return (
+                    (isAscending ? 1 : -1) *
+                    formatKeyToUppercaseWords(a.user_role).localeCompare(
+                        formatKeyToUppercaseWords(b.user_role)
+                    )
+                )
+            }
+
+            return 0
         })
         .map((item) => {
             const selected = selection.includes(item.user_id)
@@ -104,22 +145,12 @@ export default function UserTable({
                     className={cx({ [styles.rowSelected]: selected })}
                 >
                     <Table.Td>
-                        <Checkbox
-                            checked={selection.includes(item.user_id)}
-                            onChange={() => toggleRow(item.user_id)}
-                        />
+                        <Avatar src={item.pictureUrl} size={26} radius={26} />
                     </Table.Td>
                     <Table.Td>
-                        <Group gap="sm">
-                            <Avatar
-                                src={item.pictureUrl}
-                                size={26}
-                                radius={26}
-                            />
-                            <Text size="sm" fw={500}>
-                                {item.first_name}
-                            </Text>
-                        </Group>
+                        <Text size="sm" fw={500}>
+                            {item.first_name} {item.last_name}
+                        </Text>
                     </Table.Td>
                     <Table.Td>{item.email}</Table.Td>
                     <Table.Td>{formattedUserRole}</Table.Td>
@@ -149,38 +180,67 @@ export default function UserTable({
     return (
         <>
             <Title order={2}>Member Overview</Title>
-            {/* <MultiSelect
-                
-                label="Categorie"
-                data={['Barkeeper', 'Technik', 'Abendleitung', 'Chef']}
-            /> */}
-            <Input
+            <TextInput
                 my="xl"
                 placeholder="Filter"
                 onChange={(e) => handleFilter(e.target.value)}
-            ></Input>
-
+            ></TextInput>
             <ScrollArea>
                 <Table miw={800} verticalSpacing="sm">
                     <Table.Thead>
                         <Table.Tr>
-                            <Table.Th style={{ width: rem(40) }}>
-                                <Checkbox
-                                    onChange={toggleAll}
-                                    checked={
-                                        selection.length ===
-                                        userProfilesWithPicture.length
-                                    }
-                                    indeterminate={
-                                        selection.length > 0 &&
-                                        selection.length !==
-                                            userProfilesWithPicture.length
-                                    }
-                                />
+                            <Table.Th></Table.Th>
+                            <Table.Th onClick={() => handleSort('user')}>
+                                <Group className={styles.tableHead}>
+                                    User
+                                    {!sortColumn.endsWith('user') && (
+                                        <IconArrowsSort />
+                                    )}
+                                    {sortColumn.endsWith('user') && (
+                                        <>
+                                            {sortColumn.startsWith('-') ? (
+                                                <IconSortDescendingLetters />
+                                            ) : (
+                                                <IconSortAscendingLetters />
+                                            )}
+                                        </>
+                                    )}
+                                </Group>
                             </Table.Th>
-                            <Table.Th>User</Table.Th>
-                            <Table.Th>Email</Table.Th>
-                            <Table.Th>Job</Table.Th>
+                            <Table.Th onClick={() => handleSort('email')}>
+                                <Group className={styles.tableHead}>
+                                    Email
+                                    {!sortColumn.endsWith('email') && (
+                                        <IconArrowsSort />
+                                    )}
+                                    {sortColumn.endsWith('email') && (
+                                        <>
+                                            {sortColumn.startsWith('-') ? (
+                                                <IconSortDescendingLetters />
+                                            ) : (
+                                                <IconSortAscendingLetters />
+                                            )}
+                                        </>
+                                    )}
+                                </Group>
+                            </Table.Th>
+                            <Table.Th onClick={() => handleSort('job')}>
+                                <Group className={styles.tableHead}>
+                                    Job
+                                    {!sortColumn.endsWith('job') && (
+                                        <IconArrowsSort />
+                                    )}
+                                    {sortColumn.endsWith('job') && (
+                                        <>
+                                            {sortColumn.startsWith('-') ? (
+                                                <IconSortDescendingLetters />
+                                            ) : (
+                                                <IconSortAscendingLetters />
+                                            )}
+                                        </>
+                                    )}
+                                </Group>
+                            </Table.Th>
                         </Table.Tr>
                     </Table.Thead>
                     <Table.Tbody>{rows}</Table.Tbody>
