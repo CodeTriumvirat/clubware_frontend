@@ -1,6 +1,7 @@
 'use client'
 
-import { useForm } from '@mantine/form'
+import { useAdminCheck } from '@/_hooks/useAdminCheck'
+import { validateEmail, validatePassword } from '@/_utils/form-validation'
 import {
     Button,
     Container,
@@ -10,11 +11,11 @@ import {
     TextInput,
     Title,
 } from '@mantine/core'
+import { useForm } from '@mantine/form'
+import { useClipboard } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
-import { signup } from './actions'
-import { useAdminCheck } from '@/_hooks/useAdminCheck'
-import { validateEmail, validatePassword } from '@/_utils/form-validation'
 import { useState } from 'react'
+import { signup } from './actions'
 
 export default function Page() {
     useAdminCheck('/members')
@@ -30,6 +31,8 @@ export default function Page() {
         validateInputOnChange: true,
     })
 
+    const clipboard = useClipboard({ timeout: 500 })
+
     async function handleSignup(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
@@ -38,6 +41,7 @@ export default function Page() {
 
         try {
             await signup(form.values)
+            clipboard.copy(form.values.password)
         } catch (error) {
             if (error instanceof Error) {
                 notifications.show({
