@@ -1,7 +1,9 @@
 'use client'
 import {
+    Button,
     Card,
     Divider,
+    Flex,
     MultiSelect,
     ScrollArea,
     Table,
@@ -10,6 +12,7 @@ import {
     Title,
 } from '@mantine/core'
 import { Calendar } from '@mantine/dates'
+import { IconX } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 
@@ -87,6 +90,29 @@ export default function Page() {
     const [selectedDates, setSelectedDates] = useState<Date[]>([])
     const [selectedCategory, setSelectedCategory] = useState<string[]>([])
     const [search, setSearch] = useState('')
+    const [selectedDate, setSelectedDate] = useState<Date[]>([])
+
+    const handleSelect = (date: Date) => {
+        const isSelected = selectedDate.some((s) =>
+            dayjs(date).isSame(s, 'date')
+        )
+        if (isSelected) {
+            setSelectedDate((current) =>
+                current.filter((d) => !dayjs(d).isSame(date, 'date'))
+            )
+            setSearch('')
+        } else {
+            // If a different date is clicked, deselect the previously selected date (if any)
+            setSelectedDate([date])
+            setSearch(dayjs(date).format('DD-MM-YYYY'))
+        }
+    }
+
+    const handleClearSearch = () => {
+        setSearch('')
+        setSelectedDate([])
+        setSelectedCategory([])
+    }
 
     const eventCategories = [
         'Party',
@@ -130,12 +156,17 @@ export default function Page() {
             <Title order={2}>Event Overview</Title>
             <Divider my="lg" />
 
-            <TextInput
-                placeholder="Search by any field"
-                mb="md"
-                value={search}
-                onChange={(event) => setSearch(event.currentTarget.value)}
-            />
+            <Flex mb="md" justify="space-between" gap="sm">
+                <TextInput
+                    placeholder="Search by any field"
+                    w="100%"
+                    value={search}
+                    onChange={(event) => setSearch(event.currentTarget.value)}
+                />
+                <Button onClick={() => handleClearSearch()}>
+                    <IconX />
+                </Button>
+            </Flex>
 
             <MultiSelect
                 my="xl"
@@ -148,7 +179,14 @@ export default function Page() {
             />
 
             <Card>
-                <Calendar />
+                <Calendar
+                    getDayProps={(date) => ({
+                        selected: selectedDate.some((s) =>
+                            dayjs(date).isSame(s, 'date')
+                        ),
+                        onClick: () => handleSelect(date),
+                    })}
+                />
             </Card>
 
             <Divider my="lg" />
