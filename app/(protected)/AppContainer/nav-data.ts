@@ -13,13 +13,11 @@ import {
 export const navDataNoAdmin = [
     { label: 'Dashboard', link: '/dashboard', icon: IconGauge },
     {
-        label: 'Calendar',
-        icon: IconCalendar,
+        label: 'Events',
+        icon: IconConfetti,
         links: [
-            { label: 'Overview', link: '/a' },
-            { label: 'Today', link: '/b' },
-            { label: 'This Week', link: '/c' },
-            { label: 'This Month', link: '/d' },
+            { label: 'Overview', link: '/events' },
+            { label: 'Add Event', link: '/events/add' },
         ],
     },
     {
@@ -31,14 +29,7 @@ export const navDataNoAdmin = [
             { label: 'Add Product', link: '/inventory/add' },
         ],
     },
-    {
-        label: 'Events',
-        icon: IconConfetti,
-        links: [
-            { label: 'Overview', link: '/events' },
-            { label: 'Add Event', link: '/events/add' },
-        ],
-    },
+
     {
         label: 'Members',
         icon: IconUsers,
@@ -67,7 +58,6 @@ export const navDataNoAdmin = [
     },
 
     { label: 'F.A.Q.', link: '/faq', icon: IconHelpOctagon },
-    { label: 'Settings', link: '/settings', icon: IconAdjustments },
 ]
 
 export const navDataAdmin = navDataNoAdmin.map((item) => {
