@@ -20,7 +20,10 @@
 .mantine-DatePickerInput-input,
 .mantine-PasswordInput-input,
 .mantine-TimeInput-input,
-.mantine-FileInput-input {
+.mantine-FileInput-input,
+.mantine-Accordion-item,
+.mantine-Accordion-content,
+.mantine-Accordion-control {
     background-color: var(--app-color-input);
     border: 0;
 }
