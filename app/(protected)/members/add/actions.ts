@@ -17,9 +17,7 @@ export async function signup(data: { email: string; password: string }) {
         cookies().set('sb-127-auth-token', authLocalSessionCookie)
     if (authSessionCookie) cookies().set('sb-api-auth-token', authSessionCookie)
 
-    if (error) {
-        throw error
-    }
+    if (error) throw new Error('Invalid signup credentials')
 
     revalidatePath('/members', 'layout')
     redirect(`/members/edit/${data.email.toLowerCase()}`)

@@ -10,7 +10,7 @@ export async function login(data: { email: string; password: string }) {
 
     const { error } = await supabase.auth.signInWithPassword(data)
 
-    if (error) throw error
+    if (error) throw new Error('Invalid login credentials')
 
     revalidatePath('/', 'layout')
     redirect('/')
