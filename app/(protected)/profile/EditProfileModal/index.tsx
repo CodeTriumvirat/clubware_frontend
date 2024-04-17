@@ -10,6 +10,7 @@ import { DataDropzone } from '@/(protected)/profile/DataDropzone'
 import { MIME_TYPES } from '@mantine/dropzone'
 import { UserContext } from '@/_context/UserContext'
 import { DateInput } from '@mantine/dates'
+import { formatDateToString, formatStringToDate } from '@/_utils/utils'
 
 export function EditProfileModal({ user }: { user: UserProfile }) {
     const [opened, { open, close }] = useDisclosure(false)
@@ -18,19 +19,11 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
     const form = useForm({
         initialValues: {
             ...user,
+            date_of_birth: formatStringToDate(user.date_of_birth),
+            employment_date: formatStringToDate(user.employment_date),
         },
 
         validate: {
-            date_of_birth: (value = null) =>
-                value === null ||
-                /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
-                    ? null
-                    : 'Invalid Date of Birth',
-            employment_date: (value = null) =>
-                value === null ||
-                /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
-                    ? null
-                    : 'Invalid Employent Date',
             phone_number: (value = '') =>
                 value !== '' &&
                 /^(?:(?:\+|00)(?:[0-9] ?){6,14}[0-9])?$/.test(value)
@@ -55,8 +48,24 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
 
         if (!errors.hasErrors) {
             try {
-                await updateUserProfile(form.values)
-                setUser(form.values)
+                await updateUserProfile({
+                    ...form.values,
+                    date_of_birth: formatDateToString(
+                        form.values.date_of_birth
+                    ),
+                    employment_date: formatDateToString(
+                        form.values.employment_date
+                    ),
+                })
+                setUser({
+                    ...form.values,
+                    date_of_birth: formatDateToString(
+                        form.values.date_of_birth
+                    ),
+                    employment_date: formatDateToString(
+                        form.values.employment_date
+                    ),
+                })
                 console.log('Profile updated')
                 close()
             } catch (error) {
