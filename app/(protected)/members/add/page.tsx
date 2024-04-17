@@ -46,7 +46,7 @@ export default function Page() {
             if (error instanceof Error) {
                 notifications.show({
                     title: 'Signup Error',
-                    message: error.message,
+                    message: 'Invalid signup credentials',
                 })
             }
             console.error(error)

@@ -36,7 +36,7 @@ export default function LoginPage() {
             if (error instanceof Error) {
                 notifications.show({
                     title: 'Signup Error',
-                    message: error.message,
+                    message: 'Invalid login credentials',
                 })
             }
             console.error(error)
