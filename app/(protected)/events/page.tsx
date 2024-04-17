@@ -102,7 +102,6 @@ export default function Page() {
             )
             setSearch('')
         } else {
-            // If a different date is clicked, deselect the previously selected date (if any)
             setSelectedDate([date])
             setSearch(dayjs(date).format('DD-MM-YYYY'))
         }
