@@ -22,6 +22,7 @@ import {
     TextInput,
     Textarea,
     Modal,
+    Title,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { DateInput } from '@mantine/dates'
@@ -201,6 +202,7 @@ export default function EditUser({
 
     return (
         <>
+            <Title order={4}>Edit User Data</Title>
             <form onSubmit={handleSubmit}>
                 <Stack mt="md">
                     {formFields}

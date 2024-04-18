@@ -1,7 +1,7 @@
 'use client'
-import { Button, TextInput, Stack } from '@mantine/core'
+import { Button, TextInput, Stack, Title } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { setNewPassword } from '@/(auth)/password-recovery/actions'
+import { setNewPassword } from '@/(protected)/password-recovery/actions'
 import { FormEvent } from 'react'
 import { notifications } from '@mantine/notifications'
 
@@ -48,6 +48,7 @@ export default function PasswordRecoveryForm() {
         <>
             <form onSubmit={handleSubmit}>
                 <Stack>
+                    <Title order={4}>Insert new Password</Title>
                     <TextInput
                         type="password"
                         label="Password"

@@ -1,4 +1,4 @@
-import PasswordRecoveryForm from '@/(auth)/PasswordRecoveryForm'
+import PasswordRecoveryForm from '@/(protected)/password-recovery/PasswordRecoveryForm'
 import { createClient } from '@/_utils/supabase/server'
 import { redirect } from 'next/navigation'
 

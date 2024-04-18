@@ -2,7 +2,16 @@
 import { EditProfileModal } from '@/(protected)/profile/EditProfileModal'
 import { UserContext } from '@/_context/UserContext'
 import { UserProfile } from '@/_types'
-import { Avatar, Divider, Group, Stack, Text, Title } from '@mantine/core'
+import {
+    Avatar,
+    Button,
+    Divider,
+    Group,
+    Stack,
+    Text,
+    Title,
+} from '@mantine/core'
+import Link from 'next/link'
 import { useContext } from 'react'
 
 const userFields = [
@@ -91,6 +100,14 @@ export function ProfileCard() {
                         <Divider w="85%" mx="auto" />
                         {profileTextFields}
                         <EditProfileModal user={user} />
+                        <Button
+                            component={Link}
+                            href="/password-recovery"
+                            w="85%"
+                            mx="auto"
+                        >
+                            Password recovery
+                        </Button>
                     </Stack>
                 </Stack>
             )}

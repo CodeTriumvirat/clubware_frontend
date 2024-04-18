@@ -180,7 +180,7 @@ export function EditProfileModal({ user }: { user: UserProfile }) {
                     </Stack>
                 </form>
             </Modal>
-            <Button onClick={open} mt="lg" mx="auto">
+            <Button onClick={open} mt="lg" mx="auto" w="85%">
                 Edit Profile
             </Button>
         </>
