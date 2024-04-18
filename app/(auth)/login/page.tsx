@@ -4,6 +4,7 @@ import {
     Button,
     Container,
     Group,
+    Modal,
     Paper,
     PasswordInput,
     Stack,
@@ -11,13 +12,16 @@ import {
     Title,
 } from '@mantine/core'
 import Link from 'next/link'
-import { login } from '../actions'
+import { login, passwordReset } from '../actions'
 import { useState } from 'react'
 import { useForm } from '@mantine/form'
 import { notifications } from '@mantine/notifications'
+import { useDisclosure } from '@mantine/hooks'
 
 export default function LoginPage() {
     const [isClicked, setIsClicked] = useState(false)
+    const [isClickedReset, setIsClickedReset] = useState(false)
+    const [opened, { open, close }] = useDisclosure(false)
 
     const form = useForm({
         initialValues: {
@@ -41,6 +45,30 @@ export default function LoginPage() {
             }
             console.error(error)
             setIsClicked(false)
+        }
+    }
+
+    async function handleReset(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setIsClickedReset(true)
+
+        try {
+            await passwordReset(form.values)
+            notifications.show({
+                title: 'Password Reset Link sent',
+                message: 'Check your email for further instructions',
+            })
+            close()
+            setIsClickedReset(false)
+        } catch (error) {
+            if (error instanceof Error) {
+                notifications.show({
+                    title: 'Signup Error',
+                    message: 'Invalid login credentials',
+                })
+            }
+            console.error(error)
+            setIsClickedReset(false)
         }
     }
 
@@ -75,16 +103,40 @@ export default function LoginPage() {
                             </Button>
                         </Stack>
                     </form>
-                    <Group justify="space-between" grow>
-                        <Button
-                            variant="filled"
-                            size="xs"
-                            component={Link}
-                            href="/auth/recovery"
-                        >
-                            Passwort vergessen?
-                        </Button>
-                    </Group>
+                    <Modal
+                        opened={opened}
+                        onClose={close}
+                        title="Reset Password"
+                    >
+                        <form onSubmit={handleReset}>
+                            <Stack>
+                                <TextInput
+                                    type="email"
+                                    label="Email"
+                                    placeholder="yourmail@example.com"
+                                    {...form.getInputProps('email')}
+                                    required
+                                />
+                                <Button
+                                    type="submit"
+                                    disabled={isClickedReset}
+                                    fullWidth
+                                >
+                                    Reset Password
+                                </Button>
+                            </Stack>
+                        </form>
+                    </Modal>
+                    <Button
+                        variant="filled"
+                        size="xs"
+                        component={Link}
+                        href="/auth/recovery"
+                        onClick={open}
+                        fullWidth
+                    >
+                        Passwort vergessen?
+                    </Button>
                 </Stack>
             </Paper>
         </Container>

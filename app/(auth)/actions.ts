@@ -15,3 +15,13 @@ export async function login(data: { email: string; password: string }) {
     revalidatePath('/', 'layout')
     redirect('/')
 }
+
+export async function passwordReset(data: { email: string }) {
+    const supabase = createClient()
+
+    const { error } = await supabase.auth.resetPasswordForEmail(data.email)
+
+    if (error) throw new Error('Invalid email')
+
+    return true
+}

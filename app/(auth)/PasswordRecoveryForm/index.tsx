@@ -1,7 +1,7 @@
 'use client'
 import { Button, TextInput, Stack } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { setNewPassword } from '@/(auth)/password-recovery/actions'
+import { setNewPassword } from '@/(auth)/reset-password/actions'
 import { FormEvent } from 'react'
 import { notifications } from '@mantine/notifications'
 

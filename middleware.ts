@@ -27,6 +27,6 @@ export const config = {
          * - /templates (email templates route)
          * Feel free to modify this pattern to include more paths.
          */
-        '/((?!_next/static|_next/image|favicon.ico|login|templates|confirm|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+        '/((?!_next/static|_next/image|favicon.ico|login|templates|confirm|password-recovery|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
     ],
 }
